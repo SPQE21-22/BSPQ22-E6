@@ -1,4 +1,4 @@
-package com.mycompany.app.basicClass;
+package com.mycompany.server.data.domain;
 
 
 public class User{
