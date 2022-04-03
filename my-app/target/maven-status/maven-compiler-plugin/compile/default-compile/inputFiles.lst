@@ -1,1 +1,11 @@
-C:\Users\Mikel\Desktop\Deusto\SPQ\BSPQ22-E6\my-app\src\main\java\com\mycompany\app\App.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\data\dataBase\DB.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\remote\UserRemoteFacade.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\services\AppService.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\data\domain\Consumer.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\data\domain\Event.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\remote\EventRemoteFacade.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\data\domain\Organizer.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\data\domain\User.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\remote\TicketRemoteFacade.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\App.java
+C:\SPQ\BSPQ22-E6\BSPQ22-E6\my-app\src\main\java\com\mycompany\server\remote\TokenManagement.java

@@ -1,16 +1,16 @@
 package com.mycompany.server.data.domain;
 
 
-public class User{
-	private String nickname;
-	private String password;
-	private String email;
-	private String name;
-	private String surname;
-    private String phone;
+public abstract class User{
+	protected String nickname;
+	protected String password;
+	protected String email;
+	protected String name;
+	protected String surname;
+	protected String phone;
 
 
-	public User(String nickname, String password, String email,
+	protected User(String nickname, String password, String email,
 			String name, String surname, String phone) {
 		super();
 		this.nickname = nickname;
@@ -20,7 +20,7 @@ public class User{
 		this.surname = surname;
         this.phone = phone;
 	}
-	public User() {
+	protected User() {
 		super();
 		this.nickname = "";
 		this.password = "";
