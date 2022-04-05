@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.mycompany.server.data.domain.User;
+import com.mycompany.server.services.UserAppService;
 
 @Path("/users")
 public class UserRemoteFacade {
@@ -18,34 +19,35 @@ public class UserRemoteFacade {
 	@GET
 	public void login() {
 		
-		/*TODO: Call the UserAppService to look up the user in the DB and check if it exists
-		 * That method should return a User object that then we will use for the token creation*/
-		
-		User user = null;
+		User user = UserAppService.getInstance().login();
 		try {
 			long token = TokenManagement.getInstance().createToken(user);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//return token
+		
+		//TODO: return token
 	}
 	
 	@DELETE
 	public void logout() {
+		
+		//TODO: receive real token
+		long token = 0;
+		
 		try {
-			TokenManagement.getInstance().removeToken(0);
+			TokenManagement.getInstance().removeToken(token);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // TODO: use real token 
+		}
 	}
 	
 	@POST
 	public void register() {
-		/*TODO:Call UserService to add a new user with the info received from the client.
-		 * REMIND to check if user attributes are okey or if this user already exists
-		 * */
+		//TODO: receive real parameters
+		UserAppService.getInstance().register();
 	}
 
 }
