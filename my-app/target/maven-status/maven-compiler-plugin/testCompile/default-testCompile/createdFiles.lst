@@ -1,0 +1,4 @@
+com/mycompany/server/data/domain/UserTest.class
+com/mycompany/server/data/domain/EventTest.class
+com/mycompany/server/ServerAppTest.class
+com/mycompany/server/data/DBTest.class
