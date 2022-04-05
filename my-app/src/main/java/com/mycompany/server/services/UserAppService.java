@@ -34,7 +34,7 @@ public class UserAppService {
 		return null;
 	}
 	
-	public void register(User user) {
+	public void register() {
 		
 		
 

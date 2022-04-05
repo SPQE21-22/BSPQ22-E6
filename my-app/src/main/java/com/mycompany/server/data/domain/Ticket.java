@@ -1,21 +1,21 @@
 package com.mycompany.server.data.domain;
 
 public class Ticket {
-	private Event Event;
+	private Event event;
 	private Organizer organizer;
 	
 	public Ticket(Event e, Consumer c) {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String getEvent() {
+	public Event getEvent() {
 		return event;
 	}
 	public void setEvent(Event event) {
 		this.event = event;
 	}
 
-	public String getOrganizer() {
+	public Organizer getOrganizer() {
 		return organizer;
 	}
 	public void setOrganizer(Organizer organizer) {

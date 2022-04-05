@@ -15,7 +15,7 @@ public class Event {
 		this.name = name;
 		this.date = date;
 		this.place = place;
-		this.organizer = organizer
+		this.organizer = organizer;
 	}
 	public Event() {
 		super();
@@ -45,7 +45,7 @@ public class Event {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	public String getOrganizer() {
+	public Organizer getOrganizer() {
 		return organizer;
 	}
 	public void setOrganizer(Organizer organizer) {
