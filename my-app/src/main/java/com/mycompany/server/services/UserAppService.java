@@ -21,10 +21,6 @@ public class UserAppService {
 		return null;
 	}
 	
-	public void logout() {
-        //TODO logout
-	}
-	
 	public void register() {
 		
         //TODO:Receive all user parameters
