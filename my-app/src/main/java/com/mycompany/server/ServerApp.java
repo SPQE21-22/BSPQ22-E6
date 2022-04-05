@@ -21,9 +21,9 @@ public class ServerApp {
 		RemoteFacade.getInstance().initFacade(webTarget);
 		
 		running.set(true); //Starts the server
-		System.out.println("Running the server...");
+		System.out.println("Running the server in: "+String.format("http://%s:%s/rest", hostname, port));
 		while (running.get()) {
-			System.out.println("Inside the while!");
+			
 		}
 
 	}

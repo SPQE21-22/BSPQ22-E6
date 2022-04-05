@@ -7,6 +7,7 @@ public class ClientApp {
 		String hostname = args[0];
 		String port = args[1];
 		ServiceGateway.getInstance().initGateway(hostname, port);
+		System.out.println("This is the client side");
 	}
 
 }
