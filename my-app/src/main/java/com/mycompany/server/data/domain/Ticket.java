@@ -2,30 +2,35 @@ package com.mycompany.server.data.domain;
 
 public class Ticket {
 	private Event event;
-	private Organizer organizer;
-	
-	public Ticket(Event e, Consumer c) {
-		// TODO Auto-generated constructor stub
+	private User user;
+
+	public Ticket(Event e, User u) {
+		this.event = e;
+		this.user = u;
 	}
-	
-	public Event getEvent() {
-		return event;
-	}
-	public void setEvent(Event event) {
-		this.event = event;
+	public Ticket() {
+		this.event = null;
+		this.user = null;
 	}
 
-	public Organizer getOrganizer() {
-		return organizer;
+	public Event getEvent() {
+		return this.event;
 	}
-	public void setOrganizer(Organizer organizer) {
-		this.organizer = organizer;
+
+	public void setEvent(Event e){
+		this.event = e;
 	}
-	
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User u) {
+		this.user = u;
+	}
 	@Override
-	public String toString() {
-		return "Event: " + event + ", Organizer: " + organizer;
+	public String toString(){
+		return "Ticket [event=" + event + ", user=" + user + "]";
 	}
-	
-	
 }
+

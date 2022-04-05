@@ -1,8 +1,13 @@
 package com.mycompany.server.services;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import com.mycompany.server.data.domain.Ticket;
+import com.mycompany.server.data.domain.User;
+import com.mycompany.server.data.domain.Event;
+import com.mycompany.server.remote.TokenManagement;
+
 
 public class TicketAppService {
 	
@@ -18,15 +23,16 @@ public class TicketAppService {
 	
 	private TicketAppService() {}
     
-	public List<Ticket> getBoughtTickets() {
-		/*TODO get list with all the tickets 
-	        */
-		return null;
-        
+	public List<Ticket> getBoughtTickets(User user) {
+		return user.getBoughtTickets();
     }
 	
-	public void buyTicket() {
-        /*TODO create a new ticket
-        */
+	public void buyTicket(User user, Event event) throws RemoteException {
+	
+		Ticket ticket = new Ticket(event, user);	
+		user.addBoughtTicket(ticket);
+		System.out.println(ticket.toString());	
+		
+		//TODO store the ticket in the database
     }
 }

@@ -87,18 +87,33 @@ public class RemoteFacade {
 	@GET
 	@Path("/tickets")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getBoughtTickets() {
-		// TODO: receive real parameters
-		List<Ticket> listOfTickets = TicketAppService.getInstance().getBoughtTickets();
-		// TODO: return the list
+	public Response getBoughtTickets(long token) {
+		TokenManagement tokenManager = TokenManagement.getInstance();
+
+		User user;
+		List<Ticket> listOfTickets = null;
+		try {
+			user = tokenManager.checkToken(token);
+			listOfTickets = TicketAppService.getInstance().getBoughtTickets(user);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		return Response.ok(listOfTickets).build();
 	}
 
 	@POST
 	@Path("/tickets")
-	public Response buyTicket() {
-		// TODO: receive real parameters
-		TicketAppService.getInstance().buyTicket();
+	public Response buyTicket(long token, Event event) {
+		TokenManagement tokenManager = TokenManagement.getInstance();
+		try {
+			User user = tokenManager.checkToken(token);	
+			TicketAppService.getInstance().buyTicket(user, event);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			//TODO: handle exception
+		}
+		
 		return Response.ok().build();
 	}
 
