@@ -7,7 +7,10 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Ticket;
@@ -18,7 +21,7 @@ import com.mycompany.server.services.UserAppService;
 
 public class RemoteFacade {
 
-	private WebTarget webtarget;
+	private WebTarget webtarget = null;
 	
 	private static RemoteFacade instance;
 
@@ -40,24 +43,26 @@ public class RemoteFacade {
 
 	@GET
 	@Path("/users")
-	public void login() {
-
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response login() {
+		
+		long token = -1;
 		User user = UserAppService.getInstance().login();
 		if (user != null) { // If null user does not exist
 			try {
-				long token = TokenManagement.getInstance().createToken(user);
+				token = TokenManagement.getInstance().createToken(user);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
-		// TODO: return token
+		return Response.ok(token).build();
 	}
 
 	@DELETE
 	@Path("/users")
-	public void logout() {
+	public Response logout() {
 
 		// TODO: receive real token
 		long token = 0;
@@ -68,46 +73,54 @@ public class RemoteFacade {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return Response.ok().build();
 	}
-
+	
 	@POST
 	@Path("/users")
-	public void register() {
+	public Response register() {
 		// TODO: receive real parameters
 		UserAppService.getInstance().register();
+		return Response.ok().build();
 	}
 
 	@GET
 	@Path("/tickets")
-	public void getBoughtTickets() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBoughtTickets() {
 		// TODO: receive real parameters
 		List<Ticket> listOfTickets = TicketAppService.getInstance().getBoughtTickets();
 		// TODO: return the list
+		return Response.ok(listOfTickets).build();
 	}
 
 	@POST
 	@Path("/tickets")
-	public void buyTicket() {
+	public Response buyTicket() {
 		// TODO: receive real parameters
 		TicketAppService.getInstance().buyTicket();
+		return Response.ok().build();
 	}
 
 	@GET
 	@Path("/events")
-	public void getActiveEvents() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getActiveEvents() {
 		List<Event> listActiveEvents = EventAppService.getInstance().getActiveEvents();
 		// TODO: return list of active events
+		return Response.ok(listActiveEvents).build();
 	}
 
 	@POST
 	@Path("/events")
-	public void createActiveEvents() {
+	public Response createActiveEvents() {
 		/*
 		 * TODO:Call EventService to add a new event with the info received from the
 		 * client. REMIND to check if user attributes are okey or if this user already
 		 * exists
 		 */
 		EventAppService.getInstance().createEvent();
+		return Response.ok().build();
 	}
 
 }
