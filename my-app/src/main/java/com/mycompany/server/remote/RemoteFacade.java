@@ -134,7 +134,7 @@ public class RemoteFacade {
 		return Response.ok().build();
 	}
 	
-	@POST
+	@GET
 	@Path("/test/{name}")
 	public Response testingConnection(@PathParam("name") String name) {
 		if (name.length() >= 1) {

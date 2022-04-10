@@ -8,6 +8,12 @@ public class ClientApp {
 		String port = args[1];
 		ServiceGateway.getInstance().initGateway(hostname, port);
 		System.out.println("This is the client side");
+		
+		//Here we call the testing methods
+		ServiceGateway.getInstance().testingServer("JACOBTHETESTER");
 	}
+	
+	
+	
 
 }
