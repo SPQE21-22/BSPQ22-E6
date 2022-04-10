@@ -7,6 +7,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -20,8 +21,6 @@ import com.mycompany.server.services.TicketAppService;
 import com.mycompany.server.services.UserAppService;
 
 public class RemoteFacade {
-
-	private WebTarget webtarget = null;
 	
 	private static RemoteFacade instance;
 
@@ -36,9 +35,6 @@ public class RemoteFacade {
 	public RemoteFacade() {
 	}
 	
-	public void initFacade(WebTarget wt) {
-		this.webtarget = wt;
-	}
 
 
 	@GET
@@ -136,6 +132,17 @@ public class RemoteFacade {
 		 */
 		EventAppService.getInstance().createEvent();
 		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/test/{name}")
+	public Response testingConnection(@PathParam("name") String name) {
+		if (name.length() >= 1) {
+            System.out.println("Hello "+name+"!");
+            return Response.status(Response.Status.OK).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 	}
 
 }

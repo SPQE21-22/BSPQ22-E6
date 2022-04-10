@@ -88,6 +88,21 @@
 			<artifactId>log4j</artifactId>
 			<version>[1.2.17, )</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.grizzly/grizzly-http-server -->
+		<dependency>
+			<groupId>org.glassfish.grizzly</groupId>
+			<artifactId>grizzly-http-server</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-grizzly2-http -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-grizzly2-http</artifactId>
+			<version>3.0.4</version>
+		</dependency>
+		
+
+
 	</dependencies>
 
 	<build>
@@ -161,7 +176,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>com.mycompany.server.App</mainClass>
+							<mainClass>com.mycompany.server.ServerApp</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
@@ -181,7 +196,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>com.mycompany.client.App</mainClass>
+							<mainClass>com.mycompany.client.ClientApp</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
