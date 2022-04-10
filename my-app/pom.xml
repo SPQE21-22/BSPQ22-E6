@@ -18,6 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<server.hostname>127.0.0.1</server.hostname>
 		<server.port>8080</server.port>
+		<config.files.dir>${basedir}src/main/resources</config.files.dir>
 	</properties>
 
 	<dependencies>
@@ -34,8 +35,28 @@
 		</dependency>
 		<dependency>
 			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>[5.1.6, 5.9)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+			<version>[5.1.4, 5.9)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-rdbms</artifactId>
+			<version>[5.1.6, 5.9)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
 			<artifactId>javax.jdo</artifactId>
 			<version>[3.2.0-m8, )</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
@@ -62,6 +83,11 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.29</version>
 		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>[1.2.17, )</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -81,10 +107,12 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.7.0</version>
 				</plugin>
+				<!-- 
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.20.1</version>
 				</plugin>
+				-->
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>3.0.2</version>
@@ -97,10 +125,33 @@
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>2.8.2</version>
 				</plugin>
+				<plugin>
+					<groupId>org.datanucleus</groupId>
+					<artifactId>datanucleus-maven-plugin</artifactId>
+					<version>5.0.1</version>
+					<configuration>
+						<log4jConfiguration>${config.files.dir}/log4j.properties</log4jConfiguration>
+						<verbose>true</verbose>
+						<props>${config.files.dir}/datanucleus.properties</props>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+							<goals>
+								<goal>enhance</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>9.4.19.v20190610</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<profiles>
 		<!-- run as 'mvn exec:java -Pserver' -->
 		<profile>
