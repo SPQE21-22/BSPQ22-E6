@@ -1,6 +1,5 @@
 package com.mycompany.client.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -20,8 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
 
 public class LoginWindow extends JFrame {
 
@@ -37,8 +34,8 @@ public class LoginWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginWindow frame = new LoginWindow();
-					frame.setVisible(true);
+					LoginWindow window = new LoginWindow();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -113,7 +110,7 @@ public class LoginWindow extends JFrame {
 		ForgottenPasslbl.setHorizontalAlignment(SwingConstants.CENTER);
 		ForgottenPasslbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		ForgottenPasslbl.setForeground(new Color(255, 165, 0));
-		ForgottenPasslbl.setBounds(105, 319, 236, 14);
+		ForgottenPasslbl.setBounds(105, 319, 236, 17);
 		frame.getContentPane().add(ForgottenPasslbl);
 		
 		URL iconURL = getClass().getResource("/");                  //TODO: 
@@ -129,4 +126,6 @@ public class LoginWindow extends JFrame {
 		lblNewLabel_1.setIcon(img1);
 		
 		
+ }
 }
+
