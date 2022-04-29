@@ -10,7 +10,12 @@ public class ClientApp {
 		System.out.println("This is the client side");
 		
 		//Here we call the testing methods
+		try {
 		ServiceGateway.getInstance().testingServer("JACOBTHETESTER");
+		}catch(Exception e) {
+			System.out.println("* Error using the server:");
+			//e.printStackTrace();
+		}
 	}
 	
 	

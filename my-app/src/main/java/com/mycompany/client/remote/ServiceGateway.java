@@ -1,10 +1,10 @@
 package com.mycompany.client.remote;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 public class ServiceGateway {
 	private static ServiceGateway instance;
@@ -32,6 +32,7 @@ public class ServiceGateway {
 		WebTarget testTarget = baseTarget.path("test");
 		WebTarget newTarget = testTarget.path(name); //This is the name that will be displayed
 		Response r = newTarget.request().get();
+		System.out.println(r);
 		if(r.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Server has correctly done the testing");
 		}else {

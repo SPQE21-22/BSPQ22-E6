@@ -1,6 +1,5 @@
 package com.mycompany.server;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -23,14 +22,17 @@ public class ServerApp {
 		
 		System.out.println("Running the server in: "+BASE_URI);
 		
+		/*
 		try {
 			System.in.read();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
-        server.stop();
+		
+        //server.shutdown();
         
         //FIXME: error->java.lang.reflect.InvocationTargetException when compiling
 		
@@ -48,12 +50,18 @@ public class ServerApp {
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer(String uri) {
+    	HttpServer server = null;
+    	try {
         // create a resource config that scans for JAX-RS resources and providers
-        // in es.deusto.spq package
         final ResourceConfig rc = new ResourceConfig().packages("com.mycompany.server.remote");
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(uri), rc);
+        server = GrizzlyHttpServerFactory.createHttpServer(URI.create(uri), rc);
+    	}catch(Exception e) {
+    		System.out.println("* Starting the server failed: \n");
+    		e.printStackTrace();
+    	}
+    	return server;
     }
 }
