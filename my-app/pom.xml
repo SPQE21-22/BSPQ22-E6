@@ -18,7 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<server.hostname>127.0.0.1</server.hostname>
 		<server.port>8080</server.port>
-		<config.files.dir>${basedir}src/main/resources</config.files.dir>
+		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 	</properties>
 
 	<dependencies>
@@ -114,6 +114,16 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>${config.files.dir}</directory>
+				<includes>
+					<include>**/*.jdo</include>
+					<include>**/*.orm</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
 			<plugins>
@@ -189,6 +199,12 @@
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
 							</arguments>
+							<systemProperties>
+								<systemProperty>
+									<key>log4j.configuration</key>
+									<value>file:${config.files.dir}/log4j.properties</value>
+								</systemProperty>
+							</systemProperties>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -209,6 +225,12 @@
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
 							</arguments>
+							<systemProperties>
+								<systemProperty>
+									<key>log4j.configuration</key>
+									<value>file:${config.files.dir}/log4j.properties</value>
+								</systemProperty>
+							</systemProperties>
 						</configuration>
 					</plugin>
 				</plugins>

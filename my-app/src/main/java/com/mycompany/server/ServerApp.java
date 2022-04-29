@@ -2,6 +2,9 @@ package com.mycompany.server;
 
 import java.net.URI;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -9,6 +12,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 public class ServerApp {
 	private final static AtomicBoolean running = new AtomicBoolean(false);
+	private static final Logger logger = Logger.getLogger("Main");
 	
 	public static void main(String[] args) {
 		String hostname = args[0];
@@ -17,8 +21,8 @@ public class ServerApp {
 		String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
 		
 		running.set(true); //Starts the server
-		
 		HttpServer server = startServer(BASE_URI);
+		
 		
 		System.out.println("Running the server in: "+BASE_URI);
 		
@@ -40,7 +44,7 @@ public class ServerApp {
 			
 		//}
         
-        
+        server.shutdown();
         
 
 	}

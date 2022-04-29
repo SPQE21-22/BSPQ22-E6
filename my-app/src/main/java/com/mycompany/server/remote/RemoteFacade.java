@@ -3,6 +3,8 @@ package com.mycompany.server.remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -22,6 +24,7 @@ import com.mycompany.server.services.UserAppService;
 public class RemoteFacade {
 	
 	private static RemoteFacade instance;
+	private final Logger logger = Logger.getLogger("RemoteFacade");
 
 	public static RemoteFacade getInstance() {
 		if (instance == null) {
@@ -136,7 +139,7 @@ public class RemoteFacade {
 	@GET
 	@Path("/test/{name}")
 	public Response testingConnection(@PathParam("name") String name) {
-		System.out.println(name);
+		logger.info(name + " has tried to use the connection");
 		if (name.length() >= 1) {
             System.out.println("Hello "+name+"!");
             return Response.status(Response.Status.OK).build();
