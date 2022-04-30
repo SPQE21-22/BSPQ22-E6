@@ -24,6 +24,7 @@ public class ServiceGateway {
 		String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
 		Client client = ClientBuilder.newClient();
 		baseTarget = client.target(BASE_URI);
+		baseTarget = baseTarget.path("remote");
 		
 		
 	}
@@ -32,7 +33,7 @@ public class ServiceGateway {
 		WebTarget testTarget = baseTarget.path("test");
 		WebTarget newTarget = testTarget.path(name); //This is the name that will be displayed
 		Response r = newTarget.request().get();
-		System.out.println(r);
+		
 		if(r.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Server has correctly done the testing");
 		}else {

@@ -21,6 +21,7 @@ import com.mycompany.server.services.EventAppService;
 import com.mycompany.server.services.TicketAppService;
 import com.mycompany.server.services.UserAppService;
 
+@Path("/remote")
 public class RemoteFacade {
 	
 	private static RemoteFacade instance;
@@ -38,7 +39,7 @@ public class RemoteFacade {
 	}
 	
 
-
+/*
 	@GET
 	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -127,17 +128,18 @@ public class RemoteFacade {
 	@POST
 	@Path("/events")
 	public Response createActiveEvents() {
-		/*
-		 * TODO:Call EventService to add a new event with the info received from the
-		 * client. REMIND to check if user attributes are okey or if this user already
-		 * exists
-		 */
+		//
+		 // TODO:Call EventService to add a new event with the info received from the
+		 // client. REMIND to check if user attributes are okey or if this user already
+		 // exists
+		 
 		EventAppService.getInstance().createEvent();
 		return Response.ok().build();
 	}
-	
+	*/
 	@GET
 	@Path("/test/{name}")
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response testingConnection(@PathParam("name") String name) {
 		logger.info(name + " has tried to use the connection");
 		if (name.length() >= 1) {

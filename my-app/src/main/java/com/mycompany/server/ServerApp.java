@@ -1,5 +1,6 @@
 package com.mycompany.server;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -24,27 +25,17 @@ public class ServerApp {
 		HttpServer server = startServer(BASE_URI);
 		
 		
-		System.out.println("Running the server in: "+BASE_URI);
+		System.out.println("Running the server in: "+BASE_URI+"/remote");
 		
-		/*
+		
 		try {
 			System.in.read();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
 		
-		
-        //server.shutdown();
-        
-        //FIXME: error->java.lang.reflect.InvocationTargetException when compiling
-		
-		//while (running.get()) {
-			
-		//}
-        
-        server.shutdown();
+		server.stop();
         
 
 	}
