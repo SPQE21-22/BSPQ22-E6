@@ -1,11 +1,5 @@
 package com.mycompany.server.services;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-
 import com.mycompany.server.data.domain.User;
 
 public class UserAppService {
@@ -22,7 +16,7 @@ public class UserAppService {
 	
 	private UserAppService() {}
     
-	public User login() {	
+	public User login(String username, String password) {	
 		
 		
 		//check if the user exist
@@ -34,7 +28,7 @@ public class UserAppService {
 		return null;
 	}
 	
-	public void register() {
+	public void register(String email, String password, String name, String phone) {
 		
 		
 

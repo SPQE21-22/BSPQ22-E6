@@ -5,15 +5,19 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import com.mycompany.remote.serialization.UserDTO;
+import com.mycompany.remote.serialization.UserLoginDTO;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Ticket;
 import com.mycompany.server.data.domain.User;
@@ -39,53 +43,64 @@ public class RemoteFacade {
 	}
 	
 
-/*
-	@GET
+
+	@PUT
 	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response login() {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response login(UserLoginDTO userlogindto) {
 		
+		String username = userlogindto.getEmail();
+		String password = userlogindto.getPassword();
+		
+		
+		System.out.println("Hey "+username+" - "+password);
 		long token = -1;
-		User user = UserAppService.getInstance().login();
+		User user = UserAppService.getInstance().login(username, password);
 		if (user != null) { // If null user does not exist
 			try {
 				token = TokenManagement.getInstance().createToken(user);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return Response.serverError().build();
 			}
 		}
 
 		return Response.ok(token).build();
 	}
-
-	@DELETE
-	@Path("/users")
-	public Response logout() {
-
-		// TODO: receive real token
-		long token = 0;
+	
+	
+	@PUT
+	@Path("/users/logout")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response logout(long token) {
 
 		try {
 			TokenManagement.getInstance().removeToken(token);
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return Response.notModified(Long.toString(token)).build();
 		}
 		return Response.ok().build();
+		
 	}
 	
 	@POST
 	@Path("/users")
-	public Response register() {
-		// TODO: receive real parameters
-		UserAppService.getInstance().register();
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response register(UserDTO userdto) {
+		System.out.println(userdto);
+		UserAppService.getInstance().register(userdto.getEmail(),userdto.getPassword(),userdto.getName(),userdto.getPhone());
 		return Response.ok().build();
 	}
-
+	/*
 	@GET
 	@Path("/tickets")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
 	public Response getBoughtTickets(long token) {
 		TokenManagement tokenManager = TokenManagement.getInstance();
 
@@ -103,6 +118,7 @@ public class RemoteFacade {
 
 	@POST
 	@Path("/tickets")
+	@Consumes({MediaType.TEXT_PLAIN,MediaType.APPLICATION_JSON})
 	public Response buyTicket(long token, Event event) {
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {

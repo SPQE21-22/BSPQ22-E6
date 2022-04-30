@@ -1,8 +1,14 @@
 package com.mycompany.client.remote;
 
+import com.mycompany.remote.serialization.UserDTO;
+import com.mycompany.remote.serialization.UserLoginDTO;
+
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
@@ -39,6 +45,70 @@ public class ServiceGateway {
 		}else {
 			System.out.println("Server has problems with the testing");
 		}
+	}
+
+	public long login(String email, String password) {
+		WebTarget uTarget = baseTarget.path("users");
+		Invocation.Builder i = uTarget.request(MediaType.APPLICATION_JSON);
+		
+		UserLoginDTO userdto = new UserLoginDTO();
+		
+		userdto.setEmail(email);
+		userdto.setPassword(password);
+		
+		Response r = i.put(Entity.entity(userdto,MediaType.APPLICATION_JSON));
+		
+		//TODO: if error throw an exception
+		
+		if(r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly done the login");
+			return r.readEntity(Long.class);
+		}else {
+			System.out.println("Server has problems with the login");
+			return -1;
+		}	
+	}
+
+	public void register(String email, String password, String name, String phone) {
+		WebTarget uTarget = baseTarget.path("users");
+		Invocation.Builder i = uTarget.request();
+		
+		UserDTO userdto = new UserDTO();
+		
+		userdto.setEmail(email);
+		userdto.setPassword(password);
+		userdto.setName(name);
+		userdto.setPhone(phone);
+		
+		Response r = i.post(Entity.entity(userdto,MediaType.APPLICATION_JSON));
+		
+		System.out.println(r);
+		
+		if(r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly done the register");
+		}else {
+			System.out.println("Server has problems with the register");
+		}
+		
+	}
+
+	public void logout() {
+		WebTarget uTarget = baseTarget.path("users");
+		WebTarget logoutTarget = uTarget.path("logout");
+		Invocation.Builder i = logoutTarget.request();
+		
+		Long token = ClientTokenManagement.getInstance().getToken();
+		
+		Response r = i.put(Entity.entity(token,MediaType.APPLICATION_JSON));
+		
+		System.out.println(r);
+		
+		if(r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly done the logout");
+		}else {
+			System.out.println("Server has problems with the logout");
+		}
+		
 	}
 
 }
