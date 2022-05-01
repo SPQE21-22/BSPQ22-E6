@@ -31,6 +31,8 @@ public class RegisterWindow {
 	private JTextField txtPassword;
 	private JTextField txtName;
 	private JTextField txtPhone;
+	private JTextField txtExtra1;
+	private JTextField txtExtra2;
 	
 
 	/**
@@ -63,7 +65,7 @@ public class RegisterWindow {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 500, 600);
+		frame.setBounds(100, 100, 500, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("TicketResell");
 		frame.getContentPane().setLayout(null);
@@ -96,14 +98,14 @@ public class RegisterWindow {
 		lblPrivacy.setOpaque(true);
 		lblPrivacy.setForeground(Color.BLACK);
 		lblPrivacy.setBackground(Color.YELLOW);
-		lblPrivacy.setBounds(24, 381, 412, 169);
+		lblPrivacy.setBounds(25, 506, 412, 169);
 		frame.getContentPane().add(lblPrivacy);
 		lblPrivacy.setVisible(false);
 		
 		
 		final JCheckBox chckbxPrivacy = new JCheckBox(" I have read and accept the privacy policy");
 		chckbxPrivacy.setBackground(new Color(255, 255, 255));
-		chckbxPrivacy.setBounds(102, 351, 268, 23);
+		chckbxPrivacy.setBounds(103, 476, 268, 23);
 		frame.getContentPane().add(chckbxPrivacy);
 		chckbxPrivacy.addMouseListener(new MouseAdapter() {
 			@Override
@@ -154,7 +156,7 @@ public class RegisterWindow {
 		
 		createBtn.setForeground(Color.WHITE);
 		createBtn.setBackground(new Color(255, 165, 0));
-		createBtn.setBounds(136, 405, 185, 48);
+		createBtn.setBounds(133, 572, 185, 48);
 		frame.getContentPane().add(createBtn);
 		
 		txtPhone = new JTextField("Phone*");
@@ -179,7 +181,7 @@ public class RegisterWindow {
 		});
 		
 		JLabel lblfield = new JLabel("Fields marked with * are mandatory.");
-		lblfield.setBounds(114, 330, 277, 14);
+		lblfield.setBounds(115, 455, 277, 14);
 		frame.getContentPane().add(lblfield);		
 		
 		JLabel logo = new JLabel("");
@@ -198,9 +200,36 @@ public class RegisterWindow {
 				frame.dispose();
 			}
 		});
-		btnNewButton.setBounds(136, 485, 185, 23);
+		btnNewButton.setBounds(133, 652, 185, 23);
 		frame.getContentPane().add(btnNewButton);
 		
+		txtExtra1 = new JTextField("Nickname*");
+		txtExtra1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtExtra1.setBackground(SystemColor.menu);
+		txtExtra1.setBounds(114, 349, 236, 42);
+		frame.getContentPane().add(txtExtra1);
+		
+		txtExtra2 = new JTextField("UserName*");
+		txtExtra2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtExtra2.setBackground(SystemColor.menu);
+		txtExtra2.setBounds(114, 402, 236, 42);
+		frame.getContentPane().add(txtExtra2);
+		
+				
+		JCheckBox chckbxNewCheckBox = new JCheckBox("I am an organizer");
+		chckbxNewCheckBox.setBounds(112, 319, 130, 23);
+		frame.getContentPane().add(chckbxNewCheckBox);
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxPrivacy.isSelected()) {
+					
+					txtExtra1.setText("Address");
+					txtExtra1.setText("Webpage");
+					
+				}
+				
+			}
+		});
 	
 		
 

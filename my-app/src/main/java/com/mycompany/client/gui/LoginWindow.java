@@ -125,14 +125,7 @@ public class LoginWindow extends JFrame {
 		ImageIcon icon =new ImageIcon(img.getImage().getScaledInstance(78, 124, Image.SCALE_SMOOTH));
 		logo.setIcon(icon);
 		frame.getContentPane().add(logo);
-		
-		
-	
-		
-	
-		
-		
-		
+
  }
 }
 
