@@ -1,5 +1,12 @@
 package com.mycompany.client.remote;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
 
@@ -47,7 +54,7 @@ public class ServiceGateway {
 		}
 	}
 
-	public long login(String email, String password) {
+	public void login(String email, String password) { //TODO: Throw an exception if it fails 
 		WebTarget uTarget = baseTarget.path("users");
 		Invocation.Builder i = uTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -62,10 +69,9 @@ public class ServiceGateway {
 		
 		if(r.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Server has correctly done the login");
-			return r.readEntity(Long.class);
+			ClientTokenManagement.getInstance().setToken(r.readEntity(Long.class));
 		}else {
 			System.out.println("Server has problems with the login");
-			return -1;
 		}	
 	}
 
@@ -99,13 +105,39 @@ public class ServiceGateway {
 		
 		Response r = i.put(Entity.entity(token,MediaType.APPLICATION_JSON));
 		
-		System.out.println(r);
-		
 		if(r.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Server has correctly done the logout");
 		}else {
 			System.out.println("Server has problems with the logout");
 		}
+		
+	}
+
+	public List<TicketDTO> getBoughtTickets() {
+		List<TicketDTO> list = null;
+		
+		WebTarget tTarget = baseTarget.path("tickets");
+		Invocation.Builder i = tTarget.request(MediaType.APPLICATION_JSON);
+		
+		long token = ClientTokenManagement.getInstance().getToken();
+		
+		Response r = i.put(Entity.entity(token,MediaType.APPLICATION_JSON));
+		
+		if(r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly got the bought tickets");
+
+			String listInJSON = r.readEntity(String.class);
+			
+			//Deserializing the list
+			Gson gson = new Gson();
+			Type ticketDtoListType= new TypeToken<List<TicketDTO>>() {}.getType();
+			list = gson.fromJson(listInJSON, ticketDtoListType);
+			
+		}else {
+			System.out.println("Server has problems with getting the tickets");
+		}
+		
+		return list;
 		
 	}
 
