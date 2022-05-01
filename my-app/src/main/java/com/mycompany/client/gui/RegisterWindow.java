@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.mycompany.client.controller.UserController;
+
 
 
 public class RegisterWindow {
@@ -27,8 +29,9 @@ public class RegisterWindow {
 	private JFrame frame;
 	private JTextField txtEmail;
 	private JTextField txtPassword;
-	private JTextField txtPassword_1;
 	private JTextField txtName;
+	private JTextField txtPhone;
+	
 
 	/**
 	 * Launch the application.
@@ -70,7 +73,7 @@ public class RegisterWindow {
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		//txtEmail.setColumns(10);
 		txtEmail.setBackground(SystemColor.menu);
-		txtEmail.setBounds(114, 200, 236, 42);
+		txtEmail.setBounds(114, 206, 236, 42);
 		frame.getContentPane().add(txtEmail);
 		txtEmail.addMouseListener(new MouseAdapter() {
 			
@@ -124,6 +127,7 @@ public class RegisterWindow {
 					String userName = txtName.getText();
 					String email = txtEmail.getText();
 					String pass = txtPassword.getText();
+					String phone = txtPhone.getText();
 					
 					if (!pass.isEmpty()) {
 						if (!email.isEmpty()) {
@@ -138,12 +142,9 @@ public class RegisterWindow {
 					} else {
 						JOptionPane.showMessageDialog(null, "You have to enter a password");
 					}
-					//TODO:
-//					if  (DB.existUser(email)) {
-//						email = JOptionPane.showInputDialog(" This email is already in use, enter another:");	
-//					} else {
-//						DB.insertUser(userName, email, pass);
-//					}
+					
+					UserController.getInstance().register(email, pass, userName, phone);			
+					
 				}else {
 					JOptionPane.showMessageDialog(null, "You must accept the privacy policy", "ERROR!", JOptionPane.ERROR_MESSAGE);
 				}
@@ -156,13 +157,17 @@ public class RegisterWindow {
 		createBtn.setBounds(136, 405, 185, 48);
 		frame.getContentPane().add(createBtn);
 		
-		
+		txtPhone = new JTextField("Phone*");
+		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtPhone.setBackground(SystemColor.menu);
+		txtPhone.setBounds(114, 153, 236, 42);
+		frame.getContentPane().add(txtPhone);
 		
 		txtName = new JTextField("Name*");
 		txtName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		//txtNombre.setColumns(10);
 		txtName.setBackground(SystemColor.menu);
-		txtName.setBounds(114, 130, 236, 42);
+		txtName.setBounds(114, 97, 236, 42);
 		frame.getContentPane().add(txtName);
 		txtName.addMouseListener(new MouseAdapter() {
 			
@@ -175,18 +180,16 @@ public class RegisterWindow {
 		
 		JLabel lblfield = new JLabel("Fields marked with * are mandatory.");
 		lblfield.setBounds(114, 330, 277, 14);
-		frame.getContentPane().add(lblfield);
+		frame.getContentPane().add(lblfield);		
+		
+		JLabel logo = new JLabel("");
+		ImageIcon img = new ImageIcon("img/ticketLogo.png");
+		logo.setBounds(187, 0, 105, 100);
 		
 		
-		URL iconURL = getClass().getResource("/");                       //TODO
-		JLabel lblNewLabel_1 = new JLabel("");
-		
-		lblNewLabel_1.setBounds(114, 5, 236, 151);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		ImageIcon ico1= new ImageIcon(iconURL);
-		ImageIcon img1= new ImageIcon(ico1.getImage().getScaledInstance(lblNewLabel_1.getWidth(), lblNewLabel_1.getHeight(), Image.SCALE_SMOOTH));
-		lblNewLabel_1.setIcon(img1);
+		ImageIcon icon =new ImageIcon(img.getImage().getScaledInstance(78, 124, Image.SCALE_SMOOTH));
+		logo.setIcon(icon);
+		frame.getContentPane().add(logo);
 		
 		JButton btnNewButton = new JButton("I already have an account");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -198,7 +201,8 @@ public class RegisterWindow {
 		btnNewButton.setBounds(136, 485, 185, 23);
 		frame.getContentPane().add(btnNewButton);
 		
+	
+		
 
 	}
-
 }

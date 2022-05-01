@@ -20,11 +20,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.mycompany.client.controller.UserController;
+
 public class LoginWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame frame;
-	static JTextField txtNickname;
+	static JTextField txtEmail;
 	private JTextField txtPassword;
 
 	/**
@@ -58,9 +60,9 @@ public class LoginWindow extends JFrame {
 		JButton goBut = new JButton("GO");
 		goBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nickname = txtNickname.getText();
+				String email = txtEmail.getText();
 				String password = txtPassword.getText();
-		
+											
 	}
 
 });
@@ -82,17 +84,17 @@ public class LoginWindow extends JFrame {
 		registerBut.setBounds(132, 439, 185, 48);
 		frame.getContentPane().add(registerBut);
 		
-		txtNickname = new JTextField("NickName");
-		txtNickname.setBackground(SystemColor.menu);
-		txtNickname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtNickname.setBounds(115, 179, 236, 42);
-		frame.getContentPane().add(txtNickname);
-		//txtNickname.setColumns(10);
-		txtNickname.addMouseListener(new MouseAdapter() {
+		txtEmail = new JTextField("Email");
+		txtEmail.setBackground(SystemColor.menu);
+		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtEmail.setBounds(115, 179, 236, 42);
+		frame.getContentPane().add(txtEmail);
+		//txtEmail.setColumns(10);
+		txtEmail.addMouseListener(new MouseAdapter() {
 					
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						txtNickname.setText("");
+						txtEmail.setText("");
 						
 					}
 				});
@@ -113,17 +115,22 @@ public class LoginWindow extends JFrame {
 		ForgottenPasslbl.setBounds(105, 319, 236, 17);
 		frame.getContentPane().add(ForgottenPasslbl);
 		
-		URL iconURL = getClass().getResource("/");                  //TODO: 
+		//URL iconURL = getClass().getResource("/");                  
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(iconURL));
-		lblNewLabel_1.setBounds(115, 40, 236, 138);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel logo = new JLabel("");
+		ImageIcon img = new ImageIcon("img/ticketLogo.png");
+		logo.setBounds(183, 25, 98, 143);
 		
 		
-		ImageIcon ico1= new ImageIcon(iconURL);
-		ImageIcon img1= new ImageIcon(ico1.getImage().getScaledInstance(lblNewLabel_1.getWidth(), lblNewLabel_1.getHeight(), Image.SCALE_SMOOTH));
-		lblNewLabel_1.setIcon(img1);
+		ImageIcon icon =new ImageIcon(img.getImage().getScaledInstance(78, 124, Image.SCALE_SMOOTH));
+		logo.setIcon(icon);
+		frame.getContentPane().add(logo);
+		
+		
+	
+		
+	
+		
 		
 		
  }
