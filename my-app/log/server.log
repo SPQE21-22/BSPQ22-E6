@@ -1,0 +1,11 @@
+21:11:58,431 (com.mycompany.server.ServerApp.main()) INFO  [ServerApp] - Server running in: http://127.0.0.1:8080/myapp/remote
+21:12:10,233 (grizzly-http-server-0) INFO  [ServerApp] - Registering organizer: OrganizerDTO [password=organizerpass, email=TestingOrganizer@test.com, name=Organizer, phone=000000000, address=TestingStreet, webpage=wwww.Testing.com]
+21:12:10,306 (grizzly-http-server-1) INFO  [ServerApp] - Registering consumer: ConsumerDTO [password=consumerpass, email=TestingConsumer@test.com, name=Consumer, phone=111111111, nickname=consumerNick, surname=Consumerson]
+21:12:10,326 (grizzly-http-server-2) INFO  [ServerApp] - Login of: TestingOrganizer@test.com - organizerpass. [1651432330326]
+21:12:10,447 (grizzly-http-server-3) INFO  [ServerApp] - Creating an event: testing event name by [1651432330326]
+21:12:10,466 (grizzly-http-server-4) INFO  [ServerApp] - Logout of user with token: 1651432330326
+21:12:10,478 (grizzly-http-server-6) INFO  [ServerApp] - Login of: TestingConsumer@test.com - consumerpass. [1651432330478]
+21:12:10,493 (grizzly-http-server-5) INFO  [ServerApp] - Getting active events
+21:12:10,664 (grizzly-http-server-0) INFO  [ServerApp] - Getting tickets for: 1651432330478
+21:12:10,688 (grizzly-http-server-1) INFO  [ServerApp] - Logout of user with token: 1651432330478
+21:12:15,807 (com.mycompany.server.ServerApp.main()) INFO  [ServerApp] - Server stopped

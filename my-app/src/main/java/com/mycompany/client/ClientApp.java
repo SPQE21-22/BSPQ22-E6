@@ -3,6 +3,9 @@ package com.mycompany.client;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import com.mycompany.client.controller.EventController;
 import com.mycompany.client.controller.TicketController;
 import com.mycompany.client.controller.UserController;
@@ -11,11 +14,17 @@ import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 
 public class ClientApp {
+	
+	private static final Logger logger = Logger.getLogger("ClientApp");
+	
 	public static void main(String[] args) {
+		
+		BasicConfigurator.configure(); //loads the log4j properties
+		
 		String hostname = args[0];
 		String port = args[1];
 		ServiceGateway.getInstance().initGateway(hostname, port);
-		System.out.println("This is the client side");
+		ClientApp.getLogger().info("This is the client side");
 
 		// Here we call the testing methods
 
@@ -53,9 +62,9 @@ public class ClientApp {
 		// Getting active events
 		List<EventDTO> listEvents = EventController.getInstance().getActiveEvents();
 		if (listEvents != null) {
-			System.out.println("The active events are:");
+			ClientApp.getLogger().info("The active events are:");
 			for (EventDTO t : listEvents) {
-				System.out.println(t);
+				ClientApp.getLogger().info(t);
 			}
 		}
 
@@ -66,9 +75,9 @@ public class ClientApp {
 		// Getting Bought Tickets
 		List<TicketDTO> list = TicketController.getInstance().getBoughtTickets();
 		if (list != null) {
-			System.out.println("The user has bought:");
+			ClientApp.getLogger().info("The user has bought:");
 			for (TicketDTO t : list) {
-				System.out.println(t);
+				ClientApp.getLogger().info(t);
 			}
 		}
 
@@ -76,5 +85,11 @@ public class ClientApp {
 		UserController.getInstance().logout();
 
 	}
+
+	public static Logger getLogger() {
+		return logger;
+	}
+	
+	
 
 }
