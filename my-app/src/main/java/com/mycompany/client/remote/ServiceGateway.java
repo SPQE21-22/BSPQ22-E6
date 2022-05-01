@@ -138,7 +138,6 @@ public class ServiceGateway {
 		}
 		
 		return list;
-		
 	}
 
 }
