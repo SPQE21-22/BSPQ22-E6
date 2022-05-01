@@ -3,10 +3,8 @@ package com.mycompany.client.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.mycompany.client.remote.ClientTokenManagement;
 import com.mycompany.client.remote.ServiceGateway;
 import com.mycompany.remote.serialization.EventDTO;
-import com.mycompany.remote.serialization.TicketDTO;
 
 public class EventController {
 	private static EventController instance;

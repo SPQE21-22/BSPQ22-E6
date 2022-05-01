@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Ticket;
 import com.mycompany.server.data.domain.User;

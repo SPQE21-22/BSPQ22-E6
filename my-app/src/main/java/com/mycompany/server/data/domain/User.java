@@ -1,8 +1,5 @@
 package com.mycompany.server.data.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class User{
 	
 	protected String password;

@@ -2,7 +2,6 @@ package com.mycompany.client.remote;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.OrganizerDTO;
 import com.mycompany.remote.serialization.TicketDTO;
-import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
 
 import jakarta.ws.rs.client.Client;

@@ -1,15 +1,12 @@
 package com.mycompany.server.services;
 
-import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.mycompany.server.data.domain.Ticket;
-import com.mycompany.server.data.domain.User;
 import com.mycompany.server.data.dataBase.TestDBManager;
 import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
-import com.mycompany.server.data.domain.Organizer;
+import com.mycompany.server.data.domain.Ticket;
 
 public class TicketAppService {
 

@@ -7,17 +7,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-
 import com.google.gson.Gson;
 import com.mycompany.remote.serialization.BuyTicketDTO;
 import com.mycompany.remote.serialization.ConsumerDTO;
@@ -25,7 +14,6 @@ import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.OrganizerDTO;
 import com.mycompany.remote.serialization.TicketDTO;
-import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
 import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
@@ -35,6 +23,16 @@ import com.mycompany.server.data.domain.User;
 import com.mycompany.server.services.EventAppService;
 import com.mycompany.server.services.TicketAppService;
 import com.mycompany.server.services.UserAppService;
+
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/remote")
 public class RemoteFacade {

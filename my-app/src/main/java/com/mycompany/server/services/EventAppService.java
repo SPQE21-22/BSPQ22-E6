@@ -1,13 +1,11 @@
 package com.mycompany.server.services;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mycompany.server.data.dataBase.TestDBManager;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
-import com.mycompany.server.data.domain.Ticket;
 
 public class EventAppService {
 

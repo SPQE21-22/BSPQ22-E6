@@ -1,6 +1,5 @@
 package com.mycompany.client.controller;
 
-import com.mycompany.client.remote.ClientTokenManagement;
 import com.mycompany.client.remote.ServiceGateway;
 
 public class UserController {

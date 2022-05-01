@@ -1,9 +1,5 @@
 package com.mycompany.remote.serialization;
 
-import java.util.List;
-
-import com.mycompany.server.data.domain.Ticket;
-
 public class ConsumerDTO {
 	private String password;
 	private String email;
