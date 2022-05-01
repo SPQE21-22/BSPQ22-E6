@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.mycompany.server.data.domain.Ticket;
 import com.mycompany.server.data.domain.User;
+import com.mycompany.server.data.dataBase.TestDBManager;
+import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 
@@ -24,21 +26,28 @@ public class TicketAppService {
 	private TicketAppService() {
 	}
 
-	public List<Ticket> getBoughtTickets(User user) {
+	public List<Ticket> getBoughtTickets(Consumer consumer) {
 
-		return user.getBoughtTickets();
+		return consumer.getBoughtTickets();
 	}
 
-	public void buyTicket(User user, String eventName, LocalDate eventDate) {
+	public void buyTicket(Consumer consumer, String eventName, LocalDate eventDate) {
 
 		// FIXME: only for testing purposes*******************
 		//This is a replacement for searching the event in the DB
-		Organizer og = new Organizer("testingOG", "testingOGpass", "test@og.com", "945000000", "testing street", "www.test.og.com");
-		Event event = new Event(eventName, eventDate, "testing event place", og);
+		Event e = TestDBManager.getInstance().getEvent(eventName, eventDate);
 		// ****************************************************
-
-		Ticket ticket = new Ticket(event, user);
-		user.addBoughtTicket(ticket);
-		// TODO store the ticket in the database
+		
+		
+		
+		Ticket ticket = new Ticket(e, consumer);
+		consumer.addBoughtTicket(ticket);
+		
+		// FIXME: only for testing purposes*******************
+		//This is a replacement for storing the ticket in the DB
+		TestDBManager.getInstance().storeTicket(ticket);
+		// ****************************************************
+		
+		
 	}
 }

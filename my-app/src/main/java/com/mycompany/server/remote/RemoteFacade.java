@@ -20,11 +20,14 @@ import jakarta.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.mycompany.remote.serialization.BuyTicketDTO;
+import com.mycompany.remote.serialization.ConsumerDTO;
 import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
+import com.mycompany.remote.serialization.OrganizerDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
+import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 import com.mycompany.server.data.domain.Ticket;
@@ -94,17 +97,27 @@ public class RemoteFacade {
 	}
 
 	@POST
-	@Path("/users")
+	@Path("/users/consumers")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response register(UserDTO userdto) {
-		System.out.println("Registering user: " + userdto.toString());
-		UserAppService.getInstance().register(userdto.getEmail(), userdto.getPassword(), userdto.getName(),
-				userdto.getPhone());
+	public Response registerConsumer(ConsumerDTO dto) {
+		System.out.println("Registering consumer: " + dto.toString());
+		UserAppService.getInstance().registerConsumer(dto.getEmail(), dto.getPassword(), dto.getName(),
+				dto.getPhone(), dto.getNickname(), dto.getSurname());
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/users/organizers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response registerOrganizer(OrganizerDTO dto) {
+		System.out.println("Registering organizer: " + dto.toString());
+		UserAppService.getInstance().registerOrganizer(dto.getEmail(), dto.getPassword(), dto.getName(),
+				dto.getPhone(), dto.getAddress(), dto.getWebpage());
 		return Response.ok().build();
 	}
 
 	@PUT
-	@Path("/tickets")
+	@Path("/tickets/consumers")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getBoughtTickets(long token) {
@@ -116,15 +129,22 @@ public class RemoteFacade {
 			user = tokenManager.checkToken(token);
 
 			if (user != null) {
-				List<Ticket> listTickets = TicketAppService.getInstance().getBoughtTickets(user);
-				for (Ticket t : listTickets) {
-					TicketDTO dto = new TicketDTO();
-					dto.setUserEmail(t.getUser().getEmail());
-					dto.setEventName(t.getEvent().getName());
-					dto.setEventDate(t.getEvent().getDate());
-					dto.setPlace(t.getEvent().getPlace());
-					listOfTicketsDTO.add(dto);
+
+				Consumer con = UserAppService.getInstance().isConsumer(user);
+				if (con != null) {
+					List<Ticket> listTickets = TicketAppService.getInstance().getBoughtTickets(con);
+					for (Ticket t : listTickets) {
+						TicketDTO dto = new TicketDTO();
+						dto.setUserEmail(t.getUser().getEmail());
+						dto.setEventName(t.getEvent().getName());
+						dto.setEventDate(t.getEvent().getDate());
+						dto.setPlace(t.getEvent().getPlace());
+						listOfTicketsDTO.add(dto);
+					}
+				} else {
+					return Response.notModified().build();
 				}
+
 			}
 
 		} catch (RemoteException e) {
@@ -139,16 +159,20 @@ public class RemoteFacade {
 	}
 
 	@POST
-
-	@Path("/tickets")
-
+	@Path("/tickets/consumers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response buyTicket(BuyTicketDTO dto) {
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
 			User user = tokenManager.checkToken(dto.getToken());
 			if (user != null) {
-				TicketAppService.getInstance().buyTicket(user, dto.getEventName(), LocalDate.parse(dto.getEventDate()));
+				Consumer con = UserAppService.getInstance().isConsumer(user);
+				if (con != null) {
+					TicketAppService.getInstance().buyTicket(con, dto.getEventName(), LocalDate.parse(dto.getEventDate()));
+
+				} else {
+					return Response.notModified().build();
+				}
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace(); // TODO: handle exception
@@ -191,27 +215,26 @@ public class RemoteFacade {
 	}
 
 	@POST
-	@Path("/events")
+	@Path("/events/organizers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createEvent(CreateEventDTO dto) {
-		
+
 		// REMIND to check if user attributes are okey or if this user already exists
-		System.out.println("Creating an event: " + dto.getName() + " by ["  + dto.getOrganizerToken() + "]");
-		
-		
+		System.out.println("Creating an event: " + dto.getName() + " by [" + dto.getOrganizerToken() + "]");
+
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
-			//TODO: Only organizers can create an event 
+			// TODO: Only organizers can create an event
 			User user = tokenManager.checkToken(dto.getOrganizerToken());
 			if (user != null) {
-				
-				
-				//Check if user is organizer
+
+				// Check if user is organizer
 				Organizer org = UserAppService.getInstance().isOrganizer(user);
-				if(org != null) {
-					
-					EventAppService.getInstance().createEvent(dto.getName(), LocalDate.parse(dto.getDate()), dto.getPlace(), org);
-				}else {
+				if (org != null) {
+
+					EventAppService.getInstance().createEvent(dto.getName(), LocalDate.parse(dto.getDate()),
+							dto.getPlace(), org);
+				} else {
 					return Response.notModified().build();
 				}
 			}
@@ -221,7 +244,6 @@ public class RemoteFacade {
 		}
 
 		return Response.ok().build();
-		
 
 	}
 

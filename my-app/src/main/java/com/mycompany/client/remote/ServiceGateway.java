@@ -8,8 +8,10 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.remote.serialization.BuyTicketDTO;
+import com.mycompany.remote.serialization.ConsumerDTO;
 import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
+import com.mycompany.remote.serialization.OrganizerDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
@@ -60,6 +62,7 @@ public class ServiceGateway {
 
 	public void login(String email, String password) { // TODO: Throw an exception if it fails
 		WebTarget uTarget = baseTarget.path("users");
+		
 		Invocation.Builder i = uTarget.request(MediaType.APPLICATION_JSON);
 
 		UserLoginDTO userdto = new UserLoginDTO();
@@ -79,26 +82,7 @@ public class ServiceGateway {
 		}
 	}
 
-	public void register(String email, String password, String name, String phone) {
-		WebTarget uTarget = baseTarget.path("users");
-		Invocation.Builder i = uTarget.request();
 
-		UserDTO userdto = new UserDTO();
-
-		userdto.setEmail(email);
-		userdto.setPassword(password);
-		userdto.setName(name);
-		userdto.setPhone(phone);
-
-		Response r = i.post(Entity.entity(userdto, MediaType.APPLICATION_JSON));
-
-		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly done the register");
-		} else {
-			System.out.println("Server has problems with the register");
-		}
-
-	}
 
 	public void logout() {
 		WebTarget uTarget = baseTarget.path("users");
@@ -121,7 +105,9 @@ public class ServiceGateway {
 		List<TicketDTO> list = null;
 
 		WebTarget tTarget = baseTarget.path("tickets");
-		Invocation.Builder i = tTarget.request(MediaType.APPLICATION_JSON);
+		WebTarget cTarget = tTarget.path("consumers");
+
+		Invocation.Builder i = cTarget.request(MediaType.APPLICATION_JSON);
 
 		long token = ClientTokenManagement.getInstance().getToken();
 
@@ -173,7 +159,8 @@ public class ServiceGateway {
 
 	public void buyTicket(String name, LocalDate date) {
 		WebTarget uTarget = baseTarget.path("tickets");
-		Invocation.Builder i = uTarget.request();
+		WebTarget cTarget = uTarget.path("consumers");
+		Invocation.Builder i = cTarget.request();
 
 		BuyTicketDTO dto = new BuyTicketDTO();
 
@@ -195,7 +182,9 @@ public class ServiceGateway {
 
 	public void createEvent(String name, LocalDate date, String place) {
 		WebTarget uTarget = baseTarget.path("events");
-		Invocation.Builder i = uTarget.request();
+		WebTarget oTarget = uTarget.path("organizers");
+
+		Invocation.Builder i = oTarget.request();
 
 		CreateEventDTO dto = new CreateEventDTO();
 
@@ -220,6 +209,58 @@ public class ServiceGateway {
 			System.out.println("Server has problems with creating the event");
 		}
 
+	}
+
+	public void registerConsumer(String email, String password, String name, String phone, String nickname,
+			String surname) {
+		WebTarget uTarget = baseTarget.path("users");
+		WebTarget cTarget = uTarget.path("consumers");
+		
+		Invocation.Builder i = cTarget.request();
+
+		ConsumerDTO dto = new ConsumerDTO();
+
+		dto.setEmail(email);
+		dto.setPassword(password);
+		dto.setName(name);
+		dto.setPhone(phone);
+		dto.setNickname(nickname);
+		dto.setSurname(surname);
+
+		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly registered an consumer");
+		} else {
+			System.out.println("Server has problems with registering an consumer");
+		}
+		
+	}
+
+	public void registerOrganizer(String email, String password, String name, String phone, String address,
+			String webpage) {
+		WebTarget uTarget = baseTarget.path("users");
+		WebTarget cTarget = uTarget.path("organizers");
+		
+		Invocation.Builder i = cTarget.request();
+
+		OrganizerDTO dto = new OrganizerDTO();
+
+		dto.setEmail(email);
+		dto.setPassword(password);
+		dto.setName(name);
+		dto.setPhone(phone);
+		dto.setAddress(address);
+		dto.setWebpage(webpage);
+
+		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly registered an organizer");
+		} else {
+			System.out.println("Server has problems with registering an organizer");
+		}
+		
 	}
 
 }
