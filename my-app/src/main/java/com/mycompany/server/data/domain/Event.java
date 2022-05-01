@@ -1,15 +1,16 @@
 package com.mycompany.server.data.domain;
 
+import java.time.LocalDate;
 
 public class Event {
     private String name;
-	private String date;
+	private LocalDate date;
 	private String place;
 	private Organizer organizer;
 
 
 
-	public Event(String name, String date, 
+	public Event(String name, LocalDate date, 
 			String place, Organizer organizer) {
 		super();
 		this.name = name;
@@ -20,7 +21,7 @@ public class Event {
 	public Event() {
 		super();
 		this.name = "";
-		this.date = "";
+		this.date = LocalDate.now();
 		this.place = "";
 		this.organizer = null;
 	}
@@ -32,10 +33,10 @@ public class Event {
 		this.name = name;
 	}
     
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
