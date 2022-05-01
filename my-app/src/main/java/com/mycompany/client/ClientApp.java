@@ -29,6 +29,11 @@ public class ClientApp {
 		UserController.getInstance().login("TestingUser@test.com", "testingpass");
 
 		
+		
+		//Getting active events
+		EventController.getInstance().createEvent("testing event name", LocalDate.parse("2023-04-11"), "testing place");
+				
+		
 		//Getting active events
 		List<EventDTO> listEvents = EventController.getInstance().getActiveEvents();
 		if (listEvents != null) {

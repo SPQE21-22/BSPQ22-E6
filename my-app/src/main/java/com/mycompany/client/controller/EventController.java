@@ -1,5 +1,6 @@
 package com.mycompany.client.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.mycompany.client.remote.ClientTokenManagement;
@@ -34,6 +35,16 @@ public class EventController {
 		}
 		return list;
 
+	}
+
+	public void createEvent(String name, LocalDate date, String place) {
+		try {
+			ServiceGateway.getInstance().createEvent(name, date, place);
+
+		} catch (Exception e) {
+			System.out.println("* Error using the server:");
+			e.printStackTrace();
+		}		
 	}
 
 }

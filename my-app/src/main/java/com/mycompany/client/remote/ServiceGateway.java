@@ -8,6 +8,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.remote.serialization.BuyTicketDTO;
+import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
@@ -191,6 +192,30 @@ public class ServiceGateway {
 			System.out.println("Server has problems with buying the tickets");
 		}
 		
+	}
+
+	public void createEvent(String name, LocalDate date, String place) {
+		WebTarget uTarget = baseTarget.path("events");
+		Invocation.Builder i = uTarget.request();
+
+		CreateEventDTO dto = new CreateEventDTO();
+
+
+		dto.setOrganizerToken(ClientTokenManagement.getInstance().getToken());
+		dto.setDate(date);
+		dto.setName(name);
+		dto.setPlace(place);
+
+		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		// TODO: if error throw an exception
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly create the event");
+		} else {
+			System.out.println("Server has problems with creating the event");
+		}
+				
 	}
 
 }
