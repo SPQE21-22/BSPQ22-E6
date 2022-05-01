@@ -1,6 +1,7 @@
 package com.mycompany.server.remote;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,20 +136,25 @@ public class RemoteFacade {
 
 	}
 
-	/*
-	 * @POST
-	 * 
-	 * @Path("/tickets")
-	 * 
-	 * @Consumes(MediaType.APPLICATION_JSON) public Response buyTicket(BuyTicketDTO
-	 * dto) { TokenManagement tokenManager = TokenManagement.getInstance(); try {
-	 * User user = tokenManager.checkToken(dto.getToken()); if (user != null) {
-	 * TicketAppService.getInstance().buyTicket(user, dto.getEvent()); } } catch
-	 * (RemoteException e) { e.printStackTrace(); // TODO: handle exception return
-	 * Response.serverError().build(); }
-	 * 
-	 * return Response.ok().build(); }
-	 */
+	@POST
+
+	@Path("/tickets")
+
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response buyTicket(BuyTicketDTO dto) {
+		TokenManagement tokenManager = TokenManagement.getInstance();
+		try {
+			User user = tokenManager.checkToken(dto.getToken());
+			if (user != null) {
+				TicketAppService.getInstance().buyTicket(user, dto.getEventName(), LocalDate.parse(dto.getEventDate()));
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace(); // TODO: handle exception 
+			return Response.serverError().build();
+		}
+
+		return Response.ok().build();
+	}
 
 	@GET
 	@Path("/events")
