@@ -1,11 +1,13 @@
 package com.mycompany.client.remote;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mycompany.remote.serialization.BuyTicketDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
@@ -167,6 +169,28 @@ public class ServiceGateway {
 		}
 
 		return list;
+	}
+
+	public void buyTicket(String name, LocalDate date) {
+		WebTarget uTarget = baseTarget.path("tickets");
+		Invocation.Builder i = uTarget.request();
+
+		BuyTicketDTO dto = new BuyTicketDTO();
+
+		dto.setEventDate(date.toString());
+		dto.setEventName(name);
+		dto.setToken(ClientTokenManagement.getInstance().getToken());
+
+		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		// TODO: if error throw an exception
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Server has correctly bought the ticket");
+		} else {
+			System.out.println("Server has problems with buying the tickets");
+		}
+		
 	}
 
 }

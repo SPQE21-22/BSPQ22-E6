@@ -1,5 +1,6 @@
 package com.mycompany.client;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.mycompany.client.controller.EventController;
@@ -36,6 +37,9 @@ public class ClientApp {
 				System.out.println(t);
 			}
 		}
+		
+		EventDTO ev1 = listEvents.get(0);
+		TicketController.getInstance().buyTicket(ev1.getName(), LocalDate.parse(ev1.getDate()));
 		
 		//Getting Bought Tickets
 		List<TicketDTO> list = TicketController.getInstance().getBoughtTickets();

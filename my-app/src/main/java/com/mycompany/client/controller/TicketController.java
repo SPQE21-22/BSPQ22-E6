@@ -1,5 +1,6 @@
 package com.mycompany.client.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.mycompany.client.remote.ClientTokenManagement;
@@ -24,14 +25,26 @@ public class TicketController {
 
 		List<TicketDTO> list = null;
 		try {
-			
+
 			list = ServiceGateway.getInstance().getBoughtTickets();
-			
+
 		} catch (Exception e) {
 			System.out.println("* Error using the server:");
 			e.printStackTrace();
 		}
 		return list;
+
+	}
+
+	public void buyTicket(String name, LocalDate date) {
+
+		try {
+			ServiceGateway.getInstance().buyTicket(name, date);
+
+		} catch (Exception e) {
+			System.out.println("* Error using the server:");
+			e.printStackTrace();
+		}
 
 	}
 
