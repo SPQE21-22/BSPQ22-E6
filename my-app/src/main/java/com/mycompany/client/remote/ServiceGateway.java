@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mycompany.client.ClientApp;
 import com.mycompany.remote.serialization.BuyTicketDTO;
 import com.mycompany.remote.serialization.ConsumerDTO;
 import com.mycompany.remote.serialization.CreateEventDTO;
@@ -52,9 +53,9 @@ public class ServiceGateway {
 		Response r = newTarget.request().get();
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly done the testing");
+			ClientApp.getLogger().info("Server has correctly done the testing");
 		} else {
-			System.out.println("Server has problems with the testing");
+			ClientApp.getLogger().info("Server has problems with the testing");
 		}
 	}
 
@@ -73,10 +74,10 @@ public class ServiceGateway {
 		// TODO: if error throw an exception
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly done the login");
+			ClientApp.getLogger().info("Server has correctly done the login");
 			ClientTokenManagement.getInstance().setToken(r.readEntity(Long.class));
 		} else {
-			System.out.println("Server has problems with the login");
+			ClientApp.getLogger().info("Server has problems with the login");
 		}
 	}
 
@@ -92,9 +93,9 @@ public class ServiceGateway {
 		Response r = i.put(Entity.entity(token, MediaType.APPLICATION_JSON));
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly done the logout");
+			ClientApp.getLogger().info("Server has correctly done the logout");
 		} else {
-			System.out.println("Server has problems with the logout");
+			ClientApp.getLogger().info("Server has problems with the logout");
 		}
 
 	}
@@ -112,7 +113,7 @@ public class ServiceGateway {
 		Response r = i.put(Entity.entity(token, MediaType.APPLICATION_JSON));
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly got the bought tickets");
+			ClientApp.getLogger().info("Server has correctly got the bought tickets");
 
 			String listInJSON = r.readEntity(String.class);
 
@@ -123,7 +124,7 @@ public class ServiceGateway {
 			list = gson.fromJson(listInJSON, ticketDtoListType);
 
 		} else {
-			System.out.println("Server has problems with getting the tickets");
+			ClientApp.getLogger().info("Server has problems with getting the tickets");
 		}
 
 		return list;
@@ -138,7 +139,7 @@ public class ServiceGateway {
 		Response r = i.get();
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly got the active events");
+			ClientApp.getLogger().info("Server has correctly got the active events");
 
 			String listInJSON = r.readEntity(String.class);
 
@@ -149,7 +150,7 @@ public class ServiceGateway {
 			list = gson.fromJson(listInJSON, eventDtoListType);
 
 		} else {
-			System.out.println("Server has problems with getting the active events");
+			ClientApp.getLogger().info("Server has problems with getting the active events");
 		}
 
 		return list;
@@ -171,9 +172,9 @@ public class ServiceGateway {
 		// TODO: if error throw an exception
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly bought the ticket");
+			ClientApp.getLogger().info("Server has correctly bought the ticket");
 		} else {
-			System.out.println("Server has problems with buying the tickets");
+			ClientApp.getLogger().info("Server has problems with buying the tickets");
 		}
 
 	}
@@ -196,15 +197,15 @@ public class ServiceGateway {
 		// TODO: if error throw an exception
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly create the event");
+			ClientApp.getLogger().info("Server has correctly create the event");
 
 		} else if (r.getStatus() == Status.NOT_MODIFIED.getStatusCode()) {
 
-			System.out.println("Not modified: check that the user is an organizer");
+			ClientApp.getLogger().info("Not modified: check that the user is an organizer");
 
 		} else {
 
-			System.out.println("Server has problems with creating the event");
+			ClientApp.getLogger().info("Server has problems with creating the event");
 		}
 
 	}
@@ -228,9 +229,9 @@ public class ServiceGateway {
 		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly registered an consumer");
+			ClientApp.getLogger().info("Server has correctly registered an consumer");
 		} else {
-			System.out.println("Server has problems with registering an consumer");
+			ClientApp.getLogger().info("Server has problems with registering an consumer");
 		}
 		
 	}
@@ -254,9 +255,9 @@ public class ServiceGateway {
 		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			System.out.println("Server has correctly registered an organizer");
+			ClientApp.getLogger().info("Server has correctly registered an organizer");
 		} else {
-			System.out.println("Server has problems with registering an organizer");
+			ClientApp.getLogger().info("Server has problems with registering an organizer");
 		}
 		
 	}

@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
 import com.mycompany.remote.serialization.BuyTicketDTO;
 import com.mycompany.remote.serialization.ConsumerDTO;
@@ -15,6 +13,7 @@ import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.OrganizerDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
+import com.mycompany.server.ServerApp;
 import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
@@ -38,7 +37,6 @@ import jakarta.ws.rs.core.Response;
 public class RemoteFacade {
 
 	private static RemoteFacade instance;
-	private final Logger logger = Logger.getLogger("RemoteFacade");
 
 	public static RemoteFacade getInstance() {
 		if (instance == null) {
@@ -65,10 +63,11 @@ public class RemoteFacade {
 		if (user != null) { // If null user does not exist
 			try {
 				token = TokenManagement.getInstance().createToken(user);
-				System.out.println("Login of: " + username + " - " + password + ". [" + token + "]");
+				ServerApp.getLogger().info("Login of: " + username + " - " + password + ". [" + token + "]");
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				ServerApp.getLogger().error("Remote Exception occurred in the login", e);
 				return Response.serverError().build();
 			}
 		}
@@ -83,11 +82,11 @@ public class RemoteFacade {
 
 		try {
 			TokenManagement.getInstance().removeToken(token);
-			System.out.println("Logout of user with token: " + token);
+			ServerApp.getLogger().info("Logout of user with token: " + token);
 
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ServerApp.getLogger().error("Remote Exception occurred in the logout", e);
 			return Response.notModified(Long.toString(token)).build();
 		}
 		return Response.ok().build();
@@ -98,7 +97,7 @@ public class RemoteFacade {
 	@Path("/users/consumers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerConsumer(ConsumerDTO dto) {
-		System.out.println("Registering consumer: " + dto.toString());
+		ServerApp.getLogger().info("Registering consumer: " + dto.toString());
 		UserAppService.getInstance().registerConsumer(dto.getEmail(), dto.getPassword(), dto.getName(),
 				dto.getPhone(), dto.getNickname(), dto.getSurname());
 		return Response.ok().build();
@@ -108,7 +107,7 @@ public class RemoteFacade {
 	@Path("/users/organizers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerOrganizer(OrganizerDTO dto) {
-		System.out.println("Registering organizer: " + dto.toString());
+		ServerApp.getLogger().info("Registering organizer: " + dto.toString());
 		UserAppService.getInstance().registerOrganizer(dto.getEmail(), dto.getPassword(), dto.getName(),
 				dto.getPhone(), dto.getAddress(), dto.getWebpage());
 		return Response.ok().build();
@@ -119,7 +118,7 @@ public class RemoteFacade {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getBoughtTickets(long token) {
-		System.out.println("Getting tickets for: " + token);
+		ServerApp.getLogger().info("Getting tickets for: " + token);
 		User user = null;
 		List<TicketDTO> listOfTicketsDTO = new ArrayList<>();
 		try {
@@ -147,7 +146,7 @@ public class RemoteFacade {
 
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ServerApp.getLogger().error("Remote Exception occurred in getting bought tickets", e);
 			return Response.serverError().build();
 		}
 
@@ -173,7 +172,7 @@ public class RemoteFacade {
 				}
 			}
 		} catch (RemoteException e) {
-			e.printStackTrace(); // TODO: handle exception
+			ServerApp.getLogger().error("Remote Exception occurred in buying a ticket", e);
 			return Response.serverError().build();
 		}
 
@@ -185,7 +184,7 @@ public class RemoteFacade {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getActiveEvents() {
 
-		System.out.println("Getting active events");
+		ServerApp.getLogger().info("Getting active events");
 
 		List<EventDTO> listOfEventDTO = new ArrayList<>();
 		try {
@@ -203,8 +202,7 @@ public class RemoteFacade {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ServerApp.getLogger().error("Exception occurred in getting active events", e);
 			return Response.serverError().build();
 		}
 
@@ -218,7 +216,7 @@ public class RemoteFacade {
 	public Response createEvent(CreateEventDTO dto) {
 
 		// REMIND to check if user attributes are okey or if this user already exists
-		System.out.println("Creating an event: " + dto.getName() + " by [" + dto.getOrganizerToken() + "]");
+		ServerApp.getLogger().info("Creating an event: " + dto.getName() + " by [" + dto.getOrganizerToken() + "]");
 
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
@@ -237,7 +235,7 @@ public class RemoteFacade {
 				}
 			}
 		} catch (RemoteException e) {
-			e.printStackTrace(); // TODO: handle exception
+			ServerApp.getLogger().error("Remote Exception occurred in creating the event", e);
 			return Response.serverError().build();
 		}
 
@@ -249,9 +247,9 @@ public class RemoteFacade {
 	@Path("/test/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response testingConnection(@PathParam("name") String name) {
-		logger.info(name + " has tried to use the connection");
+		ServerApp.getLogger().info(name + " has tried to use the connection");
 		if (name.length() >= 1) {
-			System.out.println("Hello " + name + "!");
+			ServerApp.getLogger().info(name + "entered the method!");
 			return Response.status(Response.Status.OK).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND).build();

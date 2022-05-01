@@ -2,8 +2,8 @@ package com.mycompany.server;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -11,20 +11,23 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 
 public class ServerApp {
-	private final static AtomicBoolean running = new AtomicBoolean(false);
-	private static final Logger logger = Logger.getLogger("Main");
+
+	private static final Logger logger = Logger.getLogger("ServerApp");
 	
 	public static void main(String[] args) {
+		
+		BasicConfigurator.configure(); //loads the log4j properties
+		
 		String hostname = args[0];
 		String port = args[1];
 		
 		String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
 		
-		running.set(true); //Starts the server
 		HttpServer server = startServer(BASE_URI);
 		
+		logger.info("Server running in: "+BASE_URI+"/remote");
+		System.out.println("Running the server in: "+BASE_URI+"/remote...\nCLICK ENTER TO STOP THE SERVER...");
 		
-		System.out.println("Running the server in: "+BASE_URI+"/remote");
 		
 		
 		try {
@@ -34,8 +37,9 @@ public class ServerApp {
 			e.printStackTrace();
 		}
 		
+		
 		server.stop();
-        
+		logger.info("Server stopped");
 
 	}
 	
@@ -53,9 +57,16 @@ public class ServerApp {
         // exposing the Jersey application at BASE_URI
         server = GrizzlyHttpServerFactory.createHttpServer(URI.create(uri), rc);
     	}catch(Exception e) {
-    		System.out.println("* Starting the server failed: \n");
-    		e.printStackTrace();
+    		//System.out.println("* Starting the server failed: \n");
+    		logger.error("Starting the server failed",e);
+    		//e.printStackTrace();
     	}
     	return server;
     }
+
+	public static Logger getLogger() {
+		return logger;
+	}
+    
+    
 }

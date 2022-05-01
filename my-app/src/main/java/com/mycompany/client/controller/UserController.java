@@ -1,5 +1,6 @@
 package com.mycompany.client.controller;
 
+import com.mycompany.client.ClientApp;
 import com.mycompany.client.remote.ServiceGateway;
 
 public class UserController {
@@ -22,8 +23,8 @@ public class UserController {
 		try {
 			ServiceGateway.getInstance().login(email, password);
 		} catch (Exception e) {
-			System.out.println("* Error using the server:");
-			e.printStackTrace();
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
 		}
 	}
 	
@@ -40,8 +41,8 @@ public class UserController {
 		try {
 			ServiceGateway.getInstance().registerConsumer(email, password,name,phone, "", "");
 		} catch (Exception e) {
-			System.out.println("* Error using the server:");
-			e.printStackTrace();
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
 		}
 
 	}
@@ -50,8 +51,8 @@ public class UserController {
 		try {
 			ServiceGateway.getInstance().registerConsumer(email, password,name,phone, nickname, surname);
 		} catch (Exception e) {
-			System.out.println("* Error using the server:");
-			e.printStackTrace();
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
 		}
 
 	}
@@ -60,8 +61,8 @@ public class UserController {
 		try {
 			ServiceGateway.getInstance().registerOrganizer(email, password,name,phone, address, webpage);
 		} catch (Exception e) {
-			System.out.println("* Error using the server:");
-			e.printStackTrace();
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
 		}
 
 	}
@@ -72,8 +73,8 @@ public class UserController {
 		try {
 			ServiceGateway.getInstance().logout();
 		} catch (Exception e) {
-			System.out.println("* Error using the server:");
-			e.printStackTrace();
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
 		}
 
 	}
