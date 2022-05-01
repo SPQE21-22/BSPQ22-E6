@@ -1,5 +1,6 @@
 package com.mycompany.server.data.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User{
@@ -16,14 +17,14 @@ public abstract class User{
 		this.email = email;
 		this.name = name;
         this.phone = phone;
-		this.boughtTickets = null;
+		this.boughtTickets= new ArrayList<>();
 	}
 	protected User() {
 		this.password = "";
 		this.email = "";
 		this.name = "";
         this.phone = "";
-		this.boughtTickets = null;
+		this.boughtTickets= new ArrayList<>();
 	}
 	public String getPassword() {
 		return password;

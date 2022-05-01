@@ -32,6 +32,11 @@ public class Organizer extends User {
 	public void setWebpage(String webpage) {
 		this.webpage = webpage;
 	}
+
+	@Override
+	public String toString() {
+		return "Organizer [address=" + address + ", webpage=" + webpage + "]";
+	}
 	
 	
 
