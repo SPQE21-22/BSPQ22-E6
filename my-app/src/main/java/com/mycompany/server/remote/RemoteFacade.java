@@ -19,6 +19,7 @@ import jakarta.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.mycompany.remote.serialization.BuyTicketDTO;
+import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
@@ -126,11 +127,12 @@ public class RemoteFacade {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return Response.serverError().build();
 		}
-		
+
 		Gson gson = new Gson();// converts the list to a json
 		return Response.ok().entity(gson.toJson(listOfTicketsDTO)).build();
-		
+
 	}
 
 	/*
@@ -142,29 +144,55 @@ public class RemoteFacade {
 	 * dto) { TokenManagement tokenManager = TokenManagement.getInstance(); try {
 	 * User user = tokenManager.checkToken(dto.getToken()); if (user != null) {
 	 * TicketAppService.getInstance().buyTicket(user, dto.getEvent()); } } catch
-	 * (RemoteException e) { e.printStackTrace(); // TODO: handle exception }
+	 * (RemoteException e) { e.printStackTrace(); // TODO: handle exception return
+	 * Response.serverError().build(); }
 	 * 
 	 * return Response.ok().build(); }
-	 * 
-	 * /*
-	 * 
-	 * @GET
-	 * 
-	 * @Path("/events")
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public Response getActiveEvents() {
-	 * List<Event> listActiveEvents =
-	 * EventAppService.getInstance().getActiveEvents(); // TODO: return list of
-	 * active events return Response.ok(listActiveEvents).build(); }
-	 * 
+	 */
+
+	@GET
+	@Path("/events")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getActiveEvents() {
+
+		System.out.println("Getting active events");
+
+		List<EventDTO> listOfEventDTO = new ArrayList<>();
+		try {
+
+			List<Event> listActiveEvents = EventAppService.getInstance().getActiveEvents();
+
+			for (Event e : listActiveEvents) {
+				EventDTO dto = new EventDTO();
+				dto.setName(e.getName());
+				dto.setDate(e.getDate());
+				dto.setPlace(e.getPlace());
+				dto.setOrganizerEmail(e.getOrganizer().getEmail());
+				dto.setOrganizerWeb(e.getOrganizer().getWebpage());
+				listOfEventDTO.add(dto);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+
+		Gson gson = new Gson();// converts the list to a json
+		return Response.ok().entity(gson.toJson(listOfEventDTO)).build();
+	}
+
+	/*
 	 * @POST
 	 * 
-	 * @Path("/events") public Response createActiveEvents() { // // TODO:Call
-	 * EventService to add a new event with the info received from the // client.
-	 * REMIND to check if user attributes are okey or if this user already // exists
+	 * @Path("/events") public Response createActiveEvents() { // TODO:Call
+	 * EventService to add a new event with the info received from the client. //
+	 * REMIND to check if user attributes are okey or if this user already exists
 	 * 
 	 * EventAppService.getInstance().createEvent(); return Response.ok().build(); }
+	 * 
 	 */
+
 	@GET
 	@Path("/test/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
