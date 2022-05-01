@@ -54,12 +54,13 @@ public class RemoteFacade {
 		String password = userlogindto.getPassword();
 		
 		
-		System.out.println("Hey "+username+" - "+password);
+		
 		long token = -1;
 		User user = UserAppService.getInstance().login(username, password);
 		if (user != null) { // If null user does not exist
 			try {
 				token = TokenManagement.getInstance().createToken(user);
+				System.out.println("Login of: "+username+" - "+password+". ["+token+"]");
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -75,9 +76,10 @@ public class RemoteFacade {
 	@Path("/users/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response logout(long token) {
-
+		
 		try {
 			TokenManagement.getInstance().removeToken(token);
+			System.out.println("Logout of user with token: "+token);
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -92,7 +94,7 @@ public class RemoteFacade {
 	@Path("/users")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response register(UserDTO userdto) {
-		System.out.println(userdto);
+		System.out.println("Registering user: "+userdto.toString());
 		UserAppService.getInstance().register(userdto.getEmail(),userdto.getPassword(),userdto.getName(),userdto.getPhone());
 		return Response.ok().build();
 	}

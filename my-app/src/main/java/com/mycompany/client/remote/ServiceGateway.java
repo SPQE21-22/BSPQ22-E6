@@ -82,8 +82,6 @@ public class ServiceGateway {
 		
 		Response r = i.post(Entity.entity(userdto,MediaType.APPLICATION_JSON));
 		
-		System.out.println(r);
-		
 		if(r.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Server has correctly done the register");
 		}else {
