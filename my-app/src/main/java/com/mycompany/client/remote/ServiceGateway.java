@@ -151,7 +151,6 @@ public class ServiceGateway {
 		WebTarget tTarget = baseTarget.path("events");
 		Invocation.Builder i = tTarget.request(MediaType.APPLICATION_JSON);
 
-
 		Response r = i.get();
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
@@ -191,7 +190,7 @@ public class ServiceGateway {
 		} else {
 			System.out.println("Server has problems with buying the tickets");
 		}
-		
+
 	}
 
 	public void createEvent(String name, LocalDate date, String place) {
@@ -199,7 +198,6 @@ public class ServiceGateway {
 		Invocation.Builder i = uTarget.request();
 
 		CreateEventDTO dto = new CreateEventDTO();
-
 
 		dto.setOrganizerToken(ClientTokenManagement.getInstance().getToken());
 		dto.setDate(date);
@@ -212,10 +210,16 @@ public class ServiceGateway {
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Server has correctly create the event");
+
+		} else if (r.getStatus() == Status.NOT_MODIFIED.getStatusCode()) {
+
+			System.out.println("Not modified: check that the user is an organizer");
+
 		} else {
+
 			System.out.println("Server has problems with creating the event");
 		}
-				
+
 	}
 
 }

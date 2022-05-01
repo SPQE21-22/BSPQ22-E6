@@ -20,11 +20,13 @@ import jakarta.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.mycompany.remote.serialization.BuyTicketDTO;
+import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
 import com.mycompany.server.data.domain.Event;
+import com.mycompany.server.data.domain.Organizer;
 import com.mycompany.server.data.domain.Ticket;
 import com.mycompany.server.data.domain.User;
 import com.mycompany.server.services.EventAppService;
@@ -149,7 +151,7 @@ public class RemoteFacade {
 				TicketAppService.getInstance().buyTicket(user, dto.getEventName(), LocalDate.parse(dto.getEventDate()));
 			}
 		} catch (RemoteException e) {
-			e.printStackTrace(); // TODO: handle exception 
+			e.printStackTrace(); // TODO: handle exception
 			return Response.serverError().build();
 		}
 
@@ -188,16 +190,40 @@ public class RemoteFacade {
 		return Response.ok().entity(gson.toJson(listOfEventDTO)).build();
 	}
 
-	/*
-	 * @POST
-	 * 
-	 * @Path("/events") public Response createActiveEvents() { // TODO:Call
-	 * EventService to add a new event with the info received from the client. //
-	 * REMIND to check if user attributes are okey or if this user already exists
-	 * 
-	 * EventAppService.getInstance().createEvent(); return Response.ok().build(); }
-	 * 
-	 */
+	@POST
+	@Path("/events")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createEvent(CreateEventDTO dto) {
+		
+		// REMIND to check if user attributes are okey or if this user already exists
+		System.out.println("Creating an event: " + dto.getName() + " by ["  + dto.getOrganizerToken() + "]");
+		
+		
+		TokenManagement tokenManager = TokenManagement.getInstance();
+		try {
+			//TODO: Only organizers can create an event 
+			User user = tokenManager.checkToken(dto.getOrganizerToken());
+			if (user != null) {
+				
+				
+				//Check if user is organizer
+				Organizer org = UserAppService.getInstance().isOrganizer(user);
+				if(org != null) {
+					
+					EventAppService.getInstance().createEvent(dto.getName(), LocalDate.parse(dto.getDate()), dto.getPlace(), org);
+				}else {
+					return Response.notModified().build();
+				}
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace(); // TODO: handle exception
+			return Response.serverError().build();
+		}
+
+		return Response.ok().build();
+		
+
+	}
 
 	@GET
 	@Path("/test/{name}")

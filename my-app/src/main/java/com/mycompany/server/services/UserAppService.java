@@ -2,6 +2,7 @@ package com.mycompany.server.services;
 
 import com.mycompany.server.data.dataBase.TestDBManager;
 import com.mycompany.server.data.domain.Consumer;
+import com.mycompany.server.data.domain.Organizer;
 import com.mycompany.server.data.domain.User;
 
 public class UserAppService {
@@ -56,6 +57,22 @@ public class UserAppService {
 
 		// TODO:Save user in the database
 
+	}
+
+	
+	/**
+	 * This method checks if the user given is an organizer and returns an organizer object
+	 * If the user is not an organizer returns null
+	 * @param user user object 
+	 * @return organizer object / null if user is not an organizer
+	 */
+	public Organizer isOrganizer(User user) {
+		Organizer org = null;
+		
+		if(user != null && user instanceof Organizer) {
+			org = (Organizer) user;
+		}
+		return org;
 	}
 
 }

@@ -34,9 +34,9 @@ public class EventAppService {
 		//****************************************************
 		return list;
     }
-    public void createEvent() {
-        //TODO: create event with real parameters and check if parameters are valid
-    	Event e = new Event();
+    public void createEvent(String name, LocalDate date, String place, Organizer org) {
+        //TODO: check if parameters are valid
+    	Event e = new Event(name, date, place, org);
     	//TODO: save the event to the DB
 	}
 }
