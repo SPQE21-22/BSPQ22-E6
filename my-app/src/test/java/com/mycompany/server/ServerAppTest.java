@@ -4,17 +4,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
-public class ServerAppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
+public class ServerAppTest {
+
+	@Test
 	public void test() {
-		assertTrue(true);
+		assertTrue("Not Implemented yet", true);
 	}
 
 }
