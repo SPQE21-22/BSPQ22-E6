@@ -1,6 +1,7 @@
 package com.mycompany.remote.serialization;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class EventDTO {
 	private String name;
@@ -45,6 +46,23 @@ public class EventDTO {
 	public String toString() {
 		return "EventDTO [name=" + name + ", date=" + date + ", place=" + place + ", organizerEmail=" + organizerEmail
 				+ ", organizerWeb=" + organizerWeb + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(date, name, organizerEmail, organizerWeb, place);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EventDTO other = (EventDTO) obj;
+		return Objects.equals(date, other.date) && Objects.equals(name, other.name)
+				&& Objects.equals(organizerEmail, other.organizerEmail)
+				&& Objects.equals(organizerWeb, other.organizerWeb) && Objects.equals(place, other.place);
 	}
 	
 
