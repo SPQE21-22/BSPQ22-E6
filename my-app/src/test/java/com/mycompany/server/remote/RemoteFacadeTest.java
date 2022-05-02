@@ -7,11 +7,15 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -60,9 +64,14 @@ public class RemoteFacadeTest {
 		server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
 
 	}
+	
+	@Rule
+	public ContiPerfRule rule = new ContiPerfRule();
 
 	@Test
-	public void fullOperationTest() {
+	@PerfTest(invocations =100)
+	@Required(max=1500, average=60)
+	public void fullOperationTest() {  //max 1,5s
 
 		// *********************register an organizer
 		WebTarget uTarget = baseTarget.path("users");
