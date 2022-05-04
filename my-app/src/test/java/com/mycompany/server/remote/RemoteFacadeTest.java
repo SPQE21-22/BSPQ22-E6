@@ -7,9 +7,6 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.databene.contiperf.PerfTest;
-import org.databene.contiperf.Required;
-import org.databene.contiperf.junit.ContiPerfRule;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -18,6 +15,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.github.javatlacati.contiperf.PerfTest;
+import com.github.javatlacati.contiperf.Required;
+import com.github.javatlacati.contiperf.junit.ContiPerfRule;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.remote.serialization.BuyTicketDTO;
@@ -70,7 +70,7 @@ public class RemoteFacadeTest {
 
 	@Test
 	@PerfTest(invocations =100)
-	@Required(max=1500, average=60)
+	@Required(max=1500, average=600)
 	public void fullOperationTest() {  //max 1,5s
 
 		// *********************register an organizer
@@ -206,13 +206,13 @@ public class RemoteFacadeTest {
 
 		BuyTicketDTO dto7 = new BuyTicketDTO();
 
-		dto7.setEventDate(e.getName());
-		dto7.setEventName(e.getDate());
+		dto7.setEventDate(e.getDate());
+		dto7.setEventName(e.getName());
 		dto7.setToken(tokenc);
 
 		Response r7 = i7.post(Entity.entity(dto7, MediaType.APPLICATION_JSON));
 
-		//FIXME: assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
+		assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
 
 		// *********************getting bought tickets
 
@@ -237,7 +237,7 @@ public class RemoteFacadeTest {
 		expectedt.setUserEmail(dtoc.getEmail());
 		expectedt.setPlace(dtoe.getPlace());
 
-		//FIXME: assertEquals("Retrieved ticket is correct", expectedt, listtickets.get(0));
+		assertEquals("Retrieved ticket is correct", expectedt, listtickets.get(0));
 
 		// *********************logout
 

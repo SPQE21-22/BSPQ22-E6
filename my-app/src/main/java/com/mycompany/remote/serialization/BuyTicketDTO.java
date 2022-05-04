@@ -1,5 +1,6 @@
 package com.mycompany.remote.serialization;
 
+import java.time.LocalDate;
 
 public class BuyTicketDTO { 
 	
@@ -14,6 +15,10 @@ public class BuyTicketDTO {
 
 	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
+	}
+	
+	public void setEventDate(LocalDate date) {
+		this.eventDate = date.toString();
 	}
 
 	public String getEventName() {
