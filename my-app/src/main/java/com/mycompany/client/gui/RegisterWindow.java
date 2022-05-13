@@ -33,6 +33,7 @@ public class RegisterWindow {
 	private JTextField txtPhone;
 	private JTextField txtExtra1;
 	private JTextField txtExtra2;
+	private JCheckBox chckbxNewCheckBox;
 	
 
 	/**
@@ -121,6 +122,33 @@ public class RegisterWindow {
 			}
 		});
 		
+		chckbxNewCheckBox = new JCheckBox("I am an organizer");
+		chckbxNewCheckBox.setBounds(112, 319, 130, 23);
+		frame.getContentPane().add(chckbxNewCheckBox);
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!chckbxPrivacy.isSelected()) {
+					
+					txtExtra1.setText("Address");
+					txtExtra2.setText("Webpage");
+					
+				}
+				
+			}
+		});
+		
+		txtExtra1 = new JTextField("Nickname*");
+		txtExtra1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtExtra1.setBackground(SystemColor.menu);
+		txtExtra1.setBounds(114, 349, 236, 42);
+		frame.getContentPane().add(txtExtra1);
+		
+		txtExtra2 = new JTextField("UserName*");
+		txtExtra2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtExtra2.setBackground(SystemColor.menu);
+		txtExtra2.setBounds(114, 402, 236, 42);
+		frame.getContentPane().add(txtExtra2);
+		
 		JButton createBtn = new JButton("CREATE ACCOUNT");
 		createBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,9 +159,18 @@ public class RegisterWindow {
 					String pass = txtPassword.getText();
 					String phone = txtPhone.getText();
 					
+					String campo1 = txtExtra1.getText();
+					String campo2 = txtExtra2.getText();
+				
+					
 					if (!pass.isEmpty()) {
 						if (!email.isEmpty()) {
 							if (!userName.isEmpty()) {
+								if (chckbxNewCheckBox.isSelected()){
+									UserController.getInstance().registerConsumer(email, pass, userName, phone, campo1, campo2);
+								}else {
+									UserController.getInstance().registerOrganizer(email, pass, userName, phone, campo1, campo2);
+								}
 								
 							} else {
 								JOptionPane.showMessageDialog(null, "The section name is empty");
@@ -145,7 +182,7 @@ public class RegisterWindow {
 						JOptionPane.showMessageDialog(null, "You have to enter a password");
 					}
 					
-					UserController.getInstance().register(email, pass, userName, phone);			
+								
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "You must accept the privacy policy", "ERROR!", JOptionPane.ERROR_MESSAGE);
@@ -203,17 +240,7 @@ public class RegisterWindow {
 		btnNewButton.setBounds(133, 652, 185, 23);
 		frame.getContentPane().add(btnNewButton);
 		
-		txtExtra1 = new JTextField("Nickname*");
-		txtExtra1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtExtra1.setBackground(SystemColor.menu);
-		txtExtra1.setBounds(114, 349, 236, 42);
-		frame.getContentPane().add(txtExtra1);
 		
-		txtExtra2 = new JTextField("UserName*");
-		txtExtra2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtExtra2.setBackground(SystemColor.menu);
-		txtExtra2.setBounds(114, 402, 236, 42);
-		frame.getContentPane().add(txtExtra2);
 		
 				
 		JCheckBox chckbxNewCheckBox = new JCheckBox("I am an organizer");
@@ -221,10 +248,10 @@ public class RegisterWindow {
 		frame.getContentPane().add(chckbxNewCheckBox);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (chckbxPrivacy.isSelected()) {
+				if (!chckbxPrivacy.isSelected()) {
 					
 					txtExtra1.setText("Address");
-					txtExtra1.setText("Webpage");
+					txtExtra2.setText("Webpage");
 					
 				}
 				
