@@ -62,10 +62,12 @@ public class LoginWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String email = txtEmail.getText();
 				String password = txtPassword.getText();
+				
+				UserController.getInstance().login(email, password);
 											
-	}
+			}
 
-});
+		});
 		goBut.setForeground(new Color(255, 255, 255));
 		goBut.setBackground(new Color(255, 165, 0));
 		goBut.setBounds(132, 366, 185, 48);

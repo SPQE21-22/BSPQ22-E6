@@ -15,6 +15,9 @@ import javax.swing.JComboBox;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.mycompany.client.controller.UserController;
+
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JList;
@@ -98,6 +101,9 @@ public class PrincipalWindow {
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginWindow.main(null);
+				
+				UserController.getInstance().logout();
+				
 				frame.dispose();
 			}
 		});
