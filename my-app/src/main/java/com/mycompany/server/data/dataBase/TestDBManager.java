@@ -60,6 +60,14 @@ public class TestDBManager {
 		return false;
 	}
 	
+	public boolean deleteUser(User u) {
+		if (!storedUsers.contains(u)) {
+			storedUsers.remove(u);
+			return true;
+		}
+		return false;
+	}
+	
 	public Ticket getTicket(String consumerEmail, String eventName, LocalDate eventDate) {
 		Ticket found = null;
 		for (Ticket t :storedTickets) {

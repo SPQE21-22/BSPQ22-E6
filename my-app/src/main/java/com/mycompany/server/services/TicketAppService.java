@@ -49,15 +49,17 @@ public class TicketAppService {
 		
 	}
 	
-	public void reselledTicket(User buyer, String ticketUserMail, String ticketEventName, LocalDate ticketEventDate) {
+	public void reselledTicket(Consumer buyer, String ticketUserMail, String ticketEventName, LocalDate ticketEventDate) {
 		// FIXME: only for testing purposes*******************
 		//This is a replacement for searching the event in the DB
 		Ticket t = TestDBManager.getInstance().getTicket(ticketUserMail,ticketEventName,ticketEventDate);
 		
 		
 		TestDBManager.getInstance().deleteTicket(t);
+		TestDBManager.getInstance().deleteUser(buyer);
 		
 		t.setUser(buyer);
+		buyer.addBoughtTicket(t);
 		TestDBManager.getInstance().storeTicket(t);
 		// ****************************************************
 	}

@@ -67,7 +67,7 @@ public class RemoteFacade {
 				ServerApp.getLogger().info("Login of: " + username + " - " + password + ". [" + token + "]");
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				// e.printStackTrace();
 				ServerApp.getLogger().error("Remote Exception occurred in the login", e);
 				return Response.serverError().build();
 			}
@@ -99,18 +99,18 @@ public class RemoteFacade {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerConsumer(ConsumerDTO dto) {
 		ServerApp.getLogger().info("Registering consumer: " + dto.toString());
-		UserAppService.getInstance().registerConsumer(dto.getEmail(), dto.getPassword(), dto.getName(),
-				dto.getPhone(), dto.getNickname(), dto.getSurname());
+		UserAppService.getInstance().registerConsumer(dto.getEmail(), dto.getPassword(), dto.getName(), dto.getPhone(),
+				dto.getNickname(), dto.getSurname());
 		return Response.ok().build();
 	}
-	
+
 	@POST
 	@Path("/users/organizers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerOrganizer(OrganizerDTO dto) {
 		ServerApp.getLogger().info("Registering organizer: " + dto.toString());
-		UserAppService.getInstance().registerOrganizer(dto.getEmail(), dto.getPassword(), dto.getName(),
-				dto.getPhone(), dto.getAddress(), dto.getWebpage());
+		UserAppService.getInstance().registerOrganizer(dto.getEmail(), dto.getPassword(), dto.getName(), dto.getPhone(),
+				dto.getAddress(), dto.getWebpage());
 		return Response.ok().build();
 	}
 
@@ -166,7 +166,8 @@ public class RemoteFacade {
 			if (user != null) {
 				Consumer con = UserAppService.getInstance().isConsumer(user);
 				if (con != null) {
-					TicketAppService.getInstance().buyTicket(con, dto.getEventName(), LocalDate.parse(dto.getEventDate()));
+					TicketAppService.getInstance().buyTicket(con, dto.getEventName(),
+							LocalDate.parse(dto.getEventDate()));
 
 				} else {
 					return Response.notModified().build();
@@ -243,21 +244,28 @@ public class RemoteFacade {
 		return Response.ok().build();
 
 	}
-	
+
 	@PUT
 	@Path("/tickets/resell")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response resellTicket(ResellTicketDTO dto) {
-		//TODO
+		// TODO
 		ServerApp.getLogger().info("Buy Resell Ticket: " + dto.toString());
-		
+
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
 			// TODO: Only organizers can create an event
 			User user = tokenManager.checkToken(dto.getToken());
 			if (user != null) {
 
-				TicketAppService.getInstance().reselledTicket(user, dto.getTicketUserEmail(),dto.getTicketEventName(),LocalDate.parse(dto.getTicketEventDate()));
+				// Check if user is consumer
+				Consumer c = UserAppService.getInstance().isConsumer(user);
+				if (c != null) {
+					TicketAppService.getInstance().reselledTicket(c, dto.getTicketUserEmail(),
+							dto.getTicketEventName(), LocalDate.parse(dto.getTicketEventDate()));
+				} else {
+					return Response.notModified().build();
+				}
 			}
 		} catch (RemoteException e) {
 			ServerApp.getLogger().error("Remote Exception occurred in reselling a ticket", e);
