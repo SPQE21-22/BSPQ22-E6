@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.mycompany.remote.serialization.ResellTicketDTO;
 import com.mycompany.remote.serialization.BuyTicketDTO;
 import com.mycompany.remote.serialization.ConsumerDTO;
 import com.mycompany.remote.serialization.CreateEventDTO;
@@ -241,6 +242,29 @@ public class RemoteFacade {
 
 		return Response.ok().build();
 
+	}
+	
+	@PUT
+	@Path("/tickets/resell")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response resellTicket(ResellTicketDTO dto) {
+		//TODO
+		ServerApp.getLogger().info("Buy Resell Ticket: " + dto.toString());
+		
+		TokenManagement tokenManager = TokenManagement.getInstance();
+		try {
+			// TODO: Only organizers can create an event
+			User user = tokenManager.checkToken(dto.getToken());
+			if (user != null) {
+
+				TicketAppService.getInstance().reselledTicket(user, dto.getTicketUserEmail(),dto.getTicketEventName(),LocalDate.parse(dto.getTicketEventDate()));
+			}
+		} catch (RemoteException e) {
+			ServerApp.getLogger().error("Remote Exception occurred in reselling a ticket", e);
+			return Response.serverError().build();
+		}
+
+		return Response.ok().build();
 	}
 
 	@GET

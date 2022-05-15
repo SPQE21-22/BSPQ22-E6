@@ -52,6 +52,14 @@ public class TestDBManager {
 		return false;
 	}
 	
+	public boolean deleteTicket(Ticket t) {
+		if (!storedTickets.contains(t)) {
+			storedTickets.remove(t);
+			return true;
+		}
+		return false;
+	}
+	
 	public Ticket getTicket(String consumerEmail, String eventName, LocalDate eventDate) {
 		Ticket found = null;
 		for (Ticket t :storedTickets) {
