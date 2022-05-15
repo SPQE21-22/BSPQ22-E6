@@ -308,4 +308,31 @@ public class ServiceGateway {
 		
 	}
 
+	public List<TicketDTO> getResellingTickets() {
+		List<TicketDTO> list = null;
+
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget rTarget = tTarget.path("resell");
+		Invocation.Builder i = rTarget.request(MediaType.APPLICATION_JSON);
+
+		Response r = i.get();
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			ClientApp.getLogger().info("Server has correctly got the reselling tickets");
+
+			String listInJSON = r.readEntity(String.class);
+
+			// Deserializing the list
+			Gson gson = new Gson();
+			Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
+			}.getType();
+			list = gson.fromJson(listInJSON, ticketDtoListType);
+
+		} else {
+			ClientApp.getLogger().info("Server has problems with getting the reselling tickets");
+		}
+
+		return list;
+	}
+
 }

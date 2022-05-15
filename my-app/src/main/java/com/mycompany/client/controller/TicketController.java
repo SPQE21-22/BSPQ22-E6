@@ -70,4 +70,18 @@ public class TicketController {
 		
 	}
 
+	public List<TicketDTO> getResellingTickets() {
+		List<TicketDTO> list = null;
+		try {
+
+			list = ServiceGateway.getInstance().getResellingTickets();
+
+		} catch (Exception e) {
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
+		}
+		return list;
+
+	}
+
 }
