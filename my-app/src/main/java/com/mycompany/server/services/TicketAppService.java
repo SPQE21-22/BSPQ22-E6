@@ -61,7 +61,7 @@ public class TicketAppService {
 
 	}
 
-	public boolean buyReselledTicket(Consumer buyer, String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+	public boolean buyResellingTicket(Consumer buyer, String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
 
 		// FIXME: only for testing purposes*******************
 		// This is a replacement for searching the event in the DB

@@ -281,7 +281,7 @@ public class RemoteFacade {
 	@POST
 	@Path("/tickets/resell")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response buyReselledTicket(ResellTicketDTO dto) {
+	public Response buyResellingTicket(ResellTicketDTO dto) {
 
 		ServerApp.getLogger().info("Buy Resell Ticket: " + dto.toString());
 
@@ -294,7 +294,7 @@ public class RemoteFacade {
 				// Check if user is consumer
 				Consumer c = UserAppService.getInstance().isConsumer(user);
 				if (c != null) {
-					if (!TicketAppService.getInstance().buyReselledTicket(c, dto.getTicketUserEmail(),
+					if (!TicketAppService.getInstance().buyResellingTicket(c, dto.getTicketUserEmail(),
 							dto.getTicketEventName(), LocalDate.parse(dto.getTicketEventDate()))) {
 						return Response.notModified().build();
 					}
