@@ -93,7 +93,7 @@ public class ClientApp {
 
 		// Reselling ticket
 		TicketDTO toResellTicket = list.get(0);
-		TicketController.getInstance().resellTicket(toResellTicket.getUserEmail(), toResellTicket.getEventName(),
+		TicketController.getInstance().putTicketInResell(toResellTicket.getUserEmail(), toResellTicket.getEventName(),
 				LocalDate.parse(toResellTicket.getEventDate()));
 
 		// Getting Bought Tickets

@@ -263,7 +263,7 @@ public class ServiceGateway {
 		
 	}
 
-	public void resellTicket(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+	public void putTicketInResell(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
 		WebTarget tTarget = baseTarget.path("tickets");
 		WebTarget rTarget = tTarget.path("resell");
 		
@@ -276,10 +276,10 @@ public class ServiceGateway {
 		dto.setTicketEventDate(ticketEventDate);
 		dto.setToken(ClientTokenManagement.getInstance().getToken());
 
-		Response r = i.put(Entity.entity(dto, MediaType.APPLICATION_JSON));
+		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
-			ClientApp.getLogger().info("Server has correctly reselled a ticket");
+			ClientApp.getLogger().info("Server has correctly put in resell a ticket");
 		} else {
 			ClientApp.getLogger().info("Server has problems with reselling a ticket");
 		}

@@ -8,6 +8,7 @@ public class TicketDTO {
 	private String userEmail;
 	private String eventDate;
 	private String place;
+	private boolean inResell;
 	
 	public String getEventName() {
 		return eventName;
@@ -36,14 +37,20 @@ public class TicketDTO {
 	public void setPlace(String place) {
 		this.place = place;
 	}
+	public boolean isInResell() {
+		return inResell;
+	}
+	public void setInResell(boolean inResell) {
+		this.inResell = inResell;
+	}
 	@Override
 	public String toString() {
 		return "TicketDTO [eventName=" + eventName + ", userEmail=" + userEmail + ", eventDate=" + eventDate
-				+ ", place=" + place + "]";
+				+ ", place=" + place + ", inResell=" + inResell + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(eventDate, eventName, place, userEmail);
+		return Objects.hash(eventDate, eventName, inResell, place, userEmail);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -55,8 +62,11 @@ public class TicketDTO {
 			return false;
 		TicketDTO other = (TicketDTO) obj;
 		return Objects.equals(eventDate, other.eventDate) && Objects.equals(eventName, other.eventName)
-				&& Objects.equals(place, other.place) && Objects.equals(userEmail, other.userEmail);
+				&& inResell == other.inResell && Objects.equals(place, other.place)
+				&& Objects.equals(userEmail, other.userEmail);
 	}
+	
+	
 	
 	
 }

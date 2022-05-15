@@ -133,10 +133,11 @@ public class RemoteFacade {
 					List<Ticket> listTickets = TicketAppService.getInstance().getBoughtTickets(con);
 					for (Ticket t : listTickets) {
 						TicketDTO dto = new TicketDTO();
-						dto.setUserEmail(t.getUser().getEmail());
+						dto.setUserEmail(t.getOwner().getEmail());
 						dto.setEventName(t.getEvent().getName());
 						dto.setEventDate(t.getEvent().getDate());
 						dto.setPlace(t.getEvent().getPlace());
+						dto.setInResell(t.isInResell());
 						listOfTicketsDTO.add(dto);
 					}
 				} else {
@@ -222,7 +223,7 @@ public class RemoteFacade {
 
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
-			// TODO: Only organizers can create an event
+			// Only organizers can create an event
 			User user = tokenManager.checkToken(dto.getOrganizerToken());
 			if (user != null) {
 
@@ -245,23 +246,23 @@ public class RemoteFacade {
 
 	}
 
-	@PUT
+	@POST
 	@Path("/tickets/resell")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response resellTicket(ResellTicketDTO dto) {
-		// TODO
+	public Response putTicketInResell(ResellTicketDTO dto) {
+		
 		ServerApp.getLogger().info("Buy Resell Ticket: " + dto.toString());
 
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
-			// TODO: Only organizers can create an event
+			
 			User user = tokenManager.checkToken(dto.getToken());
 			if (user != null) {
 
 				// Check if user is consumer
 				Consumer c = UserAppService.getInstance().isConsumer(user);
 				if (c != null) {
-					TicketAppService.getInstance().reselledTicket(c, dto.getTicketUserEmail(),
+					TicketAppService.getInstance().putTicketInResell(c, dto.getTicketUserEmail(),
 							dto.getTicketEventName(), LocalDate.parse(dto.getTicketEventDate()));
 				} else {
 					return Response.notModified().build();

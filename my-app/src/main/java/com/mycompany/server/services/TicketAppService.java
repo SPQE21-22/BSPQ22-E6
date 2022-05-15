@@ -32,35 +32,32 @@ public class TicketAppService {
 	public void buyTicket(Consumer consumer, String eventName, LocalDate eventDate) {
 
 		// FIXME: only for testing purposes*******************
-		//This is a replacement for searching the event in the DB
+		// This is a replacement for searching the event in the DB
 		Event e = TestDBManager.getInstance().getEvent(eventName, eventDate);
 		// ****************************************************
-		
-		
-		
+
 		Ticket ticket = new Ticket(e, consumer);
 		consumer.addBoughtTicket(ticket);
-		
+
 		// FIXME: only for testing purposes*******************
-		//This is a replacement for storing the ticket in the DB
+		// This is a replacement for storing the ticket in the DB
 		TestDBManager.getInstance().storeTicket(ticket);
 		// ****************************************************
-		
-		
+
 	}
-	
-	public void reselledTicket(Consumer buyer, String ticketUserMail, String ticketEventName, LocalDate ticketEventDate) {
+
+	public boolean putTicketInResell(Consumer c, String ticketUserMail, String ticketEventName,
+			LocalDate ticketEventDate) {
+
 		// FIXME: only for testing purposes*******************
-		//This is a replacement for searching the event in the DB
-		Ticket t = TestDBManager.getInstance().getTicket(ticketUserMail,ticketEventName,ticketEventDate);
-		
-		
-		TestDBManager.getInstance().deleteTicket(t);
-		TestDBManager.getInstance().deleteUser(buyer);
-		
-		t.setUser(buyer);
-		buyer.addBoughtTicket(t);
-		TestDBManager.getInstance().storeTicket(t);
+		// This is a replacement for searching the event in the DB
+		Ticket t = TestDBManager.getInstance().getTicket(ticketUserMail, ticketEventName, ticketEventDate);
 		// ****************************************************
+		if (t.getOwner().equals(c)) {
+			t.setInResell(true);
+			return true;
+		}
+		return false;
+
 	}
 }

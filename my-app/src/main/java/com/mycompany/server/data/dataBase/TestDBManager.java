@@ -67,11 +67,18 @@ public class TestDBManager {
 		}
 		return false;
 	}
+	public boolean deleteEvent(Event e) {
+		if (!storedEvents.contains(e)) {
+			storedEvents.remove(e);
+			return true;
+		}
+		return false;
+	}
 	
 	public Ticket getTicket(String consumerEmail, String eventName, LocalDate eventDate) {
 		Ticket found = null;
 		for (Ticket t :storedTickets) {
-			if (t.getUser().getEmail().equals(consumerEmail) && t.getEvent().getName().equals(eventName) && t.getEvent().getDate().equals(eventDate))  {
+			if (t.getOwner().getEmail().equals(consumerEmail) && t.getEvent().getName().equals(eventName) && t.getEvent().getDate().equals(eventDate))  {
 				found = t;
 			}
 		}
