@@ -26,7 +26,7 @@ public class EventAppService {
 
 		// FIXME: only for testing purposes*******************
 		// This is a replacement for searching in the DB
-		List<Event> list = TestDBManager.getInstance().getAllEvents();
+		List<Event> list = TestDBManager.getInstance().getActiveEvents();
 		// ****************************************************
 
 		return list;

@@ -66,7 +66,7 @@ public class RemoteFacade {
 				token = TokenManagement.getInstance().createToken(user);
 				ServerApp.getLogger().info("Login of: " + username + " - " + password + ". [" + token + "]");
 			} catch (RemoteException e) {
-				
+
 				// e.printStackTrace();
 				ServerApp.getLogger().error("Remote Exception occurred in the login", e);
 				return Response.serverError().build();
@@ -86,7 +86,7 @@ public class RemoteFacade {
 			ServerApp.getLogger().info("Logout of user with token: " + token);
 
 		} catch (RemoteException e) {
-			
+
 			ServerApp.getLogger().error("Remote Exception occurred in the logout", e);
 			return Response.notModified(Long.toString(token)).build();
 		}
@@ -147,7 +147,7 @@ public class RemoteFacade {
 			}
 
 		} catch (RemoteException e) {
-			
+
 			ServerApp.getLogger().error("Remote Exception occurred in getting bought tickets", e);
 			return Response.serverError().build();
 		}
@@ -308,6 +308,34 @@ public class RemoteFacade {
 		}
 
 		return Response.ok().build();
+	}
+
+	@GET
+	@Path("/tickets/resell")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getResellingTickets() {
+
+		ServerApp.getLogger().info("Getting reselling tickets");
+		List<TicketDTO> listOfTicketsDTO = new ArrayList<>();
+		
+		try {
+			List<Ticket> listTickets = TicketAppService.getInstance().getResellingTickets();
+			for (Ticket t : listTickets) {
+				TicketDTO dto = new TicketDTO();
+				dto.setUserEmail(t.getOwner().getEmail());
+				dto.setEventName(t.getEvent().getName());
+				dto.setEventDate(t.getEvent().getDate());
+				dto.setPlace(t.getEvent().getPlace());
+				dto.setInResell(t.isInResell());
+				listOfTicketsDTO.add(dto);
+			}
+		} catch (Exception e) {
+			ServerApp.getLogger().error("Remote Exception occurred in reselling a ticket", e);
+			return Response.serverError().build();
+		}
+
+		Gson gson = new Gson();// converts the list to a json
+		return Response.ok().entity(gson.toJson(listOfTicketsDTO)).build();
 	}
 
 	@GET

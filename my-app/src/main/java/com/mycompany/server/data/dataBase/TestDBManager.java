@@ -104,7 +104,23 @@ public class TestDBManager {
 		return found;
 	}
 
-	public List<Event> getAllEvents() {
-		return storedEvents;
+	public List<Event> getActiveEvents() {
+		List<Event> active = new ArrayList<>();
+		for (Event e: storedEvents) {
+			if (e.getDate().isAfter(LocalDate.now())) {
+				active.add(e);
+			}
+		}
+		return active;
+	}
+
+	public List<Ticket> getResellingTickets() {
+		List<Ticket> reselling = new ArrayList<>();
+		for (Ticket t: storedTickets) {
+			if (t.isInResell()) {
+				reselling.add(t);
+			}
+		}
+		return reselling;
 	}
 }

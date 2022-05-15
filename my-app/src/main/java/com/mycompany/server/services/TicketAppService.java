@@ -78,4 +78,11 @@ public class TicketAppService {
 		}
 		return false;
 	}
+
+	public List<Ticket> getResellingTickets() {
+		// FIXME: only for testing purposes*******************
+		// This is a replacement for searching the event in the DB
+		return TestDBManager.getInstance().getResellingTickets();
+		// ****************************************************
+	}
 }
