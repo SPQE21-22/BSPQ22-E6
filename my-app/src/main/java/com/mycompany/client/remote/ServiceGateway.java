@@ -276,12 +276,34 @@ public class ServiceGateway {
 		dto.setTicketEventDate(ticketEventDate);
 		dto.setToken(ClientTokenManagement.getInstance().getToken());
 
-		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+		Response r = i.put(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
 			ClientApp.getLogger().info("Server has correctly put in resell a ticket");
 		} else {
 			ClientApp.getLogger().info("Server has problems with reselling a ticket");
+		}
+		
+	}
+	public void buyResellingTicket(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget rTarget = tTarget.path("resell");
+		
+		Invocation.Builder i = rTarget.request();
+
+		ResellTicketDTO dto = new ResellTicketDTO();
+
+		dto.setTicketUserEmail(ticketUserEmail);
+		dto.setTicketEventName(ticketEventName);
+		dto.setTicketEventDate(ticketEventDate);
+		dto.setToken(ClientTokenManagement.getInstance().getToken());
+
+		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			ClientApp.getLogger().info("Server has correctly buy a reselled a ticket");
+		} else {
+			ClientApp.getLogger().info("Server has problems with buying reselled tickets");
 		}
 		
 	}

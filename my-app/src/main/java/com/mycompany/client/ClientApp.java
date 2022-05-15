@@ -85,15 +85,22 @@ public class ClientApp {
 			}
 		}
 
-		// Logging out
-		UserController.getInstance().logout();
-
-		// Logging in with the other consumer
-		UserController.getInstance().login("TestingConsumer22@test.com", "consumerpass22");
-
 		// Reselling ticket
 		TicketDTO toResellTicket = list.get(0);
 		TicketController.getInstance().putTicketInResell(toResellTicket.getUserEmail(), toResellTicket.getEventName(),
+				LocalDate.parse(toResellTicket.getEventDate()));
+
+		// Logging out
+		UserController.getInstance().logout();
+		
+		
+		
+
+		// Logging in with the other consumer
+		UserController.getInstance().login("TestingConsumer22@test.com", "consumerpass22");
+		
+		//Buy a resellingTicket
+		TicketController.getInstance().buyResellingTicket(toResellTicket.getUserEmail(), toResellTicket.getEventName(),
 				LocalDate.parse(toResellTicket.getEventDate()));
 
 		// Getting Bought Tickets

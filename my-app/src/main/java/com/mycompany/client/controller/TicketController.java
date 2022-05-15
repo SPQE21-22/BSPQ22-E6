@@ -58,5 +58,16 @@ public class TicketController {
 		}
 		
 	}
+	
+	public void buyResellingTicket(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+		try {
+			ServiceGateway.getInstance().buyResellingTicket(ticketUserEmail, ticketEventName, ticketEventDate);
+
+		} catch (Exception e) {
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
+		}
+		
+	}
 
 }
