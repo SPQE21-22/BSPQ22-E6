@@ -3,6 +3,11 @@ package com.mycompany.client.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -16,12 +21,19 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.mycompany.client.controller.TicketController;
 import com.mycompany.client.controller.UserController;
+import com.mycompany.server.data.domain.Event;
+import com.mycompany.server.data.domain.Organizer;
+
+import org.glassfish.hk2.api.Self;
+import org.glassfish.jersey.logging.LoggingFeatureAutoDiscoverable;
 
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
@@ -29,6 +41,8 @@ public class PrincipalWindow {
 
 	private JFrame frame;
 	private JTextField txtIntroduceYourEvent;
+	private JPanel panel;
+	private List<Event> eventList;
 
 	/**
 	 * Launch the application.
@@ -50,6 +64,8 @@ public class PrincipalWindow {
 	 * Create the application.
 	 */
 	public PrincipalWindow() {
+		 
+
 		initialize();
 	}
 
@@ -57,6 +73,20 @@ public class PrincipalWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Event list for testing
+		Organizer organizer = new Organizer("Asier", "1234", "asier@deusto.es", "65465435", "Avd...", "");
+		Event event1 = new Event("Graduation", LocalDate.parse("2022-04-11"), "Back", organizer);
+		Event event2 = new Event("SummerFest", LocalDate.parse("2022-05-03"), "Moma", organizer);
+		Event event3 = new Event("Party", LocalDate.parse("2022-06-01"), "Fever", organizer);
+		Event event4 = new Event("Biblioteca Nocturna", LocalDate.parse("2023-03-23"), "Antzoki", organizer);
+
+		//TODO Get events from database
+		eventList = new ArrayList<Event>();
+		eventList.add(event1);
+		eventList.add(event2);
+		eventList.add(event3);
+		eventList.add(event4);
+
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 26));
 		frame.setBounds(100, 100, 1000, 600);
@@ -117,71 +147,67 @@ public class PrincipalWindow {
 		frame.getContentPane().add(txtIntroduceYourEvent);
 		txtIntroduceYourEvent.setColumns(10);
 		
-		JPanel panel = new JPanel();
-		panel.setForeground(Color.LIGHT_GRAY);
-		panel.setBounds(244, 113, 454, 126);
-		panel.setBackground(Color.LIGHT_GRAY);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("23:30");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setBounds(22, 11, 104, 58);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Back Stage");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_1.setToolTipText("");
-		lblNewLabel_1.setBounds(157, 26, 139, 76);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("03/05");
-		lblNewLabel_2.setForeground(Color.BLACK);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_2.setBounds(32, 57, 76, 58);
-		panel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("15$");
-		lblNewLabel_3.setForeground(Color.BLACK);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblNewLabel_3.setBounds(344, 22, 81, 76);
-		panel.add(lblNewLabel_3);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setForeground(Color.LIGHT_GRAY);
-		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(244, 250, 454, 126);
-		frame.getContentPane().add(panel_1);
-		
-		JLabel lblNewLabel_4 = new JLabel("20:00");
-		lblNewLabel_4.setForeground(Color.BLACK);
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel_4.setBounds(22, 11, 104, 58);
-		panel_1.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Sonora");
-		lblNewLabel_1_1.setToolTipText("");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_1_1.setBounds(164, 26, 139, 76);
-		panel_1.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("12/05");
-		lblNewLabel_2_1.setForeground(Color.BLACK);
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_2_1.setBounds(32, 57, 76, 58);
-		panel_1.add(lblNewLabel_2_1);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("8$");
-		lblNewLabel_3_1.setForeground(Color.BLACK);
-		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblNewLabel_3_1.setBounds(344, 22, 81, 76);
-		panel_1.add(lblNewLabel_3_1);
-		
+		////////////////////////////////////////
+		int i = 0;
+		JPanel[] panels = new JPanel[eventList.size()];
+		HashMap<Integer, Event> eventMap = new HashMap<Integer, Event>();
+
+
+		for (Event event : eventList) {
+			panels[i] = new JPanel();
+			panels[i].setForeground(Color.LIGHT_GRAY);
+			panels[i].setBounds(244, 113 + 137*i, 454, 120);
+			panels[i].setBackground(Color.LIGHT_GRAY);
+			panels[i].setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel(event.getDate().toString());
+			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+			lblNewLabel.setForeground(Color.BLACK);
+			lblNewLabel.setBounds(22, 11, 104, 58);
+			
+			
+			JLabel lblNewLabel_1 = new JLabel(event.getPlace());
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			lblNewLabel_1.setToolTipText("");
+			lblNewLabel_1.setBounds(195, 26 , 139, 30); 
+
+			JButton buyBut = new JButton("BUY");
+			eventMap.put(buyBut.hashCode(), event);
+			buyBut.setBounds(190, 80, 70, 20);
+			buyBut.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					TicketController.getInstance().buyTicket("User", /*eventMap.get(e.getSource().hashCode()).getDate()*/null);  
+					// System.out.println(e.getSource().hashCode());							
+				}
+			});
+
+			JLabel lblNewLabel_2 = new JLabel(event.getDate().toString());
+			lblNewLabel_2.setForeground(Color.BLACK);
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+			lblNewLabel_2.setBounds(32, 57, 76, 58);
+			
+			Random random = new Random();
+			JLabel lblNewLabel_3 = new JLabel(String.valueOf(10 + random.nextInt(10)) + "$");
+			lblNewLabel_3.setForeground(Color.BLACK);
+			lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 36));
+			lblNewLabel_3.setBounds(344, 22, 81, 76);
+			
+			panels[i].add(lblNewLabel);
+			panels[i].add(lblNewLabel_1);
+			panels[i].add(lblNewLabel_2);
+			panels[i].add(lblNewLabel_3);
+			panels[i].add(buyBut);
+			frame.getContentPane().add(panels[i]);
+
+			i++;
+		}
+
+
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(957, 0, 27, 539);
-		frame.getContentPane().add(scrollBar);
+		scrollBar.setBounds(957, 0, 15, 539);
+		frame.add(scrollBar);
+
+		
 		
 		JButton btnNewButton = new JButton("Up");
 		btnNewButton.addActionListener(new ActionListener() {
