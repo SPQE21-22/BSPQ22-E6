@@ -50,6 +50,10 @@ public class Consumer extends User {
 	public void addBoughtTicket(Ticket t) {
 		if(!boughtTickets.contains(t)) boughtTickets.add(t);
 	}
+	
+	public void removeBoughtTicket(Ticket t) {
+		if(!boughtTickets.contains(t)) boughtTickets.remove(t);
+	}
 
 	@Override
 	public String toString() {

@@ -60,4 +60,22 @@ public class TicketAppService {
 		return false;
 
 	}
+
+	public boolean buyReselledTicket(Consumer buyer, String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+
+		// FIXME: only for testing purposes*******************
+		// This is a replacement for searching the event in the DB
+		Ticket t = TestDBManager.getInstance().getTicket(ticketUserEmail, ticketEventName, ticketEventDate);
+		// ****************************************************
+		if (t.isInResell()) {
+			
+			t.getOwner().removeBoughtTicket(t);
+			t.setInResell(false);
+			
+			t.setOwner(buyer);
+			buyer.addBoughtTicket(t);
+			return true;
+		}
+		return false;
+	}
 }
