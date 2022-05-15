@@ -12,6 +12,7 @@ import com.mycompany.remote.serialization.ConsumerDTO;
 import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.OrganizerDTO;
+import com.mycompany.remote.serialization.ResellTicketDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
 
@@ -258,6 +259,29 @@ public class ServiceGateway {
 			ClientApp.getLogger().info("Server has correctly registered an organizer");
 		} else {
 			ClientApp.getLogger().info("Server has problems with registering an organizer");
+		}
+		
+	}
+
+	public void resellTicket(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget rTarget = tTarget.path("resell");
+		
+		Invocation.Builder i = rTarget.request();
+
+		ResellTicketDTO dto = new ResellTicketDTO();
+
+		dto.setTicketUserEmail(ticketUserEmail);
+		dto.setTicketEventName(ticketEventName);
+		dto.setTicketEventDate(ticketEventDate);
+		dto.setToken(ClientTokenManagement.getInstance().getToken());
+
+		Response r = i.put(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		if (r.getStatus() == Status.OK.getStatusCode()) {
+			ClientApp.getLogger().info("Server has correctly reselled a ticket");
+		} else {
+			ClientApp.getLogger().info("Server has problems with reselling a ticket");
 		}
 		
 	}

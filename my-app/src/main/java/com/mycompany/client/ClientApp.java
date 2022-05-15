@@ -14,13 +14,13 @@ import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 
 public class ClientApp {
-	
+
 	private static final Logger logger = Logger.getLogger("ClientApp");
-	
+
 	public static void main(String[] args) {
-		
-		BasicConfigurator.configure(); //loads the log4j properties
-		
+
+		BasicConfigurator.configure(); // loads the log4j properties
+
 		String hostname = args[0];
 		String port = args[1];
 		ServiceGateway.getInstance().initGateway(hostname, port);
@@ -56,6 +56,10 @@ public class ClientApp {
 
 		/**** TESTING THE CONSUMER ****/
 
+		// Registering another consumer
+		UserController.getInstance().registerConsumer("TestingConsumer22@test.com", "consumerpass22", "Consumer22",
+				"222222222", "consumerNick22", "Consumerson22");
+
 		// Logging in with the consumer
 		UserController.getInstance().login("TestingConsumer@test.com", "consumerpass");
 
@@ -84,12 +88,30 @@ public class ClientApp {
 		// Logging out
 		UserController.getInstance().logout();
 
+		// Logging in with the other consumer
+		UserController.getInstance().login("TestingConsumer22@test.com", "consumerpass22");
+
+		// Reselling ticket
+		TicketDTO toResellTicket = list.get(0);
+		TicketController.getInstance().resellTicket(toResellTicket.getUserEmail(), toResellTicket.getEventName(),
+				LocalDate.parse(toResellTicket.getEventDate()));
+
+		// Getting Bought Tickets
+		List<TicketDTO> list2 = TicketController.getInstance().getBoughtTickets();
+		if (list2 != null) {
+			ClientApp.getLogger().info("The user has bought:");
+			for (TicketDTO t : list2) {
+				ClientApp.getLogger().info(t);
+			}
+		}
+
+		// Logging out
+		UserController.getInstance().logout();
+
 	}
 
 	public static Logger getLogger() {
 		return logger;
 	}
-	
-	
 
 }

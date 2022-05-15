@@ -48,4 +48,15 @@ public class TicketController {
 
 	}
 
+	public void resellTicket(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
+		try {
+			ServiceGateway.getInstance().resellTicket(ticketUserEmail, ticketEventName, ticketEventDate);
+
+		} catch (Exception e) {
+			ClientApp.getLogger().error("* Error using the server:",e);
+			//e.printStackTrace();
+		}
+		
+	}
+
 }
