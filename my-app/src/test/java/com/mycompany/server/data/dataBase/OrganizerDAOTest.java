@@ -32,7 +32,7 @@ public class OrganizerDAOTest {
 	public void saveFindTest() {
 		dao.save(testOrganizer);
 		
-		assertEquals(testOrganizer,dao.find("YET")); //FIXME yet to be implemented
+		assertEquals(testOrganizer,dao.find(testOrganizer.getEmail())); //FIXME yet to be implemented
 	}
 	
 	
@@ -45,7 +45,7 @@ public class OrganizerDAOTest {
 		
 		dao.delete(testOrganizer);
 		
-		assertNull(dao.find("YET"));//FIXME yet to be implemented
+		assertNull(dao.find(testOrganizer.getEmail()));//FIXME yet to be implemented
 	}
 	
 	@After

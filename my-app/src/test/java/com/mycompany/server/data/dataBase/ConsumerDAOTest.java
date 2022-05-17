@@ -34,7 +34,7 @@ public class ConsumerDAOTest {
 	public void saveFindTest() {
 		dao.save(testConsumer);
 		
-		assertEquals(testConsumer,dao.find("YET")); //FIXME yet to be implemented
+		assertEquals(testConsumer,dao.find(testConsumer.getEmail())); //FIXME yet to be implemented
 	}
 	
 	
@@ -47,7 +47,7 @@ public class ConsumerDAOTest {
 		
 		dao.delete(testConsumer);
 		
-		assertNull(dao.find("YET"));//FIXME yet to be implemented
+		assertNull(dao.find(testConsumer.getEmail()));//FIXME yet to be implemented
 	}
 	
 	@After

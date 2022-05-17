@@ -37,7 +37,7 @@ public class EventDAOTest {
 	public void saveFindTest() {
 		dao.save(testEvent);
 		
-		assertEquals(testEvent,dao.find("YET")); //FIXME yet to be implemented
+		assertEquals(testEvent,dao.find(testEvent.getName(),testEvent.getDate().toString())); //FIXME yet to be implemented
 	}
 	
 	
@@ -50,7 +50,7 @@ public class EventDAOTest {
 		
 		dao.delete(testEvent);
 		
-		assertNull(dao.find("YET"));//FIXME yet to be implemented
+		assertNull(dao.find(testEvent.getName(),testEvent.getDate().toString()));//FIXME yet to be implemented
 	}
 	
 	@After

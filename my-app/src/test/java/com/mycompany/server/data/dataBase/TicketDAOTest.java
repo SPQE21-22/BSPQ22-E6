@@ -43,7 +43,7 @@ public class TicketDAOTest {
 	public void saveFindTest() {
 		dao.save(testTicket);
 		
-		assertEquals(testTicket,dao.find("YET")); //FIXME yet to be implemented
+		assertEquals(testTicket,dao.find(testTicket.getEvent().getName(),testTicket.getEvent().getDate().toString(),testTicket.getOwner().getEmail())); //FIXME yet to be implemented
 	}
 	
 	
@@ -56,7 +56,7 @@ public class TicketDAOTest {
 		
 		dao.delete(testTicket);
 		
-		assertNull(dao.find("YET"));//FIXME yet to be implemented
+		assertNull(testTicket,dao.find(testTicket.getEvent().getName(),testTicket.getEvent().getDate().toString(),testTicket.getOwner().getEmail()));//FIXME yet to be implemented
 	}
 	
 	@After
