@@ -64,7 +64,8 @@ public class LoginWindow extends JFrame {
 				String password = txtPassword.getText();
 				
 				UserController.getInstance().login(email, password);
-											
+					PrincipalWindow.main(null);
+					frame.dispose();
 			}
 
 		});
@@ -116,6 +117,14 @@ public class LoginWindow extends JFrame {
 		ForgottenPasslbl.setForeground(new Color(255, 165, 0));
 		ForgottenPasslbl.setBounds(105, 319, 236, 17);
 		frame.getContentPane().add(ForgottenPasslbl);
+		ForgottenPasslbl.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SettingsWindow.main(null);
+				frame.dispose();
+			}
+		});
 		
 		//URL iconURL = getClass().getResource("/");                  
 		
