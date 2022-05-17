@@ -45,8 +45,9 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 			
 			tx.begin();
 
-			Query<?> query = pm.newQuery("SELECT FROM " + Event.class.getName() + " WHERE name == '" + params[0] + "AND"
-					+  " date == date('" + params[1] + "')");
+			Query<?> query = pm.newQuery("SELECT FROM " + Event.class.getName() + " WHERE name == '" + params[0] + "' &&"
+					+  " dateInString == '" + params[1] + "'");
+			
 			query.setUnique(true);
 			e = (Event) query.execute();
 

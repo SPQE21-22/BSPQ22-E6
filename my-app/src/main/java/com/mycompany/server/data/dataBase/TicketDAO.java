@@ -33,7 +33,7 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 	 *                the Event (Format: YYYY-MM-DD) 3- Email of the Consumer
 	 * @return the ticket object
 	 */
-	public Ticket find(String... params) {
+	public Ticket find(String... params) { //FIXME NOT WORKING!
 		if (params.length != 3) {
 			return null;
 		}
@@ -48,8 +48,8 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 			tx3.begin();
 			Query<?> query = pm3.newQuery("SELECT FROM " + Ticket.class.getName()
 					+ " WHERE event_event_id_oid IN (SELECT event_id FROM " + Event.class.getName() + " WHERE name == '"
-					+ params[0] + "' AND" + " date == date('" + params[1] + "')) AND ticket_id IN (SELECT ticket_id_eid FROM consumer_boughttickets"
-							+ "WHERE consumer_id_oid IN (SELECT consumer_id FROM "+ Consumer.class.getName() + " WHERE email == '" +params[2] + "'))");
+					+ params[0] + "' AND" + " dateInString == '" + params[1] + "') AND ticket_id IN (SELECT ticket_id_eid FROM consumer_boughttickets"
+							+ " WHERE consumer_id_oid IN (SELECT consumer_id FROM "+ Consumer.class.getName() + " WHERE email == '" +params[2] + "'))");
 		
 
 			query.setUnique(true);

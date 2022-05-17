@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import com.mycompany.server.ServerApp;
 import com.mycompany.server.data.domain.Consumer;
 
 public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject<Consumer>{
@@ -52,7 +53,7 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error querying a Consumer: " + ex.getMessage());
+			ServerApp.getLogger().error("  $ Error querying a Consumer: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -89,7 +90,7 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 			tx.commit();
 			
 		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the users: " + ex.getMessage());
+			ServerApp.getLogger().error("  $ Error retrieving all the users: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();

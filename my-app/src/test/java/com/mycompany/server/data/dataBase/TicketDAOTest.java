@@ -24,49 +24,41 @@ public class TicketDAOTest {
 	private Organizer testOg;
 	private Consumer testCon;
 	private Ticket testTicket;
-	
+
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
-	
+
 	@Before
 	public void setup() {
 		dao = TicketDAO.getInstance();
-		testOg = new Organizer("Tester","test123","test@test.com","1111111111","Testing st.","test.com");
-		testCon = new Consumer("Testerino","test1234","test1234@test.com","1111111111","TestingKing","Testson");
-		testEv = new Event("TestingEvent", LocalDate.now(),"Testing place", testOg);
+		testOg = new Organizer("Tester", "test123", "test@test.com", "1111111111", "Testing st.", "test.com");
+		testCon = new Consumer("Testerino", "test1234", "test1234@test.com", "1111111111", "TestingKing", "Testson");
+		testEv = new Event("TestingEvent", LocalDate.now(), "Testing place", testOg);
 		testTicket = new Ticket(testEv, testCon);
 	}
-	
+
 	@Test
-	@PerfTest(invocations =100)
-	@Required(max=1500, average=600)
-	public void saveFindTest() {
+	@PerfTest(invocations = 1)
+	@Required(max = 1500, average = 600)
+	public void test() {
 		dao.save(testTicket);
-		
-		assertEquals(testTicket,dao.find(testTicket.getEvent().getName(),testTicket.getEvent().getDate().toString(),testTicket.getOwner().getEmail())); //FIXME yet to be implemented
-	}
-	
-	
-	@Test
-	@PerfTest(invocations =100)
-	@Required(max=1500, average=600)
-	public void deleteTest() {
-		
-		dao.save(testTicket);
-		
+
+		assertEquals(testTicket, dao.find(testTicket.getEvent().getName(), testTicket.getEvent().getDate().toString(),
+				testTicket.getOwner().getEmail()));
+
 		dao.delete(testTicket);
-		
-		assertNull(dao.find(testTicket.getEvent().getName(),testTicket.getEvent().getDate().toString(),testTicket.getOwner().getEmail()));//FIXME yet to be implemented
+
+		assertNull(dao.find(testTicket.getEvent().getName(), testTicket.getEvent().getDate().toString(),
+				testTicket.getOwner().getEmail()));
+
 	}
-	
+
 	@After
 	public void tearDown() {
-		
-		dao.delete(testTicket);
+
 		ConsumerDAO.getInstance().delete(testCon);
 		EventDAO.getInstance().delete(testEv);
 		OrganizerDAO.getInstance().delete(testOg);
 	}
-	
 
 }

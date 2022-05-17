@@ -34,29 +34,20 @@ public class EventDAOTest {
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
-	public void saveFindTest() {
+	public void test() {
 		dao.save(testEvent);
 		
-		assertEquals(testEvent,dao.find(testEvent.getName(),testEvent.getDate().toString())); //FIXME yet to be implemented
-	}
-	
-	
-	@Test
-	@PerfTest(invocations =1)
-	@Required(max=1500, average=600)
-	public void deleteTest() {
-		
-		dao.save(testEvent);
+		Event found = dao.find(testEvent.getName(),testEvent.getDate().toString());
+		assertEquals(testEvent,found);
 		
 		dao.delete(testEvent);
-		
-		assertNull(dao.find(testEvent.getName(),testEvent.getDate().toString()));//FIXME yet to be implemented
+		assertNull(dao.find(testEvent.getName(),testEvent.getDate().toString()));
+	
 	}
 	
 	@After
 	public void tearDown() {
-		
-		dao.delete(testEvent);
+
 		OrganizerDAO.getInstance().delete(testOg);
 	}
 	

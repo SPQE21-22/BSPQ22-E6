@@ -12,6 +12,7 @@ public class Event {
 	private String name;
 	private LocalDate date;
 	private String place;
+	private String dateInString;
 	
 	@Persistent(defaultFetchGroup="true")
 	private Organizer organizer;
@@ -20,6 +21,7 @@ public class Event {
 		super();
 		this.name = name;
 		this.date = date;
+		this.dateInString = this.date.toString();
 		this.place = place;
 		this.organizer = organizer;
 	}
@@ -28,6 +30,7 @@ public class Event {
 		super();
 		this.name = "";
 		this.date = LocalDate.now();
+		this.dateInString = this.date.toString();
 		this.place = "";
 		this.organizer = null;
 	}
@@ -46,6 +49,7 @@ public class Event {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+		this.dateInString = this.date.toString();
 	}
 
 	public String getPlace() {

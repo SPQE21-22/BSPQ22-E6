@@ -3,7 +3,6 @@ package com.mycompany.server.data.dataBase;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,16 +24,16 @@ public class ConsumerDAOTest {
 	@Before
 	public void setup() {
 		dao = ConsumerDAO.getInstance();
-		testConsumer = new Consumer("Tester","test123","test@test.com","1111111111","TestingKing","Testson");
+		testConsumer = new Consumer("Tester","test123","con@test.com","1111111111","TestingKing","Testson");
 	}
 	
 	@Test
-	@PerfTest(invocations =100)
+	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
 	public void test() {
 		dao.save(testConsumer);
-		
-		assertEquals(testConsumer,dao.find(testConsumer.getEmail())); 
+		Consumer found = dao.find(testConsumer.getEmail());
+		assertEquals(testConsumer,found); 
 		dao.delete(testConsumer);
 		assertNull(dao.find(testConsumer.getEmail()));
 	}
