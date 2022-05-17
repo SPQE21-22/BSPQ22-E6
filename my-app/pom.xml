@@ -197,7 +197,7 @@
 					</configuration>
 					<executions>
 						<execution>
-							<phase>compile</phase>
+							<phase>process-classes</phase>
 							<goals>
 								<goal>enhance</goal>
 							</goals>

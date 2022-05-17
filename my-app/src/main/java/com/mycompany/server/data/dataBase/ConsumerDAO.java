@@ -3,7 +3,9 @@ package com.mycompany.server.data.dataBase;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import com.mycompany.server.data.domain.Consumer;
@@ -21,25 +23,36 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 	public void delete(Consumer c) {
 		super.deleteObject(c);
 	}
-
+	
+	
+	
 	@Override
-	public Consumer find(String param) {
+	/**
+	 * Finds a consumer in the DB
+	 * @param String, only one parameter with the email of the consumer
+	 * @return the consumer object
+	 */
+	public Consumer find(String... params) {
+		if(params.length != 1) {
+			return null;
+		}
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		Consumer c = null;
-		/*
+		
 		try {
 			
 			tx.begin();
 
-			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE email == '" + param + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Consumer.class.getName() + " WHERE email == '" + params[0] + "'");
 			query.setUnique(true);
-			u = (User) query.execute();
+			c = (Consumer) query.execute();
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error querying a User: " + ex.getMessage());
+			System.out.println("  $ Error querying a Consumer: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -47,7 +60,7 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 
 			pm.close();
 		}
-	*/
+	
 		return c;
 	}
 
@@ -65,17 +78,16 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 		Transaction tx = pm.currentTransaction();
 
 		List<Consumer> users = new ArrayList<>();
-		/*
+		
 		try {
+			
 			tx.begin();
-
-			Extent<User> extent = pm.getExtent(User.class, true);
-
-			for (User el : extent) {
-				users.add(el);
+			Extent<Consumer> extent = pm.getExtent(Consumer.class, true);
+			for (Consumer c : extent) {
+				users.add(c);
 			}
-
 			tx.commit();
+			
 		} catch (Exception ex) {
 			System.out.println("  $ Error retrieving all the users: " + ex.getMessage());
 		} finally {
@@ -85,7 +97,7 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 
 			pm.close();
 		}
-		*/
+		
 		return users;
 	}
 }
