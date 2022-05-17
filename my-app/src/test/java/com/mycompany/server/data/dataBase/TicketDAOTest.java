@@ -56,7 +56,7 @@ public class TicketDAOTest {
 		
 		dao.delete(testTicket);
 		
-		assertNull(testTicket,dao.find(testTicket.getEvent().getName(),testTicket.getEvent().getDate().toString(),testTicket.getOwner().getEmail()));//FIXME yet to be implemented
+		assertNull(dao.find(testTicket.getEvent().getName(),testTicket.getEvent().getDate().toString(),testTicket.getOwner().getEmail()));//FIXME yet to be implemented
 	}
 	
 	@After
