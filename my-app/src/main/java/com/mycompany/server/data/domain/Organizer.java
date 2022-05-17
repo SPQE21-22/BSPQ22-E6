@@ -1,5 +1,10 @@
 package com.mycompany.server.data.domain;
 
+import java.util.Objects;
+
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable(detachable = "true")
 public class Organizer extends User {
 	
 	private String address;
@@ -36,6 +41,23 @@ public class Organizer extends User {
 	@Override
 	public String toString() {
 		return "Organizer [address=" + address + ", webpage=" + webpage + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, webpage);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Organizer other = (Organizer) obj;
+		return Objects.equals(address, other.address) && Objects.equals(webpage, other.webpage);
 	}
 	
 	
