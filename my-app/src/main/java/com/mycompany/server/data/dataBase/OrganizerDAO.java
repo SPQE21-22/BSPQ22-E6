@@ -3,7 +3,9 @@ package com.mycompany.server.data.dataBase;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import com.mycompany.server.data.domain.Organizer;
@@ -23,23 +25,32 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 	}
 
 	@Override
-	public Organizer find(String param) {
+	/**
+	 * Finds a consumer in the DB
+	 * @param String, only one parameter with the email of the consumer
+	 * @return the organizer object
+	 */
+	public Organizer find(String... params) {
+		if(params.length != 1) {
+			return null;
+		}
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		Organizer c = null;
-		/*
+		Organizer o = null;
+		
 		try {
 			
 			tx.begin();
 
-			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE email == '" + param + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Organizer.class.getName() + " WHERE email == '" + params[0] + "'");
 			query.setUnique(true);
-			u = (User) query.execute();
+			o = (Organizer) query.execute();
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error querying a User: " + ex.getMessage());
+			System.out.println("  $ Error querying a Organizer: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -47,8 +58,8 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 
 			pm.close();
 		}
-	*/
-		return c;
+	
+		return o;
 	}
 
 	public static OrganizerDAO getInstance() {
@@ -65,14 +76,14 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 		Transaction tx = pm.currentTransaction();
 
 		List<Organizer> users = new ArrayList<>();
-		/*
+		
 		try {
 			tx.begin();
 
-			Extent<User> extent = pm.getExtent(User.class, true);
+			Extent<Organizer> extent = pm.getExtent(Organizer.class, true);
 
-			for (User el : extent) {
-				users.add(el);
+			for (Organizer o : extent) {
+				users.add(o);
 			}
 
 			tx.commit();
@@ -85,7 +96,7 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 
 			pm.close();
 		}
-		*/
+		
 		return users;
 	}
 }
