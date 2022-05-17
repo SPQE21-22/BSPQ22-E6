@@ -1,9 +1,12 @@
 package com.mycompany.server.data.dataBase;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import com.mycompany.server.data.domain.Event;
@@ -23,23 +26,33 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 	}
 
 	@Override
-	public Event find(String param) {
+	/**
+	 * Finds a consumer in the DB
+	 * @param String, two parameters: 1-Name of the event, 2-Date of the event (Format: YYYY-MM-DD)
+	 * @return the event object
+	 */
+	public Event find(String... params) {
+		if(params.length != 2) {
+			return null;
+		}
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		Event c = null;
-		/*
+		Event e = null;
+		
 		try {
 			
 			tx.begin();
 
-			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE email == '" + param + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Event.class.getName() + " WHERE name == '" + params[0] + "AND"
+					+  " date == date('" + params[1] + "')");
 			query.setUnique(true);
-			u = (User) query.execute();
+			e = (Event) query.execute();
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error querying a User: " + ex.getMessage());
+			System.out.println("  $ Error querying a Event: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -47,8 +60,8 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 
 			pm.close();
 		}
-	*/
-		return c;
+	
+		return e;
 	}
 
 	public static EventDAO getInstance() {
@@ -64,15 +77,15 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		List<Event> users = new ArrayList<>();
-		/*
+		List<Event> events = new ArrayList<>();
+		
 		try {
 			tx.begin();
 
-			Extent<User> extent = pm.getExtent(User.class, true);
+			Extent<Event> extent = pm.getExtent(Event.class, true);
 
-			for (User el : extent) {
-				users.add(el);
+			for (Event e : extent) {
+				events.add(e);
 			}
 
 			tx.commit();
@@ -85,7 +98,6 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 
 			pm.close();
 		}
-		*/
-		return users;
+		return events;
 	}
 }
