@@ -31,28 +31,16 @@ public class ConsumerDAOTest {
 	@Test
 	@PerfTest(invocations =100)
 	@Required(max=1500, average=600)
-	public void saveFindTest() {
+	public void test() {
 		dao.save(testConsumer);
 		
-		assertEquals(testConsumer,dao.find(testConsumer.getEmail())); //FIXME yet to be implemented
-	}
-	
-	
-	@Test
-	@PerfTest(invocations =100)
-	@Required(max=1500, average=600)
-	public void deleteTest() {
-		
-		dao.save(testConsumer);
-		
+		assertEquals(testConsumer,dao.find(testConsumer.getEmail())); 
 		dao.delete(testConsumer);
-		
-		assertNull(dao.find(testConsumer.getEmail()));//FIXME yet to be implemented
+		assertNull(dao.find(testConsumer.getEmail()));
 	}
 	
-	@After
-	public void tearDown() {
-		dao.delete(testConsumer);
-	}
+	
+
+	
 	
 }

@@ -32,7 +32,7 @@ public class EventDAOTest {
 	}
 	
 	@Test
-	@PerfTest(invocations =100)
+	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
 	public void saveFindTest() {
 		dao.save(testEvent);
@@ -42,7 +42,7 @@ public class EventDAOTest {
 	
 	
 	@Test
-	@PerfTest(invocations =100)
+	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
 	public void deleteTest() {
 		
