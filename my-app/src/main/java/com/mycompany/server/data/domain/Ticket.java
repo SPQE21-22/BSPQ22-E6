@@ -2,9 +2,19 @@ package com.mycompany.server.data.domain;
 
 import java.util.Objects;
 
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+
+
+@PersistenceCapable(detachable = "true")
 public class Ticket {
+	
+	@Persistent(defaultFetchGroup="true")
 	private Event event;
+	
+	@Persistent(defaultFetchGroup="true")
 	private Consumer owner;
+	
 	private boolean inResell = false;
 
 	public Ticket(Event e, Consumer c) {
