@@ -36,10 +36,10 @@ public class TicketController {
 
 	}
 
-	public void buyTicket(String name, LocalDate date) {
+	public void buyTicket(String eventName, LocalDate date) {
 
 		try {
-			ServiceGateway.getInstance().buyTicket(name, date);
+			ServiceGateway.getInstance().buyTicket(eventName, date);
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
