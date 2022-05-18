@@ -21,6 +21,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.mycompany.client.ClientApp;
 import com.mycompany.client.controller.TicketController;
 import com.mycompany.client.controller.UserController;
 import com.mycompany.server.data.domain.Event;
@@ -53,6 +54,7 @@ public class PrincipalWindow {
 				try {
 					PrincipalWindow window = new PrincipalWindow();
 					window.frame.setVisible(true);
+					ClientApp.getLogger().info("Buying Tickets window has been opened");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,6 +84,7 @@ public class PrincipalWindow {
 
 		//TODO Get events from database
 		eventList = new ArrayList<Event>();
+		
 		eventList.add(event1);
 		eventList.add(event2);
 		eventList.add(event3);
@@ -174,10 +177,11 @@ public class PrincipalWindow {
 			JButton buyBut = new JButton("BUY");
 			eventMap.put(buyBut.hashCode(), event);
 			buyBut.setBounds(190, 80, 70, 20);
+			final Event evento = event;
 			buyBut.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					TicketController.getInstance().buyTicket("User", /*eventMap.get(e.getSource().hashCode()).getDate()*/null);  
-					// System.out.println(e.getSource().hashCode());							
+					TicketController.getInstance().buyTicket(evento.getName(), evento.getDate()); 
+
 				}
 			});
 
