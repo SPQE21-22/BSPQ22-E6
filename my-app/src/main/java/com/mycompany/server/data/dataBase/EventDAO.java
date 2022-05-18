@@ -91,7 +91,7 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the users: " + ex.getMessage());
+			System.out.println("  $ Error retrieving all the events: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -99,6 +99,50 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 
 			pm.close();
 		}
+		return events;
+	}
+	
+public List<Event> getActiveEvents() {
+		
+		//TODO: now gets ALL the challenges (getAll() copied)
+		//Make it get only the active ones
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+
+		List<Event> events = new ArrayList<>();
+
+		try {
+			tx.begin();
+
+			//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+			LocalDate today = LocalDate.now();
+
+			Extent<Event> extent = pm.getExtent(Event.class, true);
+
+			// Active challenges are those that are being held at the moment
+			for (Event ev : extent) {
+				//System.out.println("* Querying active challenges.");
+				if (ev.getDate().isAfter(today)) {
+					events.add(ev);
+				}
+			}
+
+			if(events.size() == 0) {
+				//System.out.println("* There are no active challenges");
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error querying active events: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
 		return events;
 	}
 }
