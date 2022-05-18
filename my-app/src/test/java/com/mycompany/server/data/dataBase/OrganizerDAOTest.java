@@ -2,6 +2,9 @@ package com.mycompany.server.data.dataBase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,6 +13,7 @@ import org.junit.Test;
 import com.github.javatlacati.contiperf.PerfTest;
 import com.github.javatlacati.contiperf.Required;
 import com.github.javatlacati.contiperf.junit.ContiPerfRule;
+import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Organizer;
 
 public class OrganizerDAOTest {
@@ -28,7 +32,7 @@ public class OrganizerDAOTest {
 	@Test
 	@PerfTest(invocations = 1)
 	@Required(max = 1500, average = 600)
-	public void saveFindTest() {
+	public void saveFindDeleteTest() {
 		dao.save(testOrganizer);
 
 		assertEquals(testOrganizer, dao.find(testOrganizer.getEmail()));
@@ -36,5 +40,16 @@ public class OrganizerDAOTest {
 
 		assertNull(dao.find(testOrganizer.getEmail()));
 
+	}
+	
+	@Test
+	@PerfTest(invocations =1)
+	@Required(max=1500, average=600)
+	public void getAllTest() {
+		dao.save(testOrganizer);
+		List<Organizer> found = dao.getAll();
+		assertTrue(found.contains(testOrganizer));
+		
+		dao.delete(testOrganizer);
 	}
 }

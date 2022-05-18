@@ -2,6 +2,9 @@ package com.mycompany.server.data.dataBase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -30,12 +33,23 @@ public class ConsumerDAOTest {
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
-	public void test() {
+	public void saveFindDeleteTest() {
 		dao.save(testConsumer);
 		Consumer found = dao.find(testConsumer.getEmail());
 		assertEquals(testConsumer,found); 
 		dao.delete(testConsumer);
 		assertNull(dao.find(testConsumer.getEmail()));
+	}
+	
+	@Test
+	@PerfTest(invocations =1)
+	@Required(max=1500, average=600)
+	public void getAllTest() {
+		dao.save(testConsumer);
+		List<Consumer> found = dao.getAll();
+		assertTrue(found.contains(testConsumer));
+		
+		dao.delete(testConsumer);
 	}
 	
 	
