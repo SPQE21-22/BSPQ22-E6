@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.mycompany.client.ClientApp;
+
 public class SettingsWindow {
 
 	private JFrame frame;
@@ -31,8 +33,11 @@ public class SettingsWindow {
 				try {
 					SettingsWindow window = new SettingsWindow();
 					window.frame.setVisible(true);
+					ClientApp.getLogger().info("Settings window opened");
 				} catch (Exception e) {
 					e.printStackTrace();
+					ClientApp.getLogger().error("The Settings window has been problems to open");
+
 				}
 			}
 		});
