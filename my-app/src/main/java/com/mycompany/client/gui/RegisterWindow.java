@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.mycompany.client.ClientApp;
 import com.mycompany.client.controller.UserController;
 
 
@@ -45,8 +46,11 @@ public class RegisterWindow {
 				try {
 					RegisterWindow window = new RegisterWindow();
 					window.frame.setVisible(true);
+					ClientApp.getLogger().info("Register window opened");
 				} catch (Exception e) {
 					e.printStackTrace();
+					ClientApp.getLogger().error("The register window has been problems to open");
+					
 				}
 			}
 		});

@@ -1,5 +1,6 @@
 package com.mycompany.client;
 
+import java.awt.EventQueue;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.mycompany.client.controller.EventController;
 import com.mycompany.client.controller.TicketController;
 import com.mycompany.client.controller.UserController;
+import com.mycompany.client.gui.LoginWindow;
 import com.mycompany.client.remote.ServiceGateway;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
@@ -21,11 +23,23 @@ public class ClientApp {
 
 		BasicConfigurator.configure(); // loads the log4j properties
 
+		
+		
 		String hostname = args[0];
 		String port = args[1];
 		ServiceGateway.getInstance().initGateway(hostname, port);
 		ClientApp.getLogger().info("This is the client side");
 
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LoginWindow window = new LoginWindow();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		// Here we call the testing methods
 
 		// Registering

@@ -20,12 +20,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.mycompany.client.ClientApp;
 import com.mycompany.client.controller.UserController;
 
 public class LoginWindow extends JFrame {
 
 	private JPanel contentPane;
-	private JFrame frame;
+	public JFrame frame;
 	static JTextField txtEmail;
 	private JTextField txtPassword;
 
@@ -38,8 +39,12 @@ public class LoginWindow extends JFrame {
 				try {
 					LoginWindow window = new LoginWindow();
 					window.frame.setVisible(true);
+					ClientApp.getLogger().info("Login window opened");
+
 				} catch (Exception e) {
 					e.printStackTrace();
+					ClientApp.getLogger().error("The Login window has been problems to open");
+
 				}
 			}
 		});
