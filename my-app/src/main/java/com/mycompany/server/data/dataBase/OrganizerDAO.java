@@ -75,7 +75,7 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		List<Organizer> users = new ArrayList<>();
+		List<Organizer> organizers = new ArrayList<>();
 		
 		try {
 			tx.begin();
@@ -83,12 +83,12 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 			Extent<Organizer> extent = pm.getExtent(Organizer.class, true);
 
 			for (Organizer o : extent) {
-				users.add(o);
+				organizers.add(o);
 			}
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the users: " + ex.getMessage());
+			System.out.println("  $ Error retrieving all the organizers: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -97,6 +97,6 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 			pm.close();
 		}
 		
-		return users;
+		return organizers;
 	}
 }

@@ -90,7 +90,7 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 			tx.commit();
 			
 		} catch (Exception ex) {
-			ServerApp.getLogger().error("  $ Error retrieving all the users: " + ex.getMessage());
+			ServerApp.getLogger().error("  $ Error retrieving all the consumers: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
