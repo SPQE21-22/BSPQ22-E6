@@ -3,7 +3,9 @@ package com.mycompany.server.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.mycompany.server.data.dataBase.EventDAO;
 import com.mycompany.server.data.dataBase.TestDBManager;
+import com.mycompany.server.data.dataBase.TicketDAO;
 import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Ticket;
@@ -31,18 +33,15 @@ public class TicketAppService {
 
 	public void buyTicket(Consumer consumer, String eventName, LocalDate eventDate) {
 
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for searching the event in the DB
-		Event e = TestDBManager.getInstance().getEvent(eventName, eventDate);
-		// ****************************************************
+
+		Event e = EventDAO.getInstance().find(eventName, eventDate.toString());
+
 
 		Ticket ticket = new Ticket(e, consumer);
 		consumer.addBoughtTicket(ticket);
 
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for storing the ticket in the DB
-		TestDBManager.getInstance().storeTicket(ticket);
-		// ****************************************************
+
+		TicketDAO.getInstance().save(ticket);
 
 	}
 
@@ -80,9 +79,8 @@ public class TicketAppService {
 	}
 
 	public List<Ticket> getResellingTickets() {
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for searching the event in the DB
-		return TestDBManager.getInstance().getResellingTickets();
-		// ****************************************************
+
+		return TicketDAO.getInstance().getInResellTickets();
+
 	}
 }

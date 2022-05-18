@@ -69,7 +69,7 @@ public class RemoteFacadeTest {
 	public ContiPerfRule rule = new ContiPerfRule();
 
 	@Test
-	@PerfTest(invocations =100)
+	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
 	public void fullOperationTest() {  //max 1,5s
 
@@ -136,7 +136,7 @@ public class RemoteFacadeTest {
 		CreateEventDTO dtoe = new CreateEventDTO();
 
 		dtoe.setOrganizerToken(token);
-		dtoe.setDate(LocalDate.now());
+		dtoe.setDate(LocalDate.now().plusDays(1));
 		dtoe.setName("testevent");
 		dtoe.setPlace("testplace");
 
@@ -152,6 +152,13 @@ public class RemoteFacadeTest {
 		Response rl = il.put(Entity.entity(token, MediaType.APPLICATION_JSON));
 
 		assertEquals("The logut returned OK", Status.OK.getStatusCode(), rl.getStatus());
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// *********************login of the consumer
 
@@ -193,28 +200,41 @@ public class RemoteFacadeTest {
 		expectede.setOrganizerWeb(dto.getWebpage());
 		expectede.setPlace(dtoe.getPlace());
 
-		assertEquals("Retrieved event is the same as the created one", expectede, listevents.get(0));
+		if(!listevents.isEmpty()) {
+			assertEquals("Retrieved event is the same as the created one", expectede, listevents.get(0));
+
+		}else {
+			fail("eventList is empty when getting active tickets");
+		}
 
 		// *********************buy a ticket for the created event
 
-		EventDTO e = listevents.get(0);
+		if(!listevents.isEmpty()) {
+			EventDTO e = listevents.get(0);
+			
+			WebTarget tTarget = baseTarget.path("tickets");
+			WebTarget cTarget2 = tTarget.path("consumers");
+
+			Invocation.Builder i7 = cTarget2.request();
+
+			BuyTicketDTO dto7 = new BuyTicketDTO();
+
+			dto7.setEventDate(e.getDate());
+			dto7.setEventName(e.getName());
+			dto7.setToken(tokenc);
+
+			Response r7 = i7.post(Entity.entity(dto7, MediaType.APPLICATION_JSON));
+
+			assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
+
+		}else {
+			fail("eventList is empty");
+		}
 		
-		WebTarget tTarget = baseTarget.path("tickets");
-		WebTarget cTarget2 = tTarget.path("consumers");
-
-		Invocation.Builder i7 = cTarget2.request();
-
-		BuyTicketDTO dto7 = new BuyTicketDTO();
-
-		dto7.setEventDate(e.getDate());
-		dto7.setEventName(e.getName());
-		dto7.setToken(tokenc);
-
-		Response r7 = i7.post(Entity.entity(dto7, MediaType.APPLICATION_JSON));
-
-		assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
+		
 
 		// *********************getting bought tickets
+		WebTarget tTarget = baseTarget.path("tickets");
 
 		WebTarget c2Target = tTarget.path("consumers");
 
@@ -236,8 +256,14 @@ public class RemoteFacadeTest {
 		expectedt.setEventName(dtoe.getName());
 		expectedt.setUserEmail(dtoc.getEmail());
 		expectedt.setPlace(dtoe.getPlace());
+		
+		if(!listtickets.isEmpty()) {
+			assertEquals("Retrieved ticket is correct", expectedt, listtickets.get(0));
 
-		assertEquals("Retrieved ticket is correct", expectedt, listtickets.get(0));
+		}else {
+			fail("listtickets is empty");
+		}
+		
 
 		// *********************logout
 

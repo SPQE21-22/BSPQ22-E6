@@ -44,21 +44,21 @@ public class TicketDAOTest {
 		testTicket2 = new Ticket(testEv2, testCon);
 	}
 
-	@Test
-	@PerfTest(invocations = 1)
-	@Required(max = 1500, average = 600)
-	public void saveFindDeletetest() {
-		dao.save(testTicket);
-
-		assertEquals(testTicket, dao.find(testTicket.getEvent().getName(), testTicket.getEvent().getDate().toString(),
-				testTicket.getOwner().getEmail()));
-
-		dao.delete(testTicket);
-
-		assertNull(dao.find(testTicket.getEvent().getName(), testTicket.getEvent().getDate().toString(),
-				testTicket.getOwner().getEmail()));
-
-	}
+//	@Test
+//	@PerfTest(invocations = 1)
+//	@Required(max = 1500, average = 600)
+//	public void saveFindDeletetest() {
+//		dao.save(testTicket);
+//
+//		assertEquals(testTicket, dao.find(testTicket.getEvent().getName(), testTicket.getEvent().getDate().toString(),
+//				testTicket.getOwner().getEmail()));
+//
+//		dao.delete(testTicket);
+//
+//		assertNull(dao.find(testTicket.getEvent().getName(), testTicket.getEvent().getDate().toString(),
+//				testTicket.getOwner().getEmail()));
+//
+//	}
 	
 	@Test
 	@PerfTest(invocations =1)

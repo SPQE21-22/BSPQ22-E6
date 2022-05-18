@@ -3,6 +3,7 @@ package com.mycompany.server.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.mycompany.server.data.dataBase.EventDAO;
 import com.mycompany.server.data.dataBase.TestDBManager;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
@@ -24,12 +25,7 @@ public class EventAppService {
 
 	public List<Event> getActiveEvents() {
 
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for searching in the DB
-		List<Event> list = TestDBManager.getInstance().getActiveEvents();
-		// ****************************************************
-
-		return list;
+		return EventDAO.getInstance().getActiveEvents();
 	}
 
 	public void createEvent(String name, LocalDate date, String place, Organizer org) {
@@ -37,9 +33,8 @@ public class EventAppService {
 		Event e = new Event(name, date, place, org);
 		
 		
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for storing the event in the DB
-		TestDBManager.getInstance().storeEvent(e);
-		// ****************************************************
+		EventDAO.getInstance().save(e);
 	}
+
+	
 }
