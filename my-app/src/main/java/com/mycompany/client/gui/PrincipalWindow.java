@@ -20,21 +20,28 @@ import javax.swing.JComboBox;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.plaf.DimensionUIResource;
 
 import com.mycompany.client.ClientApp;
+import com.mycompany.client.controller.EventController;
 import com.mycompany.client.controller.TicketController;
 import com.mycompany.client.controller.UserController;
+import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 
+import org.apache.log4j.Layout;
 import org.glassfish.hk2.api.Self;
 import org.glassfish.jersey.logging.LoggingFeatureAutoDiscoverable;
+
+import javassist.expr.NewArray;
 
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.management.AttributeList;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
@@ -57,6 +64,7 @@ public class PrincipalWindow {
 					ClientApp.getLogger().info("Buying Tickets window has been opened");
 				} catch (Exception e) {
 					e.printStackTrace();
+					ClientApp.getLogger().error("Buying Tickets window could not be opened");
 				}
 			}
 		});
@@ -76,24 +84,30 @@ public class PrincipalWindow {
 	 */
 	private void initialize() {
 		//Event list for testing
-		Organizer organizer = new Organizer("Asier", "1234", "asier@deusto.es", "65465435", "Avd...", "");
+		/*Organizer organizer = new Organizer("Asier", "1234", "asier@deusto.es", "65465435", "Avd...", "");
 		Event event1 = new Event("Graduation", LocalDate.parse("2022-04-11"), "Back", organizer);
 		Event event2 = new Event("SummerFest", LocalDate.parse("2022-05-03"), "Moma", organizer);
 		Event event3 = new Event("Party", LocalDate.parse("2022-06-01"), "Fever", organizer);
-		Event event4 = new Event("Biblioteca Nocturna", LocalDate.parse("2023-03-23"), "Antzoki", organizer);
-
-		//TODO Get events from database
-		eventList = new ArrayList<Event>();
+		Event event4 = new Event("Biblioteca Nocturna", LocalDate.parse("2023-03-23"), "Antzoki", organizer);*/
 		
-		eventList.add(event1);
-		eventList.add(event2);
-		eventList.add(event3);
-		eventList.add(event4);
+		//TODO Get events from database
+		EventController.getInstance().createEvent("Graduation", LocalDate.parse("2022-04-11"), "Back");
+		
+		List<EventDTO> eventlistDTO	= EventController.getInstance().getActiveEvents();
+
+		//ArrayList<EventDTO> eventListDTO = new ArrayList<>();
+		//eventListDTO.addAll(listDTO);
 
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 26));
-		frame.setBounds(100, 100, 1000, 600);
+		//frame.setSize(800,600);
+		frame.setMinimumSize(new DimensionUIResource(800, 1000));
+		frame.setMaximumSize(new DimensionUIResource(800, 2000));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel container = new JPanel();
+		container.setFont(new Font("Tahoma", Font.BOLD, 26));
+		container.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -141,29 +155,26 @@ public class PrincipalWindow {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_3);
-		frame.getContentPane().setLayout(null);
+		//frame.getContentPane().setLayout(null);
 		
 		txtIntroduceYourEvent = new JTextField();
 		txtIntroduceYourEvent.setFont(new Font("Tahoma", Font.BOLD, 25));
 		txtIntroduceYourEvent.setText("Introduce your event...");
-		txtIntroduceYourEvent.setBounds(244, 40, 454, 59);
-		frame.getContentPane().add(txtIntroduceYourEvent);
+		txtIntroduceYourEvent.setBounds(164, 40, 454, 59);
+		container.add(txtIntroduceYourEvent);
 		txtIntroduceYourEvent.setColumns(10);
 		
-		////////////////////////////////////////
 		int i = 0;
-		JPanel[] panels = new JPanel[eventList.size()];
-		HashMap<Integer, Event> eventMap = new HashMap<Integer, Event>();
+		JPanel[] panels = new JPanel[eventlistDTO.size()];
 
-
-		for (Event event : eventList) {
+		for (EventDTO event : eventlistDTO) {
 			panels[i] = new JPanel();
 			panels[i].setForeground(Color.LIGHT_GRAY);
-			panels[i].setBounds(244, 113 + 137*i, 454, 120);
+			panels[i].setBounds(164, 113 + 137*i, 454, 120);
 			panels[i].setBackground(Color.LIGHT_GRAY);
 			panels[i].setLayout(null);
 			
-			JLabel lblNewLabel = new JLabel(event.getDate().toString());
+			JLabel lblNewLabel = new JLabel(event.getName());
 			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 			lblNewLabel.setForeground(Color.BLACK);
 			lblNewLabel.setBounds(22, 11, 104, 58);
@@ -175,13 +186,11 @@ public class PrincipalWindow {
 			lblNewLabel_1.setBounds(195, 26 , 139, 30); 
 
 			JButton buyBut = new JButton("BUY");
-			eventMap.put(buyBut.hashCode(), event);
 			buyBut.setBounds(190, 80, 70, 20);
-			final Event evento = event;
+			final EventDTO evento = event;
 			buyBut.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					TicketController.getInstance().buyTicket(evento.getName(), evento.getDate()); 
-
+					TicketController.getInstance().buyTicket(evento.getName(), LocalDate.parse(evento.getDate())); 
 				}
 			});
 
@@ -201,15 +210,11 @@ public class PrincipalWindow {
 			panels[i].add(lblNewLabel_2);
 			panels[i].add(lblNewLabel_3);
 			panels[i].add(buyBut);
-			frame.getContentPane().add(panels[i]);
-
+			container.add(panels[i]);
 			i++;
 		}
-
-
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(957, 0, 15, 539);
-		frame.add(scrollBar);
+		
+		
 
 		
 		
@@ -222,10 +227,8 @@ public class PrincipalWindow {
 		frame.getContentPane().add(btnNewButton);
 		
 		
-		
-		
-		
-		
-		
+		JScrollPane jScrollPane = new JScrollPane(container);
+		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frame.getContentPane().add(jScrollPane);
 	}
 }
