@@ -44,27 +44,13 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 
 		Ticket t = null;
 
-		try {
-
-			tx3.begin();
-			Query<?> query = pm3.newQuery(
-					"SELECT FROM " + Ticket.class.getName() + " WHERE event_event_id_oid IN (SELECT event_id FROM "
-							+ Event.class.getName() + " WHERE name == '" + params[0] + "' AND" + " dateInString == '"
-							+ params[1] + "') AND ticket_id IN (SELECT ticket_id_eid FROM consumer_boughttickets"
-							+ " WHERE consumer_id_oid IN (SELECT consumer_id FROM " + Consumer.class.getName()
-							+ " WHERE email == '" + params[2] + "'))");
-
-			query.setUnique(true);
-			t = (Ticket) query.execute();
-			tx3.commit();
-		} catch (Exception ex) {
-			System.out.println("  $ Error querying a Ticket: " + ex.getMessage());
-		} finally {
-			if (tx3 != null && tx3.isActive()) {
-				tx3.rollback();
+		Consumer c = ConsumerDAO.getInstance().find(params[2]);
+		Event e = EventDAO.getInstance().find(params[0],params[1]);
+		
+		if (c!=null && e!=null) {
+			for (Ticket ticket: c.getBoughtTickets()) {
+				if (ticket.getEvent().equals(e)) return ticket;
 			}
-
-			pm3.close();
 		}
 
 		return t;
