@@ -34,7 +34,7 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 	 *                the Event (Format: YYYY-MM-DD) 3- Email of the Consumer
 	 * @return the ticket object
 	 */
-	public Ticket find(String... params) { // FIXME NOT WORKING!
+	public Ticket find(String... params) {
 		if (params.length != 3) {
 			return null;
 		}

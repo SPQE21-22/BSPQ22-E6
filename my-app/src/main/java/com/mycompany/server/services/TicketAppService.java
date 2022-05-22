@@ -3,6 +3,7 @@ package com.mycompany.server.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.mycompany.server.data.dataBase.ConsumerDAO;
 import com.mycompany.server.data.dataBase.EventDAO;
 import com.mycompany.server.data.dataBase.TestDBManager;
 import com.mycompany.server.data.dataBase.TicketDAO;
@@ -47,13 +48,12 @@ public class TicketAppService {
 
 	public boolean putTicketInResell(Consumer c, String ticketUserMail, String ticketEventName,
 			LocalDate ticketEventDate) {
-
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for searching the event in the DB
-		Ticket t = TestDBManager.getInstance().getTicket(ticketUserMail, ticketEventName, ticketEventDate);
-		// ****************************************************
+		
+		Ticket t = TicketDAO.getInstance().find(ticketEventName, ticketEventDate.toString(),ticketUserMail);
+	
 		if (t.getOwner().equals(c)) {
 			t.setInResell(true);
+			TicketDAO.getInstance().save(t);
 			return true;
 		}
 		return false;
@@ -62,17 +62,19 @@ public class TicketAppService {
 
 	public boolean buyResellingTicket(Consumer buyer, String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
 
-		// FIXME: only for testing purposes*******************
-		// This is a replacement for searching the event in the DB
-		Ticket t = TestDBManager.getInstance().getTicket(ticketUserEmail, ticketEventName, ticketEventDate);
-		// ****************************************************
+		Ticket t = TicketDAO.getInstance().find(ticketEventName, ticketEventDate.toString(),ticketUserEmail);
+		
 		if (t.isInResell()) {
+			
+			TicketDAO.getInstance().delete(t);
 			
 			t.getOwner().removeBoughtTicket(t);
 			t.setInResell(false);
 			
 			t.setOwner(buyer);
 			buyer.addBoughtTicket(t);
+			
+			ConsumerDAO.getInstance().save(buyer);
 			return true;
 		}
 		return false;
