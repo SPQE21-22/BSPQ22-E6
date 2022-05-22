@@ -64,6 +64,41 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 	
 		return c;
 	}
+	
+	/**
+	 * Finds a consumer in the DB
+	 * @param email
+	 * @param password
+	 * @return the consumer object
+	 */
+	public Consumer findLogin(String email, String password) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+
+		Consumer c = null;
+		
+		try {
+			
+			tx.begin();
+
+			Query<?> query = pm.newQuery("SELECT FROM " + Consumer.class.getName() + " WHERE email == '" + email + "' AND password == '"+password+"'");
+			query.setUnique(true);
+			c = (Consumer) query.execute();
+
+			tx.commit();
+		} catch (Exception ex) {
+			ServerApp.getLogger().error("  $ Error querying a Consumer: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+	
+		return c;
+	}
 
 	public static ConsumerDAO getInstance() {
 		if (instance == null) {

@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import com.mycompany.server.ServerApp;
 import com.mycompany.server.data.domain.Organizer;
 
 public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObject<Organizer>{
@@ -51,6 +52,41 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println("  $ Error querying a Organizer: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+	
+		return o;
+	}
+	
+	/**
+	 * Finds a organizer in the DB
+	 * @param email
+	 * @param password
+	 * @return the organizer object
+	 */
+	public Organizer findLogin(String email, String password) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+
+		Organizer o = null;
+		
+		try {
+			
+			tx.begin();
+
+			Query<?> query = pm.newQuery("SELECT FROM " + Organizer.class.getName() + " WHERE email == '" + email + "' AND password == '"+password+"'");
+			query.setUnique(true);
+			o = (Organizer) query.execute();
+
+			tx.commit();
+		} catch (Exception ex) {
+			ServerApp.getLogger().error("  $ Error querying a Organizer: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();

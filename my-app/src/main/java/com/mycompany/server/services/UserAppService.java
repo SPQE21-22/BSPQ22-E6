@@ -1,5 +1,7 @@
 package com.mycompany.server.services;
 
+import com.mycompany.server.data.dataBase.ConsumerDAO;
+import com.mycompany.server.data.dataBase.OrganizerDAO;
 import com.mycompany.server.data.dataBase.TestDBManager;
 import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Organizer;
@@ -21,18 +23,16 @@ public class UserAppService {
 	}
 
 	public User login(String email, String password) {
-
-		// ***************MOCK METHOD TO CHECK IF WORKING
-
-		return TestDBManager.getInstance().getUser(email, password);
-
-		// **********************************************
-
-		// check if the user exist
-		// check if the password and the nickname are corrects
-
-		// TODO Search for the user in the DB and if exists return it
-		// return null;
+		
+		User u = null;
+		
+		Consumer c = ConsumerDAO.getInstance().findLogin(email,password);
+		Organizer o = OrganizerDAO.getInstance().findLogin(email,password);
+		
+		if (c!=null) return c;
+		if (o!=null) return o;
+		
+		return u;
 	}
 
 
@@ -72,7 +72,6 @@ public class UserAppService {
 	public void registerConsumer(String email, String password, String name, String phone, String nickname,
 			String surname) {
 
-		// ***************MOCK METHOD TO CHECK IF WORKING
 		Consumer c = new Consumer();
 		c.setEmail(email);
 		c.setPassword(password);
@@ -81,25 +80,13 @@ public class UserAppService {
 		c.setNickname(nickname);
 		c.setSurname(surname);
 
-		TestDBManager.getInstance().storeUser(c);
-
-		// **********************************************
-
-		// TODO:Receive all user parameters
-
-		// TODO: Check if parameters are valid
-
-		// TODO:Create user
-		// User u = new Organizer(); or User u = new Consumer();
-
-		// TODO:Save user in the database
+		ConsumerDAO.getInstance().save(c);
 
 	}
 
 	public void registerOrganizer(String email, String password, String name, String phone, String address,
 			String webpage) {
 
-		// ***************MOCK METHOD TO CHECK IF WORKING
 		Organizer o = new Organizer();
 		o.setEmail(email);
 		o.setPassword(password);
@@ -108,18 +95,7 @@ public class UserAppService {
 		o.setAddress(address);
 		o.setWebpage(webpage);
 
-		TestDBManager.getInstance().storeUser(o);
-
-		// **********************************************
-
-		// TODO:Receive all user parameters
-
-		// TODO: Check if parameters are valid
-
-		// TODO:Create user
-		// User u = new Organizer(); or User u = new Consumer();
-
-		// TODO:Save user in the database
+		OrganizerDAO.getInstance().save(o);
 
 	}
 
