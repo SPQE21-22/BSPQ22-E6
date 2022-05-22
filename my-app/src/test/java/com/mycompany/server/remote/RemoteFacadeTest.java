@@ -25,8 +25,18 @@ import com.mycompany.remote.serialization.ConsumerDTO;
 import com.mycompany.remote.serialization.CreateEventDTO;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.OrganizerDTO;
+import com.mycompany.remote.serialization.ResellTicketDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 import com.mycompany.remote.serialization.UserLoginDTO;
+import com.mycompany.server.data.dataBase.ConsumerDAO;
+import com.mycompany.server.data.dataBase.EventDAO;
+import com.mycompany.server.data.dataBase.OrganizerDAO;
+import com.mycompany.server.data.dataBase.TicketDAO;
+import com.mycompany.server.data.domain.Consumer;
+import com.mycompany.server.data.domain.Event;
+import com.mycompany.server.data.domain.Organizer;
+import com.mycompany.server.data.domain.Ticket;
+
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -43,6 +53,19 @@ public class RemoteFacadeTest {
 	WebTarget baseTarget;
 	String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
 	HttpServer server;
+
+	Consumer regConsumer = null;
+	Organizer regOrganizer = null;
+	Event creaEvent = null;
+
+	Consumer tConsumer = null;
+	Organizer tOrganizer = null;
+	Event tEvent = null;
+	Ticket tTicket = null;
+
+	Consumer tConsumerResell = null;
+	Event tEventResell = null;
+	Ticket tTicketResell = null;
 
 	@Before
 	public void setupClient() {
@@ -64,16 +87,86 @@ public class RemoteFacadeTest {
 		server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
 
 	}
-	
+
+	@Before
+	public void objectsSetUp() {
+		// **************************Create the objects for the DB
+
+		tConsumer = new Consumer("Consumer", "remconsumer", "remfac@consumer.com", "010101010", "RemFacC", "remFac");
+		tConsumerResell = new Consumer("ConsumerRes", "resellconsumer", "resell@consumer.com", "010101010", "ConResell",
+				"Reseller");
+
+		tOrganizer = new Organizer("Organizer", "remorganizer", "remfac@organizer.com", "010101010", "RemFac st.",
+				"www.organizer.com");
+
+		tEvent = new Event("Event", LocalDate.parse("2050-12-31"), "RemFac st.", tOrganizer);
+		tEventResell = new Event("EventResell", LocalDate.parse("2070-12-31"), "Resell st.", tOrganizer);
+
+		tTicket = new Ticket(tEvent, tConsumer);
+
+		tTicketResell = new Ticket(tEventResell, tConsumerResell);
+		tTicketResell.setInResell(true);
+
+		// **************************Add to the DB
+
+		ConsumerDAO.getInstance().save(tConsumer);
+
+		ConsumerDAO.getInstance().save(tConsumerResell);
+
+		OrganizerDAO.getInstance().save(tOrganizer);
+
+		EventDAO.getInstance().save(tEvent);
+
+		TicketDAO.getInstance().save(tTicket);
+
+		TicketDAO.getInstance().save(tTicketResell);
+
+		// ****** regustration and creation set up
+
+		regConsumer = new Consumer("ConsumerReg", "regconsumer", "registration@consumer.com", "010101010",
+				"RegisterCon", "Register");
+
+		regOrganizer = new Organizer("OrganizerReg", "regorganizer", "registration@organizer.com", "010101010",
+				"Registration st.", "www.organizer.com");
+
+		creaEvent = new Event("CreatedEvent", LocalDate.parse("2099-12-31"), "Created st.", tOrganizer);
+	}
+
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 
 	@Test
-	@PerfTest(invocations =1)
-	@Required(max=1500, average=600)
-	public void fullOperationTest() {  //max 1,5s
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void registerConsumerTest() {
 
-		// *********************register an organizer
+		WebTarget uTarget = baseTarget.path("users");
+		WebTarget cTarget = uTarget.path("consumers");
+
+		Invocation.Builder i2 = cTarget.request();
+
+		ConsumerDTO dtoc = new ConsumerDTO();
+
+		dtoc.setEmail(regConsumer.getEmail());
+		dtoc.setPassword(regConsumer.getPassword());
+		dtoc.setName(regConsumer.getName());
+		dtoc.setPhone(regConsumer.getPhone());
+		dtoc.setNickname(regConsumer.getNickname());
+		dtoc.setSurname(regConsumer.getSurname());
+
+		Response r2 = i2.post(Entity.entity(dtoc, MediaType.APPLICATION_JSON));
+
+		assertEquals("The registering returned OK", Status.OK.getStatusCode(), r2.getStatus());
+
+		// ****delete registered consumer from the DB
+		ConsumerDAO.getInstance().delete(regConsumer);
+
+	}
+
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void registerOrganizerTest() {
 		WebTarget uTarget = baseTarget.path("users");
 		WebTarget oTarget = uTarget.path("organizers");
 
@@ -81,52 +174,71 @@ public class RemoteFacadeTest {
 
 		OrganizerDTO dto = new OrganizerDTO();
 
-		dto.setEmail("org@test.com");
-		dto.setPassword("orgpass");
-		dto.setName("testName");
-		dto.setPhone("testPhone");
-		dto.setAddress("testaddress");
-		dto.setWebpage("testwebpage");
+		dto.setEmail(regOrganizer.getEmail());
+		dto.setPassword(regOrganizer.getPassword());
+		dto.setName(regOrganizer.getName());
+		dto.setPhone(regOrganizer.getPhone());
+		dto.setAddress(regOrganizer.getAddress());
+		dto.setWebpage(regOrganizer.getWebpage());
 
 		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
 		assertEquals("The registering returned OK", Status.OK.getStatusCode(), r.getStatus());
 
-		// *********************register a consumer
+		// ****delete registered organizer from the DB
+		OrganizerDAO.getInstance().delete(regOrganizer);
+	}
 
-		WebTarget cTarget = uTarget.path("consumers");
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void loginTest() {
+		// *********************login of the consumer
+		WebTarget uTarget = baseTarget.path("users");
 
-		Invocation.Builder i2 = cTarget.request();
+		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
 
-		ConsumerDTO dtoc = new ConsumerDTO();
+		UserLoginDTO userdto5 = new UserLoginDTO();
 
-		dtoc.setEmail("con@test.com");
-		dtoc.setPassword("conpass");
-		dtoc.setName("name");
-		dtoc.setPhone("phone");
-		dtoc.setNickname("nickname");
-		dtoc.setSurname("surname");
+		userdto5.setEmail(tConsumer.getEmail());
+		userdto5.setPassword(tConsumer.getPassword());
 
-		Response r2 = i2.post(Entity.entity(dtoc, MediaType.APPLICATION_JSON));
+		Response r5 = i5.put(Entity.entity(userdto5, MediaType.APPLICATION_JSON));
 
-		assertEquals("The registering returned OK", Status.OK.getStatusCode(), r2.getStatus());
+		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r5.getStatus());
+		long tokenc = r5.readEntity(Long.class);
+		assertTrue("The login returns a valid token", tokenc > 0);
 
+		// *********************logout
+		WebTarget logoutTarget = uTarget.path("logout");
+		Invocation.Builder il2 = logoutTarget.request();
+
+		Response rl2 = il2.put(Entity.entity(tokenc, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
+	}
+
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void createEventTest() {
 		// *********************login of the organizer
+		WebTarget uTarget = baseTarget.path("users");
+
 		long token = -1;
 
 		Invocation.Builder i3 = uTarget.request(MediaType.APPLICATION_JSON);
 
 		UserLoginDTO userdto = new UserLoginDTO();
 
-		userdto.setEmail("org@test.com");
-		userdto.setPassword("orgpass");
+		userdto.setEmail(tOrganizer.getEmail());
+		userdto.setPassword(tOrganizer.getPassword());
 
 		Response r3 = i3.put(Entity.entity(userdto, MediaType.APPLICATION_JSON));
 
 		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r3.getStatus());
 		token = r3.readEntity(Long.class);
 		assertTrue("The login returns a valid token", token > 0);
-		
 
 		// *********************create an event
 		WebTarget eTarget = baseTarget.path("events");
@@ -136,9 +248,9 @@ public class RemoteFacadeTest {
 		CreateEventDTO dtoe = new CreateEventDTO();
 
 		dtoe.setOrganizerToken(token);
-		dtoe.setDate(LocalDate.now().plusDays(1));
-		dtoe.setName("testevent");
-		dtoe.setPlace("testplace");
+		dtoe.setDate(creaEvent.getDate());
+		dtoe.setName(creaEvent.getName());
+		dtoe.setPlace(creaEvent.getPlace());
 
 		Response r4 = i4.post(Entity.entity(dtoe, MediaType.APPLICATION_JSON));
 
@@ -152,31 +264,17 @@ public class RemoteFacadeTest {
 		Response rl = il.put(Entity.entity(token, MediaType.APPLICATION_JSON));
 
 		assertEquals("The logut returned OK", Status.OK.getStatusCode(), rl.getStatus());
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 
-		// *********************login of the consumer
+		// ********delete created event from DB
+		EventDAO.getInstance().delete(creaEvent);
+	}
 
-		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void getActiveEventsTest() {
+		WebTarget eTarget = baseTarget.path("events");
 
-		UserLoginDTO userdto5 = new UserLoginDTO();
-
-		userdto5.setEmail("con@test.com");
-		userdto5.setPassword("conpass");
-
-		Response r5 = i5.put(Entity.entity(userdto5, MediaType.APPLICATION_JSON));
-
-		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r5.getStatus());
-		long tokenc = r5.readEntity(Long.class);
-		assertTrue("The login returns a valid token", tokenc > 0);
-		
-
-		// *********************getting active events
 		List<EventDTO> listevents = null;
 
 		Invocation.Builder i6 = eTarget.request(MediaType.APPLICATION_JSON);
@@ -193,45 +291,104 @@ public class RemoteFacadeTest {
 		}.getType();
 		listevents = gson.fromJson(listInJSON, eventDtoListType);
 
-		EventDTO expectede = new EventDTO();
-		expectede.setDate(dtoe.getDate());
-		expectede.setName(dtoe.getName());
-		expectede.setOrganizerEmail(dto.getEmail());
-		expectede.setOrganizerWeb(dto.getWebpage());
-		expectede.setPlace(dtoe.getPlace());
+		assertNotNull("Retrieved a list of events", listevents);
+	}
 
-		if(!listevents.isEmpty()) {
-			assertEquals("Retrieved event is the same as the created one", expectede, listevents.get(0));
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void getResellingTicketsTest() {
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget rTarget = tTarget.path("resell");
 
-		}else {
-			fail("eventList is empty when getting active tickets");
-		}
+		List<TicketDTO> listtickets = null;
+
+		Invocation.Builder i6 = rTarget.request(MediaType.APPLICATION_JSON);
+
+		Response r6 = i6.get();
+
+		assertEquals("Getting in resell tickets returned OK", Status.OK.getStatusCode(), r6.getStatus());
+
+		String listInJSON = r6.readEntity(String.class);
+
+		// Deserializing the list
+		Gson gson = new Gson();
+		Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
+		}.getType();
+		listtickets = gson.fromJson(listInJSON, ticketDtoListType);
+
+		assertNotNull("Retrieved a list of tickets", listtickets);
+	}
+
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void buyTicketsTest() {
+		// *********************login of the consumer
+		WebTarget uTarget = baseTarget.path("users");
+
+		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
+
+		UserLoginDTO userdto5 = new UserLoginDTO();
+
+		userdto5.setEmail(tConsumer.getEmail());
+		userdto5.setPassword(tConsumer.getPassword());
+
+		Response r5 = i5.put(Entity.entity(userdto5, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r5.getStatus());
+		long tokenc = r5.readEntity(Long.class);
+		assertTrue("The login returns a valid token", tokenc > 0);
 
 		// *********************buy a ticket for the created event
 
-		if(!listevents.isEmpty()) {
-			EventDTO e = listevents.get(0);
-			
-			WebTarget tTarget = baseTarget.path("tickets");
-			WebTarget cTarget2 = tTarget.path("consumers");
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget cTarget2 = tTarget.path("consumers");
 
-			Invocation.Builder i7 = cTarget2.request();
+		Invocation.Builder i7 = cTarget2.request();
 
-			BuyTicketDTO dto7 = new BuyTicketDTO();
+		BuyTicketDTO dto7 = new BuyTicketDTO();
 
-			dto7.setEventDate(e.getDate());
-			dto7.setEventName(e.getName());
-			dto7.setToken(tokenc);
+		dto7.setEventDate(tEvent.getDate());
+		dto7.setEventName(tEvent.getName());
+		dto7.setToken(tokenc);
 
-			Response r7 = i7.post(Entity.entity(dto7, MediaType.APPLICATION_JSON));
+		Response r7 = i7.post(Entity.entity(dto7, MediaType.APPLICATION_JSON));
 
-			assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
+		assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
 
-		}else {
-			fail("eventList is empty");
-		}
-		
-		
+		// *********************logout
+		WebTarget logoutTarget = uTarget.path("logout");
+		Invocation.Builder il2 = logoutTarget.request();
+
+		Response rl2 = il2.put(Entity.entity(tokenc, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
+
+		// ************delete the created ticket from DB
+		TicketDAO.getInstance().delete(tTicket);
+
+	}
+
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void getBoughtTicketsTest() {
+		// *********************login of the consumer
+		WebTarget uTarget = baseTarget.path("users");
+
+		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
+
+		UserLoginDTO userdto5 = new UserLoginDTO();
+
+		userdto5.setEmail(tConsumer.getEmail());
+		userdto5.setPassword(tConsumer.getPassword());
+
+		Response r5 = i5.put(Entity.entity(userdto5, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r5.getStatus());
+		long tokenc = r5.readEntity(Long.class);
+		assertTrue("The login returns a valid token", tokenc > 0);
 
 		// *********************getting bought tickets
 		WebTarget tTarget = baseTarget.path("tickets");
@@ -247,35 +404,128 @@ public class RemoteFacadeTest {
 		String listInJSON2 = r8.readEntity(String.class);
 
 		// Deserializing the list
+		Gson gson = new Gson();
 		Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
 		}.getType();
 		List<TicketDTO> listtickets = gson.fromJson(listInJSON2, ticketDtoListType);
 
-		TicketDTO expectedt = new TicketDTO();
-		expectedt.setEventDate(dtoe.getDate());
-		expectedt.setEventName(dtoe.getName());
-		expectedt.setUserEmail(dtoc.getEmail());
-		expectedt.setPlace(dtoe.getPlace());
-		
-		if(!listtickets.isEmpty()) {
-			assertEquals("Retrieved ticket is correct", expectedt, listtickets.get(0));
-
-		}else {
-			fail("listtickets is empty");
-		}
-		
+		assertNotNull("Retrieved a list of tickets", listtickets);
 
 		// *********************logout
+		WebTarget logoutTarget = uTarget.path("logout");
+		Invocation.Builder il2 = logoutTarget.request();
 
+		Response rl2 = il2.put(Entity.entity(tokenc, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
+	}
+
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void putTicketInResellTest() {
+		// *********************login of the consumer
+		WebTarget uTarget = baseTarget.path("users");
+
+		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
+
+		UserLoginDTO userdto5 = new UserLoginDTO();
+
+		userdto5.setEmail(tConsumer.getEmail());
+		userdto5.setPassword(tConsumer.getPassword());
+
+		Response r5 = i5.put(Entity.entity(userdto5, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r5.getStatus());
+		long tokenc = r5.readEntity(Long.class);
+		assertTrue("The login returns a valid token", tokenc > 0);
+
+		// **********************Put a ticket in resell
+
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget rTarget = tTarget.path("resell");
+
+		Invocation.Builder ires = rTarget.request();
+
+		ResellTicketDTO dto = new ResellTicketDTO();
+		dto.setToken(tokenc);
+		dto.setTicketUserEmail(tConsumer.getEmail());
+		dto.setTicketEventDate(tEvent.getDate());
+		dto.setTicketEventName(tEvent.getName());
+
+		Response rres = ires.put(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		assertEquals("Putting to resell a ticket returned OK", Status.OK.getStatusCode(), rres.getStatus());
+
+		// *********************logout
+		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il2 = logoutTarget.request();
 
 		Response rl2 = il2.put(Entity.entity(tokenc, MediaType.APPLICATION_JSON));
 
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 
+		// *************reset state of the ticket
+		TicketDAO.getInstance().find(tEvent.getName(), tEvent.getDate().toString(), tConsumer.getEmail())
+				.setInResell(false);
+		TicketDAO.getInstance().save(tTicket);
 	}
 
 	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
+	public void resellTicketsTest() {
+		// *********************login of the consumer
+		WebTarget uTarget = baseTarget.path("users");
+
+		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
+
+		UserLoginDTO userdto5 = new UserLoginDTO();
+
+		userdto5.setEmail(tConsumer.getEmail());
+		userdto5.setPassword(tConsumer.getPassword());
+
+		Response r5 = i5.put(Entity.entity(userdto5, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logging in returned OK", Status.OK.getStatusCode(), r5.getStatus());
+		long tokenc = r5.readEntity(Long.class);
+		assertTrue("The login returns a valid token", tokenc > 0);
+
+		// **********************Buy in resell ticket
+
+		WebTarget tTarget = baseTarget.path("tickets");
+		WebTarget rTarget = tTarget.path("resell");
+
+		Invocation.Builder ires = rTarget.request();
+
+		ResellTicketDTO dto = new ResellTicketDTO();
+		dto.setToken(tokenc);
+		dto.setTicketUserEmail(tConsumer.getEmail());
+		dto.setTicketEventDate(tEventResell.getDate());
+		dto.setTicketEventName(tEventResell.getName());
+
+		Response rres = ires.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
+
+		assertEquals("Buying a ticket in resell returned OK", Status.OK.getStatusCode(), rres.getStatus());
+
+		// *********************logout
+		WebTarget logoutTarget = uTarget.path("logout");
+		Invocation.Builder il2 = logoutTarget.request();
+
+		Response rl2 = il2.put(Entity.entity(tokenc, MediaType.APPLICATION_JSON));
+
+		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
+
+		// *************reset state of the ticket
+		TicketDAO.getInstance().find(tEvent.getName(), tEvent.getDate().toString(), tConsumer.getEmail())
+				.setOwner(tConsumerResell);
+		TicketDAO.getInstance().save(tTicket);
+
+	}
+
+	@Test
+	@PerfTest(invocations = 50)
+	@Required(max = 1500, average = 600)
 	public void ConnectionTest() {
 		WebTarget testTarget = baseTarget.path("test");
 		WebTarget newTarget = testTarget.path("Testing name"); // This is the name that will be displayed
@@ -285,8 +535,16 @@ public class RemoteFacadeTest {
 	}
 
 	@After
-	public void teardown() {
-		server.stop();
+	void deleteMockDB() {
+		TicketDAO.getInstance().delete(tTicket);
+		EventDAO.getInstance().delete(tEvent);
+		OrganizerDAO.getInstance().delete(tOrganizer);
+		ConsumerDAO.getInstance().delete(tConsumer);
+	}
+
+	@After
+	public void teardownServer() {
+		server.shutdown();
 	}
 
 }
