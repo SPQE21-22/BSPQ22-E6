@@ -537,9 +537,12 @@ public class RemoteFacadeTest {
 	@After
 	void deleteMockDB() {
 		TicketDAO.getInstance().delete(tTicket);
+		TicketDAO.getInstance().delete(tTicketResell);
 		EventDAO.getInstance().delete(tEvent);
+		EventDAO.getInstance().delete(tEventResell);
 		OrganizerDAO.getInstance().delete(tOrganizer);
 		ConsumerDAO.getInstance().delete(tConsumer);
+		ConsumerDAO.getInstance().delete(tConsumerResell);
 	}
 
 	@After
