@@ -171,9 +171,9 @@ public class RegisterWindow {
 						if (!email.isEmpty()) {
 							if (!userName.isEmpty()) {
 								if (chckbxNewCheckBox.isSelected()){
-									UserController.getInstance().registerConsumer(email, pass, userName, phone, campo1, campo2);
-								}else {
 									UserController.getInstance().registerOrganizer(email, pass, userName, phone, campo1, campo2);
+								}else {
+									UserController.getInstance().registerConsumer(email, pass, userName, phone, campo1, campo2);
 								}
 								
 							} else {
