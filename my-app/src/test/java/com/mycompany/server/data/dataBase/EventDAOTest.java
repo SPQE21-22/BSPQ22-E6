@@ -19,9 +19,7 @@ import com.github.javatlacati.contiperf.junit.ContiPerfRule;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 
-/**
- * The Class EventDAOTest.
- */
+/** The Class EventDAOTest.*/
 public class EventDAOTest {
 	
 	/** The dao. */

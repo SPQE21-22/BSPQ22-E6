@@ -7,9 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * The Class EventWindow.
- */
+/** The Class EventWindow.*/
 public class EventWindow extends JFrame {
 
 	/** The content pane. */

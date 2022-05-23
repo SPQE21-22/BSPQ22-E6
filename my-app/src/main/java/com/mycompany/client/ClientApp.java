@@ -16,10 +16,7 @@ import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ClientApp.
- */
+/** The Class ClientApp.*/
 public class ClientApp {
 
 	/** The Constant logger. */

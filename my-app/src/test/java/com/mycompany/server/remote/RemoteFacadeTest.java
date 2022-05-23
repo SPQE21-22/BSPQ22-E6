@@ -47,9 +47,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
 
-/**
- * The Class RemoteFacadeTest.
- */
+/** The Class RemoteFacadeTest.*/
 public class RemoteFacadeTest {
 
 	/** The hostname. */
@@ -97,9 +95,7 @@ public class RemoteFacadeTest {
 	/** The t ticket resell. */
 	Ticket tTicketResell = null;
 
-	/**
-	 * Setup client.
-	 */
+	/** Setup client.*/
 	@Before
 	public void setupClient() {
 		Client client = ClientBuilder.newClient();
@@ -107,9 +103,7 @@ public class RemoteFacadeTest {
 		baseTarget = baseTarget.path("remote");
 	}
 
-	/**
-	 * Setup server.
-	 */
+	/** Setup server*/
 	@Before
 	public void setupServer() {
 
@@ -124,9 +118,7 @@ public class RemoteFacadeTest {
 
 	}
 
-	/**
-	 * Objects set up.
-	 */
+	/** Objects set up. */
 	@Before
 	public void objectsSetUp() {
 		/** Create the objects for the DB */
@@ -175,9 +167,7 @@ public class RemoteFacadeTest {
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 
-	/**
-	 * Register consumer test.
-	 */
+	/** Register consumer test. */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -206,9 +196,7 @@ public class RemoteFacadeTest {
 
 	}
 
-	/**
-	 * Register organizer test.
-	 */
+	/** Register organizer test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -235,9 +223,7 @@ public class RemoteFacadeTest {
 		OrganizerDAO.getInstance().delete(regOrganizer);
 	}
 
-	/**
-	 * Login test.
-	 */
+	/** Login test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -267,9 +253,7 @@ public class RemoteFacadeTest {
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 	}
 
-	/**
-	 * Creates the event test.
-	 */
+	/** Creates the event test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -382,9 +366,7 @@ public class RemoteFacadeTest {
 		assertNotNull("Retrieved a list of tickets", listtickets);
 	}
 
-	/**
-	 * Buy tickets test.
-	 */
+	/** Buy tickets test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -490,9 +472,7 @@ public class RemoteFacadeTest {
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 	}
 
-	/**
-	 * Put ticket in resell test.
-	 */
+	/** Put ticket in resell test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -544,9 +524,7 @@ public class RemoteFacadeTest {
 		TicketDAO.getInstance().save(tTicket);
 	}
 
-	/**
-	 * Resell tickets test.
-	 */
+	/** Resell tickets test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -599,9 +577,7 @@ public class RemoteFacadeTest {
 
 	}
 
-	/**
-	 * Connection test.
-	 */
+	/** Connection test.*/
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -613,9 +589,7 @@ public class RemoteFacadeTest {
 
 	}
 
-	/**
-	 * Delete mock DB.
-	 */
+	/** Delete mock DB.*/
 	@After
 	void deleteMockDB() {
 		TicketDAO.getInstance().delete(tTicket);
@@ -627,9 +601,7 @@ public class RemoteFacadeTest {
 		ConsumerDAO.getInstance().delete(tConsumerResell);
 	}
 
-	/**
-	 * Teardown server.
-	 */
+	/** Teardown server.*/
 	@After
 	public void teardownServer() {
 		server.shutdown();

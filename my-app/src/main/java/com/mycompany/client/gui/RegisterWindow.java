@@ -89,9 +89,9 @@ public class RegisterWindow {
 		frame.getContentPane().setLayout(null);
 		
 		txtEmail = new JTextField("Email*");
-		//txtEmail.setToolTipText("");
+		/** txtEmail.setToolTipText(""); */
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		//txtEmail.setColumns(10);
+		/** txtEmail.setColumns(10); */
 		txtEmail.setBackground(SystemColor.menu);
 		txtEmail.setBounds(114, 206, 236, 42);
 		frame.getContentPane().add(txtEmail);
@@ -107,7 +107,7 @@ public class RegisterWindow {
 		txtPassword = new JPasswordField();;
 		txtPassword.setText("");
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		//txtPassword.setColumns(10);
+		/** txtPassword.setColumns(10); */
 		txtPassword.setBackground(SystemColor.menu);
 		txtPassword.setBounds(114, 265, 236, 42);
 		frame.getContentPane().add(txtPassword);
@@ -221,7 +221,7 @@ public class RegisterWindow {
 		
 		txtName = new JTextField("Name*");
 		txtName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		//txtNombre.setColumns(10);
+		/**txtNombre.setColumns(10);*/
 		txtName.setBackground(SystemColor.menu);
 		txtName.setBounds(114, 97, 236, 42);
 		frame.getContentPane().add(txtName);

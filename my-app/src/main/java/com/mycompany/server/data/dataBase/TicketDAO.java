@@ -130,8 +130,8 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 	 */
 	public List<Ticket> getInResellTickets() {
 
-		// TODO: now gets ALL the challenges (getAll() copied)
-		// Make it get only the active ones
+		/** TODO: now gets ALL the challenges (getAll() copied)*/
+		/** Make it get only the active ones */
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

@@ -15,9 +15,7 @@ import com.github.javatlacati.contiperf.Required;
 import com.github.javatlacati.contiperf.junit.ContiPerfRule;
 import com.mycompany.server.data.domain.Consumer;
 
-/**
- * The Class ConsumerDAOTest.
- */
+/** The Class ConsumerDAOTest.*/
 public class ConsumerDAOTest {
 	
 	/** The dao. */
@@ -30,18 +28,14 @@ public class ConsumerDAOTest {
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 	
-	/**
-	 * Setup.
-	 */
+	/** Setup.*/
 	@Before
 	public void setup() {
 		dao = ConsumerDAO.getInstance();
 		testConsumer = new Consumer("Tester","test123","con@test.com","1111111111","TestingKing","Testson");
 	}
 	
-	/**
-	 * Save find delete test.
-	 */
+	/** Save find delete test.*/
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)

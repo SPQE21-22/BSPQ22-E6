@@ -150,8 +150,8 @@ public class TicketWalletWindow extends JFrame {
 		
 		JPanel listPanel = new JPanel();
 		JScrollPane scrollList = new JScrollPane(list);
-		// scrollList.setBounds(0, 0,220, 80);
-		// scrollList.setViewportView(list);
+		/** scrollList.setBounds(0, 0,220, 80); */
+		/** scrollList.setViewportView(list); */
 		listPanel.add(scrollList);
 		panel1.add(listPanel);
 

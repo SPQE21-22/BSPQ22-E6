@@ -137,8 +137,8 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
  */
 public List<Event> getActiveEvents() {
 		
-		//TODO: now gets ALL the challenges (getAll() copied)
-		//Make it get only the active ones
+		/** TODO: now gets ALL the challenges (getAll() copied)*/
+		/** Make it get only the active ones*/
 		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

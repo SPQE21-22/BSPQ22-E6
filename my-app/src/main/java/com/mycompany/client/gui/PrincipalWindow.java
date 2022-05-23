@@ -161,7 +161,7 @@ public class PrincipalWindow {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_3);
-		//frame.getContentPane().setLayout(null);
+		/** frame.getContentPane().setLayout(null); */
 		
 		txtIntroduceYourEvent = new JTextField();
 		txtIntroduceYourEvent.setFont(new Font("Tahoma", Font.BOLD, 25));

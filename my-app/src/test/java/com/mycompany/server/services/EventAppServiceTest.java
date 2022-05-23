@@ -12,9 +12,7 @@ import org.junit.Test;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 
-/**
- * The Class EventAppServiceTest.
- */
+/** The Class EventAppServiceTest.*/
 public class EventAppServiceTest {
 
 	/** The testing list. */
@@ -23,9 +21,7 @@ public class EventAppServiceTest {
 	/** The all event org. */
 	Organizer allEventOrg;
 
-	/**
-	 * Setup.
-	 */
+	/** Setup.*/
 	@Before
 	public void setup() {
 		/** Initialize the list */
@@ -53,9 +49,7 @@ public class EventAppServiceTest {
 		assertTrue("Not Implemented yet", true);
 	}
 
-	/**
-	 * Creates the event test.
-	 */
+	/** Creates the event test.*/
 	@Test
 	public void createEventTest() {
 		

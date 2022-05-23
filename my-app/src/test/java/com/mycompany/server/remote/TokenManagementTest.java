@@ -10,9 +10,7 @@ import org.junit.Test;
 import com.mycompany.server.data.domain.Organizer;
 import com.mycompany.server.data.domain.User;
 
-/**
- * The Class TokenManagementTest.
- */
+/** The Class TokenManagementTest.*/
 public class TokenManagementTest {
 
 	/** The u test. */

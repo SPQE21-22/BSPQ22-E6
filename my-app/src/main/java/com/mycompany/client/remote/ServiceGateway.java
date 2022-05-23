@@ -100,7 +100,7 @@ public class ServiceGateway {
 
 		Response r = i.put(Entity.entity(userdto, MediaType.APPLICATION_JSON));
 
-		// TODO: if error throw an exception
+		/** TODO: if error throw an exception */
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
 			ClientApp.getLogger().info("Server has correctly done the login");
@@ -215,7 +215,7 @@ public class ServiceGateway {
 
 		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
-		// TODO: if error throw an exception
+		/** TODO: if error throw an exception */
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
 			ClientApp.getLogger().info("Server has correctly bought the ticket");
@@ -247,7 +247,7 @@ public class ServiceGateway {
 
 		Response r = i.post(Entity.entity(dto, MediaType.APPLICATION_JSON));
 
-		// TODO: if error throw an exception
+		/** TODO: if error throw an exception*/
 
 		if (r.getStatus() == Status.OK.getStatusCode()) {
 			ClientApp.getLogger().info("Server has correctly create the event");

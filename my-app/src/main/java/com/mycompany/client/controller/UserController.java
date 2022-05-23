@@ -3,9 +3,7 @@ package com.mycompany.client.controller;
 import com.mycompany.client.ClientApp;
 import com.mycompany.client.remote.ServiceGateway;
 
-/**
- * The Class UserController.
- */
+/** The Class UserController.*/
 public class UserController {
 
 	/** The instance. */
@@ -24,9 +22,7 @@ public class UserController {
 		return instance;
 	}
 
-	/**
-	 * Instantiates a new user controller.
-	 */
+	/** Instantiates a new user controller.*/
 	private UserController() {
 	}
 
@@ -115,9 +111,7 @@ public class UserController {
 	
 	
 	
-	/**
-	 * Logout.
-	 */
+	/** Logout.*/
 	public void logout() {
 		try {
 			ServiceGateway.getInstance().logout();

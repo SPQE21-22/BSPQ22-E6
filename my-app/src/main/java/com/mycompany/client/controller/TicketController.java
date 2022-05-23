@@ -7,9 +7,7 @@ import com.mycompany.client.ClientApp;
 import com.mycompany.client.remote.ServiceGateway;
 import com.mycompany.remote.serialization.TicketDTO;
 
-/**
- * The Class TicketController.
- */
+/** The Class TicketController.*/
 public class TicketController {
 	
 	/** The instance. */
@@ -28,9 +26,7 @@ public class TicketController {
 		return instance;
 	}
 
-	/**
-	 * Instantiates a new ticket controller.
-	 */
+	/** Instantiates a new ticket controller.*/
 	private TicketController() {
 	}
 
@@ -48,7 +44,7 @@ public class TicketController {
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			/** e.printStackTrace(); */
 		}
 		return list;
 
@@ -67,7 +63,7 @@ public class TicketController {
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			/** e.printStackTrace(); */
 		}
 
 	}
@@ -85,7 +81,7 @@ public class TicketController {
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			/** e.printStackTrace(); */
 		}
 		
 	}
@@ -103,7 +99,7 @@ public class TicketController {
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			/** e.printStackTrace();*/
 		}
 		
 	}
@@ -121,7 +117,7 @@ public class TicketController {
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			/** e.printStackTrace(); */
 		}
 		return list;
 

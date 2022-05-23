@@ -7,9 +7,7 @@ import com.mycompany.client.ClientApp;
 import com.mycompany.client.remote.ServiceGateway;
 import com.mycompany.remote.serialization.EventDTO;
 
-/**
- * The Class EventController.
- */
+/** The Class EventController.*/
 public class EventController {
 	
 	/** The instance. */
@@ -28,9 +26,7 @@ public class EventController {
 		return instance;
 	}
 
-	/**
-	 * Instantiates a new event controller.
-	 */
+	/** Instantiates a new event controller.*/
 	private EventController() {
 	}
 
@@ -48,7 +44,7 @@ public class EventController {
 			
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			//** e.printStackTrace(); */
 		}
 		return list;
 
@@ -67,7 +63,7 @@ public class EventController {
 
 		} catch (Exception e) {
 			ClientApp.getLogger().error("* Error using the server:",e);
-			//e.printStackTrace();
+			//** e.printStackTrace(); */
 		}		
 	}
 

@@ -105,7 +105,7 @@ public class LoginWindow extends JFrame {
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtEmail.setBounds(115, 179, 236, 42);
 		frame.getContentPane().add(txtEmail);
-		//txtEmail.setColumns(10);
+		/** txtEmail.setColumns(10); */
 		txtEmail.addMouseListener(new MouseAdapter() {
 					
 					@Override
@@ -120,7 +120,7 @@ public class LoginWindow extends JFrame {
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		txtPassword.setText("");
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		//txtPassword.setColumns(10);
+		/** txtPassword.setColumns(10); */
 		txtPassword.setBounds(115, 252, 236, 42);
 		frame.getContentPane().add(txtPassword);
 		

@@ -4,9 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * The Class ServerAppTest.
- */
+/** The Class ServerAppTest.*/
 public class ServerAppTest {
 
 	/**

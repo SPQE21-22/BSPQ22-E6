@@ -40,7 +40,7 @@ public class ServerApp {
 		try {
 			System.in.read();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			/** TODO Auto-generated catch block*/
 			e.printStackTrace();
 		}
 		

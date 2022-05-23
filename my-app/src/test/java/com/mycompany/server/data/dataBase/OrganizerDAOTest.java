@@ -16,9 +16,7 @@ import com.github.javatlacati.contiperf.junit.ContiPerfRule;
 import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Organizer;
 
-/**
- * The Class OrganizerDAOTest.
- */
+/** The Class OrganizerDAOTest.*/
 public class OrganizerDAOTest {
 	
 	/** The dao. */
