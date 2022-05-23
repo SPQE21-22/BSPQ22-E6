@@ -9,3 +9,5 @@
 21:12:10,664 (grizzly-http-server-0) INFO  [ServerApp] - Getting tickets for: 1651432330478
 21:12:10,688 (grizzly-http-server-1) INFO  [ServerApp] - Logout of user with token: 1651432330478
 21:12:15,807 (com.mycompany.server.ServerApp.main()) INFO  [ServerApp] - Server stopped
+12:31:33,296 (main) ERROR [ServerApp] -   $ Error retrieving all the consumers: The class "com.mycompany.server.data.domain.Consumer" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+12:36:25,296 (main) ERROR [ServerApp] -   $ Error retrieving all the consumers: The class "com.mycompany.server.data.domain.Consumer" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.

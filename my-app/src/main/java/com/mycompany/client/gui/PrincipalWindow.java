@@ -45,15 +45,25 @@ import javax.management.AttributeList;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+/** The Class PrincipalWindow. */
 public class PrincipalWindow {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The txt introduce your event. */
 	private JTextField txtIntroduceYourEvent;
+	
+	/** The panel. */
 	private JPanel panel;
+	
+	/** The event list. */
 	private List<Event> eventList;
 
 	/**
-	 * Launch the application.
+	 *  Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -70,18 +80,14 @@ public class PrincipalWindow {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	/** Create the application.*/
 	public PrincipalWindow() {
 		 
 
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	/** Initialize the contents of the frame. */
 	private void initialize() {
 		//Event list for testing
 		/*Organizer organizer = new Organizer("Asier", "1234", "asier@deusto.es", "65465435", "Avd...", "");

@@ -11,20 +11,38 @@ import javax.jdo.Transaction;
 import com.mycompany.server.ServerApp;
 import com.mycompany.server.data.domain.Organizer;
 
+/** The Class OrganizerDAO. */
 public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObject<Organizer>{
 	
+	/** The instance. */
 	private static OrganizerDAO instance;
 	
+	/**
+	 * Save.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void save(Organizer c) {
 		super.saveObject(c);
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void delete(Organizer c) {
 		super.deleteObject(c);
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param params the params
+	 * @return the organizer
+	 */
 	@Override
 	/**
 	 * Finds a consumer in the DB
@@ -64,9 +82,10 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 	}
 	
 	/**
-	 * Finds a organizer in the DB
-	 * @param email
-	 * @param password
+	 * Finds a organizer in the DB.
+	 *
+	 * @param email the email
+	 * @param password the password
 	 * @return the organizer object
 	 */
 	public Organizer findLogin(String email, String password) {
@@ -98,6 +117,11 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 		return o;
 	}
 
+	/**
+	 * Gets the single instance of OrganizerDAO.
+	 *
+	 * @return single instance of OrganizerDAO
+	 */
 	public static OrganizerDAO getInstance() {
 		if (instance == null) {
 			instance = new OrganizerDAO();
@@ -106,6 +130,11 @@ public class OrganizerDAO extends DataAccesObjectBase implements IDataAccesObjec
 		return instance;
 	}
 
+	/**
+	 * Gets the all.
+	 *
+	 * @return the all
+	 */
 	@Override
 	public List<Organizer> getAll() {
 		PersistenceManager pm = pmf.getPersistenceManager();

@@ -8,16 +8,19 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/** The Class DB. */
 public class DB {
     
 
+    /** The Constant LOG. */
     private static final Logger LOG = Logger.getLogger(DB.class.getName());
 
     /**
-	 * Inicializes SQLITE DB y return a conection with it
-	 * @param nameDB  Name of the file of DataBase
-	 * @return Conexion with the indicated DataBase. If there is an error it will return null 
-	 */
+     * Inicializes SQLITE DB y return a conection with it.
+     *
+     * @param nameDB  Name of the file of DataBase
+     * @return Conexion with the indicated DataBase. If there is an error it will return null
+     */
 	
 	public static Connection initDB( String nameDB ) {
 		try {
@@ -32,10 +35,12 @@ public class DB {
 	}
 
 
-    /** Close the open DataBase
-	 * @param con DataBase open Conexion 
-	 * @param st DataBase open Sentence 
-	 */
+    /**
+     *  Close the open DataBase.
+     *
+     * @param con DataBase open Conexion
+     * @param st DataBase open Sentence
+     */
 	public static void closeDB( Connection con, Statement st ) {
 		try {
 			if (st!=null) st.close();
@@ -57,8 +62,13 @@ public class DB {
         */
 
 
-
-
+    /**
+     * Creates the event.
+     *
+     * @param name the name
+     * @param date the date
+     * @param place the place
+     */
     public static void createEvent(String name, String date, String place) {
 
         String s = "INSERT INTO Event (name, date, place) VALUES('"+ name +"','"+ date +"','"+place+"')";

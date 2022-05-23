@@ -10,15 +10,27 @@ import org.junit.Test;
 import com.mycompany.server.data.domain.Organizer;
 import com.mycompany.server.data.domain.User;
 
+/**
+ * The Class TokenManagementTest.
+ */
 public class TokenManagementTest {
 
+	/** The u test. */
 	User uTest;
 
+	/**
+	 * Setup.
+	 */
 	@Before
 	public void setup() {
 		uTest = new Organizer("AllEvent", "1234", "t@t.com", "600000000", "Test str.", "www.test.com");
 	}
 
+	/**
+	 * Creates the token test.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	@Test
 	public void createTokenTest() throws RemoteException {
 		long token;
@@ -28,6 +40,11 @@ public class TokenManagementTest {
 
 	}
 
+	/**
+	 * Creates the token test 2.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	@Test(expected = RemoteException.class)
 	public void createTokenTest2() throws RemoteException {
 
@@ -37,10 +54,21 @@ public class TokenManagementTest {
 	}
 	
 
+	/**
+	 * Removes the token test.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	@Test(expected = RemoteException.class)
 	public void removeTokenTest() throws RemoteException {
 		TokenManagement.getInstance().removeToken(-1);
 	}
+	
+	/**
+	 * Removes the token test 2.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	@Test(expected = RemoteException.class)
 	public void removeTokenTest2() throws RemoteException {
 		long token = TokenManagement.getInstance().createToken(uTest);
@@ -49,6 +77,11 @@ public class TokenManagementTest {
 		TokenManagement.getInstance().removeToken(token);
 	}
 	
+	/**
+	 * Check token test.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	@Test
 	public void checkTokenTest() throws RemoteException {
 		long token;
@@ -58,6 +91,11 @@ public class TokenManagementTest {
 		assertEquals("The user checked equals original user",uTest,TokenManagement.getInstance().checkToken(token));
 	}
 	
+	/**
+	 * Check token test 2.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	@Test(expected = RemoteException.class)
 	public void checkTokenTest2() throws RemoteException {
 		long token;

@@ -34,11 +34,18 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+/** The Class RemoteFacade*/
 @Path("/remote")
 public class RemoteFacade {
 
+	/** The instance. */
 	private static RemoteFacade instance;
 
+	/**
+	 * Gets the single instance of RemoteFacade.
+	 *
+	 * @return single instance of RemoteFacade
+	 */
 	public static RemoteFacade getInstance() {
 		if (instance == null) {
 			instance = new RemoteFacade();
@@ -47,9 +54,16 @@ public class RemoteFacade {
 		return instance;
 	}
 
+	/** Instantiates a new remote facade. */
 	public RemoteFacade() {
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param userlogindto the userlogindto
+	 * @return the response
+	 */
 	@PUT
 	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -61,13 +75,13 @@ public class RemoteFacade {
 
 		long token = -1;
 		User user = UserAppService.getInstance().login(username, password);
-		if (user != null) { // If null user does not exist
+		if (user != null) { /** If null user does not exist */
 			try {
 				token = TokenManagement.getInstance().createToken(user);
 				ServerApp.getLogger().info("Login of: " + username + " - " + password + ". [" + token + "]");
 			} catch (RemoteException e) {
 
-				// e.printStackTrace();
+				/** e.printStackTrace(); */
 				ServerApp.getLogger().error("Remote Exception occurred in the login", e);
 				return Response.serverError().build();
 			}
@@ -76,6 +90,12 @@ public class RemoteFacade {
 		return Response.ok(token).build();
 	}
 
+	/**
+	 * Logout.
+	 *
+	 * @param token the token
+	 * @return the response
+	 */
 	@PUT
 	@Path("/users/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -94,6 +114,12 @@ public class RemoteFacade {
 
 	}
 
+	/**
+	 * Register consumer.
+	 *
+	 * @param dto the dto
+	 * @return the response
+	 */
 	@POST
 	@Path("/users/consumers")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -104,6 +130,12 @@ public class RemoteFacade {
 		return Response.ok().build();
 	}
 
+	/**
+	 * Register organizer.
+	 *
+	 * @param dto the dto
+	 * @return the response
+	 */
 	@POST
 	@Path("/users/organizers")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -114,6 +146,12 @@ public class RemoteFacade {
 		return Response.ok().build();
 	}
 
+	/**
+	 * Gets the bought tickets.
+	 *
+	 * @param token the token
+	 * @return the bought tickets
+	 */
 	@PUT
 	@Path("/tickets/consumers")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -152,11 +190,17 @@ public class RemoteFacade {
 			return Response.serverError().build();
 		}
 
-		Gson gson = new Gson();// converts the list to a json
+		Gson gson = new Gson();/** converts the list to a json */
 		return Response.ok().entity(gson.toJson(listOfTicketsDTO)).build();
 
 	}
 
+	/**
+	 * Buy ticket.
+	 *
+	 * @param dto the dto
+	 * @return the response
+	 */
 	@POST
 	@Path("/tickets/consumers")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -182,6 +226,11 @@ public class RemoteFacade {
 		return Response.ok().build();
 	}
 
+	/**
+	 * Gets the active events.
+	 *
+	 * @return the active events
+	 */
 	@GET
 	@Path("/events")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -209,25 +258,31 @@ public class RemoteFacade {
 			return Response.serverError().build();
 		}
 
-		Gson gson = new Gson();// converts the list to a json
+		Gson gson = new Gson();/** converts the list to a json*/
 		return Response.ok().entity(gson.toJson(listOfEventDTO)).build();
 	}
 
+	/**
+	 * Creates the event.
+	 *
+	 * @param dto the dto
+	 * @return the response
+	 */
 	@POST
 	@Path("/events/organizers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createEvent(CreateEventDTO dto) {
 
-		// REMIND to check if user attributes are okey or if this user already exists
+		/** REMIND to check if user attributes are okey or if this user already exists */
 		ServerApp.getLogger().info("Creating an event: " + dto.getName() + " by [" + dto.getOrganizerToken() + "]");
 
 		TokenManagement tokenManager = TokenManagement.getInstance();
 		try {
-			// Only organizers can create an event
+			/** Only organizers can create an event */
 			User user = tokenManager.checkToken(dto.getOrganizerToken());
 			if (user != null) {
 
-				// Check if user is organizer
+				/** Check if user is organizer */
 				Organizer org = UserAppService.getInstance().isOrganizer(user);
 				if (org != null) {
 
@@ -246,6 +301,12 @@ public class RemoteFacade {
 
 	}
 
+	/**
+	 * Put ticket in resell.
+	 *
+	 * @param dto the dto
+	 * @return the response
+	 */
 	@PUT
 	@Path("/tickets/resell")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -259,7 +320,7 @@ public class RemoteFacade {
 			User user = tokenManager.checkToken(dto.getToken());
 			if (user != null) {
 
-				// Check if user is consumer
+				/** Check if user is consumer */
 				Consumer c = UserAppService.getInstance().isConsumer(user);
 				if (c != null) {
 					if (!TicketAppService.getInstance().putTicketInResell(c, dto.getTicketUserEmail(),
@@ -278,6 +339,12 @@ public class RemoteFacade {
 		return Response.ok().build();
 	}
 
+	/**
+	 * Buy reselling ticket.
+	 *
+	 * @param dto the dto
+	 * @return the response
+	 */
 	@POST
 	@Path("/tickets/resell")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -291,7 +358,7 @@ public class RemoteFacade {
 			User user = tokenManager.checkToken(dto.getToken());
 			if (user != null) {
 
-				// Check if user is consumer
+				/** Check if user is consumer*/
 				Consumer c = UserAppService.getInstance().isConsumer(user);
 				if (c != null) {
 					if (!TicketAppService.getInstance().buyResellingTicket(c, dto.getTicketUserEmail(),
@@ -310,6 +377,11 @@ public class RemoteFacade {
 		return Response.ok().build();
 	}
 
+	/**
+	 * Gets the reselling tickets.
+	 *
+	 * @return the reselling tickets
+	 */
 	@GET
 	@Path("/tickets/resell")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -334,10 +406,16 @@ public class RemoteFacade {
 			return Response.serverError().build();
 		}
 
-		Gson gson = new Gson();// converts the list to a json
+		Gson gson = new Gson();/** converts the list to a json */
 		return Response.ok().entity(gson.toJson(listOfTicketsDTO)).build();
 	}
 
+	/**
+	 * Testing connection.
+	 *
+	 * @param name the name
+	 * @return the response
+	 */
 	@GET
 	@Path("/test/{name}")
 	@Produces(MediaType.TEXT_PLAIN)

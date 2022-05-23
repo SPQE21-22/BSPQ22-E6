@@ -11,20 +11,38 @@ import javax.jdo.Transaction;
 
 import com.mycompany.server.data.domain.Event;
 
+/** The Class EventDAO.*/
 public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Event>{
 	
+	/** The instance. */
 	private static EventDAO instance;
 	
+	/**
+	 * Save.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void save(Event c) {
 		super.saveObject(c);
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void delete(Event c) {
 		super.deleteObject(c);
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param params the params
+	 * @return the event
+	 */
 	@Override
 	/**
 	 * Finds a consumer in the DB
@@ -65,6 +83,11 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 		return e;
 	}
 
+	/**
+	 * Gets the single instance of EventDAO.
+	 *
+	 * @return single instance of EventDAO
+	 */
 	public static EventDAO getInstance() {
 		if (instance == null) {
 			instance = new EventDAO();
@@ -73,6 +96,11 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 		return instance;
 	}
 
+	/**
+	 * Gets the all.
+	 *
+	 * @return the all
+	 */
 	@Override
 	public List<Event> getAll() {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -102,6 +130,11 @@ public class EventDAO extends DataAccesObjectBase implements IDataAccesObject<Ev
 		return events;
 	}
 	
+/**
+ * Gets the active events.
+ *
+ * @return the active events
+ */
 public List<Event> getActiveEvents() {
 		
 		//TODO: now gets ALL the challenges (getAll() copied)
@@ -115,21 +148,21 @@ public List<Event> getActiveEvents() {
 		try {
 			tx.begin();
 
-			//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+			/** DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-DD"); */
 			LocalDate today = LocalDate.now();
 
 			Extent<Event> extent = pm.getExtent(Event.class, true);
 
-			// Active challenges are those that are being held at the moment
+			/** Active challenges are those that are being held at the moment */
 			for (Event ev : extent) {
-				//System.out.println("* Querying active challenges.");
+				/** System.out.println("* Querying active challenges."); */
 				if (ev.getDate().isAfter(today)) {
 					events.add(ev);
 				}
 			}
 
 			if(events.size() == 0) {
-				//System.out.println("* There are no active challenges");
+				/** System.out.println("* There are no active challenges"); */
 			}
 
 			tx.commit();

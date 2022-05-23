@@ -29,16 +29,25 @@ import com.mycompany.client.controller.TicketController;
 import com.mycompany.client.controller.UserController;
 import com.mycompany.remote.serialization.TicketDTO;
 
-
+/** The Class TicketWalletWindow. */
 public class TicketWalletWindow extends JFrame {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The model. */
 	private DefaultListModel<TicketDTO> model;
+	
+	/** The list. */
 	private JList<TicketDTO> list;
 
 	/**
-	 * Launch the application.
+	 *  Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String args[]) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,13 +64,12 @@ public class TicketWalletWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	/** Create the frame. */
 	public TicketWalletWindow() {
 		initialize();
 	}
 
+	/** Initialize. */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 26));

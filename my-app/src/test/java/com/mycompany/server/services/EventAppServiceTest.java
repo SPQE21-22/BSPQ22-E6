@@ -12,14 +12,23 @@ import org.junit.Test;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 
+/**
+ * The Class EventAppServiceTest.
+ */
 public class EventAppServiceTest {
 
+	/** The testing list. */
 	List<Event> testingList;
+	
+	/** The all event org. */
 	Organizer allEventOrg;
 
+	/**
+	 * Setup.
+	 */
 	@Before
 	public void setup() {
-		// Initialize the list
+		/** Initialize the list */
 		testingList = new ArrayList<>();
 
 		allEventOrg = new Organizer("AllEvent", "1234", "t@t.com", "600000000", "Test str.", "www.test.com");
@@ -32,6 +41,11 @@ public class EventAppServiceTest {
 		
 	}
 
+	/**
+	 * Gets the active events test.
+	 *
+	 * @return the active events test
+	 */
 	@Test
 	public void getActiveEventsTest() {
 		List<Event> list = EventAppService.getInstance().getActiveEvents();
@@ -39,6 +53,9 @@ public class EventAppServiceTest {
 		assertTrue("Not Implemented yet", true);
 	}
 
+	/**
+	 * Creates the event test.
+	 */
 	@Test
 	public void createEventTest() {
 		

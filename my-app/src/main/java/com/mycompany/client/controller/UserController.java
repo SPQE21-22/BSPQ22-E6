@@ -3,10 +3,19 @@ package com.mycompany.client.controller;
 import com.mycompany.client.ClientApp;
 import com.mycompany.client.remote.ServiceGateway;
 
+/**
+ * The Class UserController.
+ */
 public class UserController {
 
+	/** The instance. */
 	private static UserController instance;
 
+	/**
+	 * Gets the single instance of UserController.
+	 *
+	 * @return single instance of UserController
+	 */
 	public static UserController getInstance() {
 		if (instance == null) {
 			instance = new UserController();
@@ -15,9 +24,18 @@ public class UserController {
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new user controller.
+	 */
 	private UserController() {
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 */
 	public void login(String email, String password) {
 		
 		try {
@@ -28,6 +46,14 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * Register.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 * @param name the name
+	 * @param phone the phone
+	 */
 	@Deprecated
 	/**
 	 * Deprecated method that was used before differencing the two register types: consumer and organizer
@@ -47,6 +73,16 @@ public class UserController {
 
 	}
 	
+	/**
+	 * Register consumer.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 * @param name the name
+	 * @param phone the phone
+	 * @param nickname the nickname
+	 * @param surname the surname
+	 */
 	public void registerConsumer(String email, String password, String name, String phone, String nickname, String surname) {
 		try {
 			ServiceGateway.getInstance().registerConsumer(email, password,name,phone, nickname, surname);
@@ -57,6 +93,16 @@ public class UserController {
 
 	}
 	
+	/**
+	 * Register organizer.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 * @param name the name
+	 * @param phone the phone
+	 * @param address the address
+	 * @param webpage the webpage
+	 */
 	public void registerOrganizer(String email, String password, String name, String phone, String address, String webpage ) {
 		try {
 			ServiceGateway.getInstance().registerOrganizer(email, password,name,phone, address, webpage);
@@ -69,6 +115,9 @@ public class UserController {
 	
 	
 	
+	/**
+	 * Logout.
+	 */
 	public void logout() {
 		try {
 			ServiceGateway.getInstance().logout();

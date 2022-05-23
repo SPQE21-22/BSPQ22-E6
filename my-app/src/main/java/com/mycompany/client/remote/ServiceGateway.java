@@ -25,10 +25,20 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
+/** The Class ServiceGateway.*/
 public class ServiceGateway {
+	
+	/** The instance. */
 	private static ServiceGateway instance;
+	
+	/** The base target. */
 	private WebTarget baseTarget;
 
+	/**
+	 * Gets the single instance of ServiceGateway.
+	 *
+	 * @return single instance of ServiceGateway
+	 */
 	public static ServiceGateway getInstance() {
 		if (instance == null) {
 			instance = new ServiceGateway();
@@ -37,9 +47,16 @@ public class ServiceGateway {
 		return instance;
 	}
 
+	/** Instantiates a new service gateway.*/
 	private ServiceGateway() {
 	}
 
+	/**
+	 * Inits the gateway.
+	 *
+	 * @param hostname the hostname
+	 * @param port the port
+	 */
 	public void initGateway(String hostname, String port) {
 		String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
 		Client client = ClientBuilder.newClient();
@@ -48,6 +65,11 @@ public class ServiceGateway {
 
 	}
 
+	/**
+	 * Testing server.
+	 *
+	 * @param name the name
+	 */
 	public void testingServer(String name) {
 		WebTarget testTarget = baseTarget.path("test");
 		WebTarget newTarget = testTarget.path(name); // This is the name that will be displayed
@@ -60,6 +82,12 @@ public class ServiceGateway {
 		}
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 */
 	public void login(String email, String password) { // TODO: Throw an exception if it fails
 		WebTarget uTarget = baseTarget.path("users");
 		
@@ -84,6 +112,7 @@ public class ServiceGateway {
 
 
 
+	/** Logout.*/
 	public void logout() {
 		WebTarget uTarget = baseTarget.path("users");
 		WebTarget logoutTarget = uTarget.path("logout");
@@ -101,6 +130,11 @@ public class ServiceGateway {
 
 	}
 
+	/**
+	 * Gets the bought tickets.
+	 *
+	 * @return the bought tickets
+	 */
 	public List<TicketDTO> getBoughtTickets() {
 		List<TicketDTO> list = null;
 
@@ -118,7 +152,7 @@ public class ServiceGateway {
 
 			String listInJSON = r.readEntity(String.class);
 
-			// Deserializing the list
+			/** Deserializing the list */
 			Gson gson = new Gson();
 			Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
 			}.getType();
@@ -131,6 +165,11 @@ public class ServiceGateway {
 		return list;
 	}
 
+	/**
+	 * Gets the active events.
+	 *
+	 * @return the active events
+	 */
 	public List<EventDTO> getActiveEvents() {
 		List<EventDTO> list = null;
 
@@ -144,7 +183,7 @@ public class ServiceGateway {
 
 			String listInJSON = r.readEntity(String.class);
 
-			// Deserializing the list
+			/** Deserializing the list */
 			Gson gson = new Gson();
 			Type eventDtoListType = new TypeToken<List<EventDTO>>() {
 			}.getType();
@@ -157,6 +196,12 @@ public class ServiceGateway {
 		return list;
 	}
 
+	/**
+	 * Buy ticket.
+	 *
+	 * @param name the name
+	 * @param date the date
+	 */
 	public void buyTicket(String name, LocalDate date) {
 		WebTarget uTarget = baseTarget.path("tickets");
 		WebTarget cTarget = uTarget.path("consumers");
@@ -180,6 +225,13 @@ public class ServiceGateway {
 
 	}
 
+	/**
+	 * Creates the event.
+	 *
+	 * @param name the name
+	 * @param date the date
+	 * @param place the place
+	 */
 	public void createEvent(String name, LocalDate date, String place) {
 		WebTarget uTarget = baseTarget.path("events");
 		WebTarget oTarget = uTarget.path("organizers");
@@ -211,6 +263,16 @@ public class ServiceGateway {
 
 	}
 
+	/**
+	 * Register consumer.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 * @param name the name
+	 * @param phone the phone
+	 * @param nickname the nickname
+	 * @param surname the surname
+	 */
 	public void registerConsumer(String email, String password, String name, String phone, String nickname,
 			String surname) {
 		WebTarget uTarget = baseTarget.path("users");
@@ -237,6 +299,16 @@ public class ServiceGateway {
 		
 	}
 
+	/**
+	 * Register organizer.
+	 *
+	 * @param email the email
+	 * @param password the password
+	 * @param name the name
+	 * @param phone the phone
+	 * @param address the address
+	 * @param webpage the webpage
+	 */
 	public void registerOrganizer(String email, String password, String name, String phone, String address,
 			String webpage) {
 		WebTarget uTarget = baseTarget.path("users");
@@ -263,6 +335,13 @@ public class ServiceGateway {
 		
 	}
 
+	/**
+	 * Put ticket in resell.
+	 *
+	 * @param ticketUserEmail the ticket user email
+	 * @param ticketEventName the ticket event name
+	 * @param ticketEventDate the ticket event date
+	 */
 	public void putTicketInResell(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
 		WebTarget tTarget = baseTarget.path("tickets");
 		WebTarget rTarget = tTarget.path("resell");
@@ -285,6 +364,14 @@ public class ServiceGateway {
 		}
 		
 	}
+	
+	/**
+	 * Buy reselling ticket.
+	 *
+	 * @param ticketUserEmail the ticket user email
+	 * @param ticketEventName the ticket event name
+	 * @param ticketEventDate the ticket event date
+	 */
 	public void buyResellingTicket(String ticketUserEmail, String ticketEventName, LocalDate ticketEventDate) {
 		WebTarget tTarget = baseTarget.path("tickets");
 		WebTarget rTarget = tTarget.path("resell");
@@ -308,6 +395,11 @@ public class ServiceGateway {
 		
 	}
 
+	/**
+	 * Gets the reselling tickets.
+	 *
+	 * @return the reselling tickets
+	 */
 	public List<TicketDTO> getResellingTickets() {
 		List<TicketDTO> list = null;
 
@@ -322,7 +414,7 @@ public class ServiceGateway {
 
 			String listInJSON = r.readEntity(String.class);
 
-			// Deserializing the list
+			/** Deserializing the list */
 			Gson gson = new Gson();
 			Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
 			}.getType();

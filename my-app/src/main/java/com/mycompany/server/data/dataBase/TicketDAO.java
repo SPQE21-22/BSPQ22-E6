@@ -12,20 +12,38 @@ import com.mycompany.server.data.domain.Consumer;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Ticket;
 
+/** The Class TicketDAO.*/
 public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<Ticket> {
 
+	/** The instance. */
 	private static TicketDAO instance;
 
+	/**
+	 * Save.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void save(Ticket c) {
 		super.saveObject(c);
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void delete(Ticket c) {
 		super.deleteObject(c);
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param params the params
+	 * @return the ticket
+	 */
 	@Override
 	/**
 	 * Finds a consumer in the DB
@@ -57,6 +75,11 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 
 	}
 
+	/**
+	 * Gets the single instance of TicketDAO.
+	 *
+	 * @return single instance of TicketDAO
+	 */
 	public static TicketDAO getInstance() {
 		if (instance == null) {
 			instance = new TicketDAO();
@@ -65,6 +88,11 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 		return instance;
 	}
 
+	/**
+	 * Gets the all.
+	 *
+	 * @return the all
+	 */
 	@Override
 	public List<Ticket> getAll() {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -95,6 +123,11 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 		return tickets;
 	}
 
+	/**
+	 * Gets the in resell tickets.
+	 *
+	 * @return the in resell tickets
+	 */
 	public List<Ticket> getInResellTickets() {
 
 		// TODO: now gets ALL the challenges (getAll() copied)
@@ -110,16 +143,16 @@ public class TicketDAO extends DataAccesObjectBase implements IDataAccesObject<T
 
 			Extent<Ticket> extent = pm.getExtent(Ticket.class, true);
 
-			// Active challenges are those that are being held at the moment
+			/** Active challenges are those that are being held at the moment */
 			for (Ticket t : extent) {
-				// System.out.println("* Querying active challenges.");
+				/** System.out.println("* Querying active challenges."); */
 				if (t.isInResell()) {
 					tickets.add(t);
 				}
 			}
 
 			if (tickets.size() == 0) {
-				// System.out.println("* There are no active challenges");
+				/** System.out.println("* There are no active challenges"); */
 			}
 
 			tx.commit();

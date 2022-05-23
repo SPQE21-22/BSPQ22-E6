@@ -46,27 +46,60 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
+
+/**
+ * The Class RemoteFacadeTest.
+ */
 public class RemoteFacadeTest {
 
+	/** The hostname. */
 	String hostname = "127.0.0.1";
+	
+	/** The port. */
 	String port = "8080";
+	
+	/** The base target. */
 	WebTarget baseTarget;
+	
+	/** The base uri. */
 	String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
+	
+	/** The server. */
 	HttpServer server;
 
+	/** The reg consumer. */
 	Consumer regConsumer = null;
+	
+	/** The reg organizer. */
 	Organizer regOrganizer = null;
+	
+	/** The crea event. */
 	Event creaEvent = null;
 
+	/** The t consumer. */
 	Consumer tConsumer = null;
+	
+	/** The t organizer. */
 	Organizer tOrganizer = null;
+	
+	/** The t event. */
 	Event tEvent = null;
+	
+	/** The t ticket. */
 	Ticket tTicket = null;
 
+	/** The t consumer resell. */
 	Consumer tConsumerResell = null;
+	
+	/** The t event resell. */
 	Event tEventResell = null;
+	
+	/** The t ticket resell. */
 	Ticket tTicketResell = null;
 
+	/**
+	 * Setup client.
+	 */
 	@Before
 	public void setupClient() {
 		Client client = ClientBuilder.newClient();
@@ -74,23 +107,29 @@ public class RemoteFacadeTest {
 		baseTarget = baseTarget.path("remote");
 	}
 
+	/**
+	 * Setup server.
+	 */
 	@Before
 	public void setupServer() {
 
 		String BASE_URI = String.format("http://%s:%s/myapp", hostname, port);
 
-		// create a resource config that scans for JAX-RS resources and providers
+		/** create a resource config that scans for JAX-RS resources and providers */
 		final ResourceConfig rc = new ResourceConfig().packages("com.mycompany.server.remote");
 
-		// create and start a new instance of grizzly http server
-		// exposing the Jersey application at BASE_URI
+		/** create and start a new instance of grizzly http server */
+		/** exposing the Jersey application at BASE_URI */
 		server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
 
 	}
 
+	/**
+	 * Objects set up.
+	 */
 	@Before
 	public void objectsSetUp() {
-		// **************************Create the objects for the DB
+		/** Create the objects for the DB */
 
 		tConsumer = new Consumer("Consumer", "remconsumer", "remfac@consumer.com", "010101010", "RemFacC", "remFac");
 		tConsumerResell = new Consumer("ConsumerRes", "resellconsumer", "resell@consumer.com", "010101010", "ConResell",
@@ -107,7 +146,7 @@ public class RemoteFacadeTest {
 		tTicketResell = new Ticket(tEventResell, tConsumerResell);
 		tTicketResell.setInResell(true);
 
-		// **************************Add to the DB
+		/** Add to the DB */
 
 		ConsumerDAO.getInstance().save(tConsumer);
 
@@ -121,7 +160,7 @@ public class RemoteFacadeTest {
 
 		TicketDAO.getInstance().save(tTicketResell);
 
-		// ****** regustration and creation set up
+		/** regustration and creation set up */
 
 		regConsumer = new Consumer("ConsumerReg", "regconsumer", "registration@consumer.com", "010101010",
 				"RegisterCon", "Register");
@@ -132,9 +171,13 @@ public class RemoteFacadeTest {
 		creaEvent = new Event("CreatedEvent", LocalDate.parse("2099-12-31"), "Created st.", tOrganizer);
 	}
 
+	/** The rule. */
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 
+	/**
+	 * Register consumer test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -158,11 +201,14 @@ public class RemoteFacadeTest {
 
 		assertEquals("The registering returned OK", Status.OK.getStatusCode(), r2.getStatus());
 
-		// ****delete registered consumer from the DB
+		/** delete registered consumer from the DB */
 		ConsumerDAO.getInstance().delete(regConsumer);
 
 	}
 
+	/**
+	 * Register organizer test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -185,15 +231,18 @@ public class RemoteFacadeTest {
 
 		assertEquals("The registering returned OK", Status.OK.getStatusCode(), r.getStatus());
 
-		// ****delete registered organizer from the DB
+		/** delete registered organizer from the DB */
 		OrganizerDAO.getInstance().delete(regOrganizer);
 	}
 
+	/**
+	 * Login test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void loginTest() {
-		// *********************login of the consumer
+		/** login of the consumer */
 		WebTarget uTarget = baseTarget.path("users");
 
 		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
@@ -209,7 +258,7 @@ public class RemoteFacadeTest {
 		long tokenc = r5.readEntity(Long.class);
 		assertTrue("The login returns a valid token", tokenc > 0);
 
-		// *********************logout
+		/** logout */
 		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il2 = logoutTarget.request();
 
@@ -218,11 +267,14 @@ public class RemoteFacadeTest {
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 	}
 
+	/**
+	 * Creates the event test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void createEventTest() {
-		// *********************login of the organizer
+		/** login of the organizer */
 		WebTarget uTarget = baseTarget.path("users");
 
 		long token = -1;
@@ -240,7 +292,7 @@ public class RemoteFacadeTest {
 		token = r3.readEntity(Long.class);
 		assertTrue("The login returns a valid token", token > 0);
 
-		// *********************create an event
+		/** create an event */
 		WebTarget eTarget = baseTarget.path("events");
 		WebTarget oTarget2 = eTarget.path("organizers");
 		Invocation.Builder i4 = oTarget2.request();
@@ -256,7 +308,7 @@ public class RemoteFacadeTest {
 
 		assertEquals("Creating an event returned OK", Status.OK.getStatusCode(), r4.getStatus());
 
-		// *********************logout the organizer
+		/** logout the organizer */
 
 		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il = logoutTarget.request();
@@ -265,10 +317,15 @@ public class RemoteFacadeTest {
 
 		assertEquals("The logut returned OK", Status.OK.getStatusCode(), rl.getStatus());
 
-		// ********delete created event from DB
+		/** delete created event from DB */
 		EventDAO.getInstance().delete(creaEvent);
 	}
 
+	/**
+	 * Gets the active events test.
+	 *
+	 * @return the active events test
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -285,7 +342,7 @@ public class RemoteFacadeTest {
 
 		String listInJSON = r6.readEntity(String.class);
 
-		// Deserializing the list
+		/** Deserializing the list */
 		Gson gson = new Gson();
 		Type eventDtoListType = new TypeToken<List<EventDTO>>() {
 		}.getType();
@@ -294,6 +351,11 @@ public class RemoteFacadeTest {
 		assertNotNull("Retrieved a list of events", listevents);
 	}
 
+	/**
+	 * Gets the reselling tickets test.
+	 *
+	 * @return the reselling tickets test
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
@@ -311,7 +373,7 @@ public class RemoteFacadeTest {
 
 		String listInJSON = r6.readEntity(String.class);
 
-		// Deserializing the list
+		/** Deserializing the list */
 		Gson gson = new Gson();
 		Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
 		}.getType();
@@ -320,11 +382,14 @@ public class RemoteFacadeTest {
 		assertNotNull("Retrieved a list of tickets", listtickets);
 	}
 
+	/**
+	 * Buy tickets test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void buyTicketsTest() {
-		// *********************login of the consumer
+		/** login of the consumer */
 		WebTarget uTarget = baseTarget.path("users");
 
 		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
@@ -340,7 +405,7 @@ public class RemoteFacadeTest {
 		long tokenc = r5.readEntity(Long.class);
 		assertTrue("The login returns a valid token", tokenc > 0);
 
-		// *********************buy a ticket for the created event
+		/**buy a ticket for the created event */
 
 		WebTarget tTarget = baseTarget.path("tickets");
 		WebTarget cTarget2 = tTarget.path("consumers");
@@ -357,7 +422,7 @@ public class RemoteFacadeTest {
 
 		assertEquals("Buying the event returned OK", Status.OK.getStatusCode(), r7.getStatus());
 
-		// *********************logout
+		/** lgout */
 		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il2 = logoutTarget.request();
 
@@ -365,16 +430,21 @@ public class RemoteFacadeTest {
 
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 
-		// ************delete the created ticket from DB
+		/** delete the created ticket from DB */
 		TicketDAO.getInstance().delete(tTicket);
 
 	}
 
+	/**
+	 * Gets the bought tickets test.
+	 *
+	 * @return the bought tickets test
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void getBoughtTicketsTest() {
-		// *********************login of the consumer
+		/** login of the consumer */
 		WebTarget uTarget = baseTarget.path("users");
 
 		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
@@ -390,7 +460,7 @@ public class RemoteFacadeTest {
 		long tokenc = r5.readEntity(Long.class);
 		assertTrue("The login returns a valid token", tokenc > 0);
 
-		// *********************getting bought tickets
+		/** getting bought tickets */
 		WebTarget tTarget = baseTarget.path("tickets");
 
 		WebTarget c2Target = tTarget.path("consumers");
@@ -403,7 +473,7 @@ public class RemoteFacadeTest {
 
 		String listInJSON2 = r8.readEntity(String.class);
 
-		// Deserializing the list
+		/** Deserializing the list */
 		Gson gson = new Gson();
 		Type ticketDtoListType = new TypeToken<List<TicketDTO>>() {
 		}.getType();
@@ -411,7 +481,7 @@ public class RemoteFacadeTest {
 
 		assertNotNull("Retrieved a list of tickets", listtickets);
 
-		// *********************logout
+		/** logout */
 		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il2 = logoutTarget.request();
 
@@ -420,11 +490,14 @@ public class RemoteFacadeTest {
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 	}
 
+	/**
+	 * Put ticket in resell test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void putTicketInResellTest() {
-		// *********************login of the consumer
+		/** login of the consumer */
 		WebTarget uTarget = baseTarget.path("users");
 
 		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
@@ -440,7 +513,7 @@ public class RemoteFacadeTest {
 		long tokenc = r5.readEntity(Long.class);
 		assertTrue("The login returns a valid token", tokenc > 0);
 
-		// **********************Put a ticket in resell
+		/** Put a ticket in resell */
 
 		WebTarget tTarget = baseTarget.path("tickets");
 		WebTarget rTarget = tTarget.path("resell");
@@ -457,7 +530,7 @@ public class RemoteFacadeTest {
 
 		assertEquals("Putting to resell a ticket returned OK", Status.OK.getStatusCode(), rres.getStatus());
 
-		// *********************logout
+		/** logout */
 		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il2 = logoutTarget.request();
 
@@ -465,17 +538,20 @@ public class RemoteFacadeTest {
 
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 
-		// *************reset state of the ticket
+		/** reset state of the ticket */
 		TicketDAO.getInstance().find(tEvent.getName(), tEvent.getDate().toString(), tConsumer.getEmail())
 				.setInResell(false);
 		TicketDAO.getInstance().save(tTicket);
 	}
 
+	/**
+	 * Resell tickets test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void resellTicketsTest() {
-		// *********************login of the consumer
+		/** login of the consumer */
 		WebTarget uTarget = baseTarget.path("users");
 
 		Invocation.Builder i5 = uTarget.request(MediaType.APPLICATION_JSON);
@@ -491,7 +567,7 @@ public class RemoteFacadeTest {
 		long tokenc = r5.readEntity(Long.class);
 		assertTrue("The login returns a valid token", tokenc > 0);
 
-		// **********************Buy in resell ticket
+		/** Buy in resell ticket */
 
 		WebTarget tTarget = baseTarget.path("tickets");
 		WebTarget rTarget = tTarget.path("resell");
@@ -508,7 +584,7 @@ public class RemoteFacadeTest {
 
 		assertEquals("Buying a ticket in resell returned OK", Status.OK.getStatusCode(), rres.getStatus());
 
-		// *********************logout
+		/** logout */
 		WebTarget logoutTarget = uTarget.path("logout");
 		Invocation.Builder il2 = logoutTarget.request();
 
@@ -516,24 +592,30 @@ public class RemoteFacadeTest {
 
 		assertEquals("The logout returned OK", Status.OK.getStatusCode(), rl2.getStatus());
 
-		// *************reset state of the ticket
+		/** reset state of the ticket */
 		TicketDAO.getInstance().find(tEvent.getName(), tEvent.getDate().toString(), tConsumer.getEmail())
 				.setOwner(tConsumerResell);
 		TicketDAO.getInstance().save(tTicket);
 
 	}
 
+	/**
+	 * Connection test.
+	 */
 	@Test
 	@PerfTest(invocations = 50)
 	@Required(max = 1500, average = 600)
 	public void ConnectionTest() {
 		WebTarget testTarget = baseTarget.path("test");
-		WebTarget newTarget = testTarget.path("Testing name"); // This is the name that will be displayed
+		WebTarget newTarget = testTarget.path("Testing name"); /** This is the name that will be displayed */
 		Response r = newTarget.request().get();
 		assertEquals(Status.OK.getStatusCode(), r.getStatus());
 
 	}
 
+	/**
+	 * Delete mock DB.
+	 */
 	@After
 	void deleteMockDB() {
 		TicketDAO.getInstance().delete(tTicket);
@@ -545,6 +627,9 @@ public class RemoteFacadeTest {
 		ConsumerDAO.getInstance().delete(tConsumerResell);
 	}
 
+	/**
+	 * Teardown server.
+	 */
 	@After
 	public void teardownServer() {
 		server.shutdown();

@@ -24,21 +24,38 @@ import com.mycompany.client.ClientApp;
 import com.mycompany.client.controller.UserController;
 
 
-
+/** The Class RegisterWindow. */
 public class RegisterWindow {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The txt email. */
 	private JTextField txtEmail;
+	
+	/** The txt password. */
 	private JTextField txtPassword;
+	
+	/** The txt name. */
 	private JTextField txtName;
+	
+	/** The txt phone. */
 	private JTextField txtPhone;
+	
+	/** The txt extra 1. */
 	private JTextField txtExtra1;
+	
+	/** The txt extra 2. */
 	private JTextField txtExtra2;
+	
+	/** The chckbx new check box. */
 	private JCheckBox chckbxNewCheckBox;
 	
 
 	/**
-	 * Launch the application.
+	 *  Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,16 +73,12 @@ public class RegisterWindow {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	/** Create the application. */
 	public RegisterWindow() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	/** Initialize the contents of the frame. */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);

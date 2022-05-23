@@ -11,15 +11,27 @@ import javax.jdo.Transaction;
 import com.mycompany.server.ServerApp;
 import com.mycompany.server.data.domain.Consumer;
 
+/** The Class ConsumerDAO.*/
 public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject<Consumer>{
 	
+	/** The instance. */
 	private static ConsumerDAO instance;
 	
+	/**
+	 * Save.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void save(Consumer c) {
 		super.saveObject(c);
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param c the c
+	 */
 	@Override
 	public void delete(Consumer c) {
 		super.deleteObject(c);
@@ -27,6 +39,12 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 	
 	
 	
+	/**
+	 * Find.
+	 *
+	 * @param params the params
+	 * @return the consumer
+	 */
 	@Override
 	/**
 	 * Finds a consumer in the DB
@@ -66,9 +84,10 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 	}
 	
 	/**
-	 * Finds a consumer in the DB
-	 * @param email
-	 * @param password
+	 * Finds a consumer in the DB.
+	 *
+	 * @param email the email
+	 * @param password the password
 	 * @return the consumer object
 	 */
 	public Consumer findLogin(String email, String password) {
@@ -100,6 +119,11 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 		return c;
 	}
 
+	/**
+	 * Gets the single instance of ConsumerDAO.
+	 *
+	 * @return single instance of ConsumerDAO
+	 */
 	public static ConsumerDAO getInstance() {
 		if (instance == null) {
 			instance = new ConsumerDAO();
@@ -108,6 +132,11 @@ public class ConsumerDAO extends DataAccesObjectBase implements IDataAccesObject
 		return instance;
 	}
 
+	/**
+	 * Gets the all.
+	 *
+	 * @return the all
+	 */
 	@Override
 	public List<Consumer> getAll() {
 		PersistenceManager pm = pmf.getPersistenceManager();

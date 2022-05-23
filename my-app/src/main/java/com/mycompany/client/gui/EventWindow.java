@@ -7,12 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * The Class EventWindow.
+ */
 public class EventWindow extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 *  Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -27,9 +33,7 @@ public class EventWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	/** Create the frame. */
 	public EventWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

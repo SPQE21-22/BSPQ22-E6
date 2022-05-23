@@ -13,19 +13,37 @@ import javax.swing.JTextField;
 
 import com.mycompany.client.ClientApp;
 
+/** The Class SettingsWindow. */
 public class SettingsWindow {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The text field. */
 	private JTextField textField;
+	
+	/** The text field 1. */
 	private JTextField textField_1;
+	
+	/** The text field 2. */
 	private JTextField textField_2;
+	
+	/** The lbl new label 4. */
 	private JLabel lblNewLabel_4;
+	
+	/** The lbl new label 5. */
 	private JLabel lblNewLabel_5;
+	
+	/** The lbl new label 6. */
 	private JLabel lblNewLabel_6;
+	
+	/** The btn new button. */
 	private JButton btnNewButton;
 
 	/**
-	 * Launch the application.
+	 *  Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,16 +61,12 @@ public class SettingsWindow {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	/** Create the application. */
 	public SettingsWindow() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	/** Initialize the contents of the frame. */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 450);

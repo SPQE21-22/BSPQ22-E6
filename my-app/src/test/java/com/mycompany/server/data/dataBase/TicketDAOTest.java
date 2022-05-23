@@ -21,18 +21,39 @@ import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 import com.mycompany.server.data.domain.Ticket;
 
+/**
+ * The Class TicketDAOTest.
+ */
 public class TicketDAOTest {
+	
+	/** The dao. */
 	private TicketDAO dao;
+	
+	/** The test ev. */
 	private Event testEv;
+	
+	/** The test ev 2. */
 	private Event testEv2;
+	
+	/** The test og. */
 	private Organizer testOg;
+	
+	/** The test con. */
 	private Consumer testCon;
+	
+	/** The test ticket. */
 	private Ticket testTicket;
+	
+	/** The test ticket 2. */
 	private Ticket testTicket2;
 
+	/** The rule. */
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 
+	/**
+	 * Setup.
+	 */
 	@Before
 	public void setup() {
 		dao = TicketDAO.getInstance();
@@ -60,7 +81,12 @@ public class TicketDAOTest {
 //
 //	}
 	
-	@Test
+	/**
+ * Gets the all test.
+ *
+ * @return the all test
+ */
+@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
 	public void getAllTest() {
@@ -71,6 +97,11 @@ public class TicketDAOTest {
 		dao.delete(testTicket);
 	}
 	
+	/**
+	 * Gets the in resell test.
+	 *
+	 * @return the in resell test
+	 */
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
@@ -89,6 +120,9 @@ public class TicketDAOTest {
 		dao.delete(testTicket);
 	}
 
+	/**
+	 * Tear down.
+	 */
 	@After
 	public void tearDown() {
 

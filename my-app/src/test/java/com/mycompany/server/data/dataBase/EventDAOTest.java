@@ -19,15 +19,30 @@ import com.github.javatlacati.contiperf.junit.ContiPerfRule;
 import com.mycompany.server.data.domain.Event;
 import com.mycompany.server.data.domain.Organizer;
 
+/**
+ * The Class EventDAOTest.
+ */
 public class EventDAOTest {
+	
+	/** The dao. */
 	private EventDAO dao;
+	
+	/** The test event. */
 	private Event testEvent;
+	
+	/** The test event 2. */
 	private Event testEvent2;
+	
+	/** The test og. */
 	private Organizer testOg;
 	
+	/** The rule. */
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 	
+	/**
+	 * Setup.
+	 */
 	@Before
 	public void setup() {
 		dao = EventDAO.getInstance();
@@ -36,6 +51,9 @@ public class EventDAOTest {
 		testEvent2 = new Event("TestingEvent2", LocalDate.now().minusDays(1),"Testing place", testOg);
 	}
 	
+	/**
+	 * Save find delete test.
+	 */
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
@@ -50,6 +68,11 @@ public class EventDAOTest {
 	
 	}
 	
+	/**
+	 * Gets the all test.
+	 *
+	 * @return the all test
+	 */
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
@@ -61,6 +84,11 @@ public class EventDAOTest {
 		dao.delete(testEvent);
 	}
 	
+	/**
+	 * Gets the active test.
+	 *
+	 * @return the active test
+	 */
 	@Test
 	@PerfTest(invocations =1)
 	@Required(max=1500, average=600)
@@ -75,6 +103,9 @@ public class EventDAOTest {
 		dao.delete(testEvent2);
 	}
 	
+	/**
+	 * Tear down.
+	 */
 	@After
 	public void tearDown() {
 

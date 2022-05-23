@@ -5,9 +5,17 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Transaction;
 
+/** The Class DataAccesObjectBase.*/
 public class DataAccesObjectBase {
+    
+    /** The pmf. */
     protected static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 
+    /**
+     * Delete object.
+     *
+     * @param object the object
+     */
     public void deleteObject(Object object) {
         PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();
@@ -27,6 +35,11 @@ public class DataAccesObjectBase {
         }
     }
 
+    /**
+     * Save object.
+     *
+     * @param object the object
+     */
     public void saveObject(Object object) {
         PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();

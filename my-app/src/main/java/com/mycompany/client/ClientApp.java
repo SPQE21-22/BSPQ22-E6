@@ -15,13 +15,24 @@ import com.mycompany.client.remote.ServiceGateway;
 import com.mycompany.remote.serialization.EventDTO;
 import com.mycompany.remote.serialization.TicketDTO;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientApp.
+ */
 public class ClientApp {
 
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger("ClientApp");
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
-		BasicConfigurator.configure(); // loads the log4j properties
+		BasicConfigurator.configure(); /** Loads the log4j properties */
 
 		
 		
@@ -40,44 +51,44 @@ public class ClientApp {
 				}
 			}
 		});
-		// Here we call the testing methods
+		/**Here we call the testing methods */
 
-		// Registering
+		/** Registering */
 
-		// Deprecated method
+		/** Deprecated method */
 
-		// UserController.getInstance().register("TestingUser@test.com", "testingpass",
-		// "Tester", "696969696");
+		/** UserController.getInstance().register("TestingUser@test.com", "testingpass",*/
+		/** "Tester", "696969696");*/
 
-		// Registering an organizer
+		/** Registering an organizer*/
 		UserController.getInstance().registerOrganizer("TestingOrganizer@test.com", "organizerpass", "Organizer",
 				"000000000", "TestingStreet", "wwww.Testing.com");
 
-		// Registering an consumer
+		/** Registering an consumer */
 		UserController.getInstance().registerConsumer("TestingConsumer@test.com", "consumerpass", "Consumer",
 				"111111111", "consumerNick", "Consumerson");
 
 		/**** TESTING THE ORGANIZER ****/
 
-		// Logging in with the organizer
+		/** Logging in with the organizer */
 		UserController.getInstance().login("TestingOrganizer@test.com", "organizerpass");
 
-		// Create an event
+		/** Create an event */
 		EventController.getInstance().createEvent("testing event name", LocalDate.parse("2023-04-11"), "testing place");
 
-		// Logging out with the organizer
+		/** Logging out with the organizer */
 		UserController.getInstance().logout();
 
 		/**** TESTING THE CONSUMER ****/
 
-		// Registering another consumer
+		/** Registering another consumer */
 		UserController.getInstance().registerConsumer("TestingConsumer22@test.com", "consumerpass22", "Consumer22",
 				"222222222", "consumerNick22", "Consumerson22");
 
-		// Logging in with the consumer
+		/** Logging in with the consumer */
 		UserController.getInstance().login("TestingConsumer@test.com", "consumerpass");
 
-		// Getting active events
+		/** Getting active events */
 		List<EventDTO> listEvents = EventController.getInstance().getActiveEvents();
 		if (listEvents != null) {
 			ClientApp.getLogger().info("The active events are:");
@@ -86,11 +97,11 @@ public class ClientApp {
 			}
 		}
 
-		// Buy a ticket
+		/** Buy a ticket */
 		EventDTO ev1 = listEvents.get(0);
 		TicketController.getInstance().buyTicket(ev1.getName(), LocalDate.parse(ev1.getDate()));
 
-		// Getting Bought Tickets
+		/** Getting Bought Tickets */
 		List<TicketDTO> list = TicketController.getInstance().getBoughtTickets();
 		if (list != null) {
 			ClientApp.getLogger().info("The user has bought:");
@@ -99,31 +110,31 @@ public class ClientApp {
 			}
 		}
 
-		// Reselling ticket
+		/** Reselling tickets */
 		TicketDTO toResellTicket = list.get(0);
 		TicketController.getInstance().putTicketInResell(toResellTicket.getUserEmail(), toResellTicket.getEventName(),
 				LocalDate.parse(toResellTicket.getEventDate()));
 
-		// Logging out
+		/** Logging out */
 		UserController.getInstance().logout();
 
-		// Logging in with the other consumer
+		/** Logging in with the other consumer */
 		UserController.getInstance().login("TestingConsumer22@test.com", "consumerpass22");
 		
-		//Get the reselling tickets
+		/** Get the reselling tickets */
 		List<TicketDTO> resellingTickets = TicketController.getInstance().getResellingTickets();
 		
 		
-		//Buy a reselling  ticket
+		/** Buy a reselling  ticket */
 		if (resellingTickets != null && !resellingTickets.isEmpty()) {
 			TicketDTO resellingT = resellingTickets.get(0);
-			// Buy a resellingTicket
+			/** Buy a resellingTicket */
 			TicketController.getInstance().buyResellingTicket(resellingT.getUserEmail(), resellingT.getEventName(),
 					LocalDate.parse(resellingT.getEventDate()));
 		}
 		
 		
-		// Getting Bought Tickets
+		/** Getting Bought Tickets */
 		List<TicketDTO> list2 = TicketController.getInstance().getBoughtTickets();
 		if (list2 != null) {
 			ClientApp.getLogger().info("The user has bought:");
@@ -132,11 +143,16 @@ public class ClientApp {
 			}
 		}
 
-		// Logging out
+		/** Logging out */
 		UserController.getInstance().logout();
 
 	}
 
+	/**
+	 * Gets the logger.
+	 *
+	 * @return the logger
+	 */
 	public static Logger getLogger() {
 		return logger;
 	}

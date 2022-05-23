@@ -23,15 +23,25 @@ import javax.swing.SwingConstants;
 import com.mycompany.client.ClientApp;
 import com.mycompany.client.controller.UserController;
 
+/** The Class LoginWindow.*/
 public class LoginWindow extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The frame. */
 	public JFrame frame;
+	
+	/** The txt email. */
 	static JTextField txtEmail;
+	
+	/** The txt password. */
 	private JTextField txtPassword;
 
 	/**
-	 * Launch the application.
+	 *  Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,9 +60,7 @@ public class LoginWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	/** Create the frame. */
 	public LoginWindow() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
@@ -131,7 +139,7 @@ public class LoginWindow extends JFrame {
 			}
 		});
 		
-		//URL iconURL = getClass().getResource("/");                  
+		/** URL iconURL = getClass().getResource("/"); */                 
 		
 		JLabel logo = new JLabel("");
 		ImageIcon img = new ImageIcon("img/ticketLogo.png");
