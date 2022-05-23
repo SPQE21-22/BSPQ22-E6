@@ -127,8 +127,7 @@ public class EventDTO {
 	 */
 	@Override
 	public String toString() {
-		return "EventDTO [name=" + name + ", date=" + date + ", place=" + place + ", organizerEmail=" + organizerEmail
-				+ ", organizerWeb=" + organizerWeb + "]";
+		return name + " in " + place + " (" + date + ")";
 	}
 	
 	/**

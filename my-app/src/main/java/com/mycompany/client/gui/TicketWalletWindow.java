@@ -92,19 +92,19 @@ public class TicketWalletWindow extends JFrame {
 		
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Settings");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Buy Standard Tickets");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SettingsWindow.main(null);
+				PrincipalWindow.main(null);
 				dispose();
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Buy Tickets");
+
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Settings");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PrincipalWindow.main(null);
+				SettingsWindow.main(null);
 				dispose();
 			}
 		});
@@ -135,23 +135,23 @@ public class TicketWalletWindow extends JFrame {
 		panel1.add(label);
 
 		list = new JList<>();
-		
-		
 
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		list.setSize(200, 100);
 		model = new DefaultListModel<TicketDTO>();
 		List<TicketDTO> boughtTickets = TicketController.getInstance().getBoughtTickets();
-		for (TicketDTO ticketDTO : boughtTickets) {
-			if(!ticketDTO.isInResell()) model.addElement(ticketDTO);
+		if(boughtTickets != null){
+			for (TicketDTO ticketDTO : boughtTickets) {
+				if(!ticketDTO.isInResell()) model.addElement(ticketDTO);
+			}
 		}
 		list.setModel(model);
 		list.setVisibleRowCount(5);
 		
 		JPanel listPanel = new JPanel();
 		JScrollPane scrollList = new JScrollPane(list);
-		/** scrollList.setBounds(0, 0,220, 80); */
-		/** scrollList.setViewportView(list); */
+		// scrollList.setBounds(0, 0,220, 80);
+		// scrollList.setViewportView(list);
 		listPanel.add(scrollList);
 		panel1.add(listPanel);
 

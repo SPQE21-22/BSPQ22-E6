@@ -311,7 +311,7 @@ public class RemoteFacadeTest {
 	 * @return the active events test
 	 */
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void getActiveEventsTest() {
 		WebTarget eTarget = baseTarget.path("events");
@@ -341,7 +341,7 @@ public class RemoteFacadeTest {
 	 * @return the reselling tickets test
 	 */
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void getResellingTicketsTest() {
 		WebTarget tTarget = baseTarget.path("tickets");
@@ -368,7 +368,7 @@ public class RemoteFacadeTest {
 
 	/** Buy tickets test.*/
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void buyTicketsTest() {
 		/** login of the consumer */
@@ -423,7 +423,7 @@ public class RemoteFacadeTest {
 	 * @return the bought tickets test
 	 */
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void getBoughtTicketsTest() {
 		/** login of the consumer */
@@ -474,7 +474,7 @@ public class RemoteFacadeTest {
 
 	/** Put ticket in resell test.*/
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void putTicketInResellTest() {
 		/** login of the consumer */
@@ -526,7 +526,7 @@ public class RemoteFacadeTest {
 
 	/** Resell tickets test.*/
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void resellTicketsTest() {
 		/** login of the consumer */
@@ -579,7 +579,7 @@ public class RemoteFacadeTest {
 
 	/** Connection test.*/
 	@Test
-	@PerfTest(invocations = 50)
+	@PerfTest(invocations = 5)
 	@Required(max = 1500, average = 600)
 	public void ConnectionTest() {
 		WebTarget testTarget = baseTarget.path("test");
