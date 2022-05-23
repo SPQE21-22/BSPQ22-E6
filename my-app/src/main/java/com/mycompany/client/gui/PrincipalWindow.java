@@ -140,6 +140,15 @@ public class PrincipalWindow {
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Resale Market");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ResaleTicketsWindow.main(null);
+				frame.dispose();
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_4);
+
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("My Wallet");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -161,7 +170,7 @@ public class PrincipalWindow {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_3);
-		/** frame.getContentPane().setLayout(null); */
+		//frame.getContentPane().setLayout(null);
 		
 		txtIntroduceYourEvent = new JTextField();
 		txtIntroduceYourEvent.setFont(new Font("Tahoma", Font.BOLD, 25));
