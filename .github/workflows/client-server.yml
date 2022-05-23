@@ -32,4 +32,4 @@ jobs:
     - name: Launch the client
       run: mvn exec:java -Pclient -f my-app/pom.xml
     - name: Test with Maven
-      run: mvn test -f my-app/pom.xml
+      run: mvn test -f my-app/pom.xml -DargLine="-Dcontiperf.active=false"
