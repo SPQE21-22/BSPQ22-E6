@@ -1,0 +1,86 @@
+\hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b}{}\doxysection{com.\+mycompany.\+server.\+data.\+data\+Base.\+DB Class Reference}
+\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b}\index{com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Connection \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a1bdfa1819b751e4ba1addb6673b74cb7}{init\+DB}} (String name\+DB)
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a50a15e2cb26a4d732363cf9026d7c8c9}{close\+DB}} (Connection con, Statement st)
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a326aba94c51dc63bcf29def2ae39d665}{create\+Event}} (String name, String date, String place)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Class \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b}{DB}}. 
+
+Definition at line 12 of file D\+B.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a50a15e2cb26a4d732363cf9026d7c8c9}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a50a15e2cb26a4d732363cf9026d7c8c9}} 
+\index{com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}!closeDB@{closeDB}}
+\index{closeDB@{closeDB}!com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}}
+\doxysubsubsection{\texorpdfstring{closeDB()}{closeDB()}}
+{\footnotesize\ttfamily static void com.\+mycompany.\+server.\+data.\+data\+Base.\+D\+B.\+close\+DB (\begin{DoxyParamCaption}\item[{Connection}]{con,  }\item[{Statement}]{st }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Close the open Data\+Base.
+
+
+\begin{DoxyParams}{Parameters}
+{\em con} & Data\+Base open Conexion \\
+\hline
+{\em st} & Data\+Base open Sentence \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file D\+B.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a326aba94c51dc63bcf29def2ae39d665}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a326aba94c51dc63bcf29def2ae39d665}} 
+\index{com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}!createEvent@{createEvent}}
+\index{createEvent@{createEvent}!com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}}
+\doxysubsubsection{\texorpdfstring{createEvent()}{createEvent()}}
+{\footnotesize\ttfamily static void com.\+mycompany.\+server.\+data.\+data\+Base.\+D\+B.\+create\+Event (\begin{DoxyParamCaption}\item[{String}]{name,  }\item[{String}]{date,  }\item[{String}]{place }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates the event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+{\em date} & the date \\
+\hline
+{\em place} & the place \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 72 of file D\+B.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a1bdfa1819b751e4ba1addb6673b74cb7}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b_a1bdfa1819b751e4ba1addb6673b74cb7}} 
+\index{com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}!initDB@{initDB}}
+\index{initDB@{initDB}!com.mycompany.server.data.dataBase.DB@{com.mycompany.server.data.dataBase.DB}}
+\doxysubsubsection{\texorpdfstring{initDB()}{initDB()}}
+{\footnotesize\ttfamily static Connection com.\+mycompany.\+server.\+data.\+data\+Base.\+D\+B.\+init\+DB (\begin{DoxyParamCaption}\item[{String}]{name\+DB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Inicializes S\+Q\+L\+I\+TE \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_d_b}{DB}} y return a conection with it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name\+DB} & Name of the file of Data\+Base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Conexion with the indicated Data\+Base. If there is an error it will return null 
+\end{DoxyReturn}
+
+
+Definition at line 25 of file D\+B.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+git/\+B\+S\+P\+Q22-\/\+E6/my-\/app/src/main/java/com/mycompany/server/data/data\+Base/\mbox{\hyperlink{_d_b_8java}{D\+B.\+java}}\end{DoxyCompactItemize}

@@ -1,0 +1,88 @@
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app}{}\doxysection{com.\+mycompany.\+server.\+Server\+App Class Reference}
+\label{classcom_1_1mycompany_1_1server_1_1_server_app}\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_server_app_a618cefab152df85636d55b6429fe859c}{main}} (String\mbox{[}$\,$\mbox{]} args)
+\item 
+static Http\+Server \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_server_app_a4680f99e862a3ab71ee39c15d81d9a20}{start\+Server}} (String uri)
+\item 
+static Logger \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_server_app_ad23c3df6ad7b86a14cb6d92761ffaf84}{get\+Logger}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Class \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_server_app}{Server\+App}}. 
+
+Definition at line 14 of file Server\+App.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app_ad23c3df6ad7b86a14cb6d92761ffaf84}\label{classcom_1_1mycompany_1_1server_1_1_server_app_ad23c3df6ad7b86a14cb6d92761ffaf84}} 
+\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}!getLogger@{getLogger}}
+\index{getLogger@{getLogger}!com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+\doxysubsubsection{\texorpdfstring{getLogger()}{getLogger()}}
+{\footnotesize\ttfamily static Logger com.\+mycompany.\+server.\+Server\+App.\+get\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the logger.
+
+\begin{DoxyReturn}{Returns}
+the logger 
+\end{DoxyReturn}
+
+
+Definition at line 81 of file Server\+App.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app_a618cefab152df85636d55b6429fe859c}\label{classcom_1_1mycompany_1_1server_1_1_server_app_a618cefab152df85636d55b6429fe859c}} 
+\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}!main@{main}}
+\index{main@{main}!com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void com.\+mycompany.\+server.\+Server\+App.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+The main method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & the arguments \\
+\hline
+\end{DoxyParams}
+loads the log4j properties
+
+T\+O\+DO Auto-\/generated catch block
+
+Definition at line 24 of file Server\+App.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app_a4680f99e862a3ab71ee39c15d81d9a20}\label{classcom_1_1mycompany_1_1server_1_1_server_app_a4680f99e862a3ab71ee39c15d81d9a20}} 
+\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}!startServer@{startServer}}
+\index{startServer@{startServer}!com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+\doxysubsubsection{\texorpdfstring{startServer()}{startServer()}}
+{\footnotesize\ttfamily static Http\+Server com.\+mycompany.\+server.\+Server\+App.\+start\+Server (\begin{DoxyParamCaption}\item[{String}]{uri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Starts Grizzly H\+T\+TP server exposing J\+A\+X-\/\+RS resources defined in this application.
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & the uri \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Grizzly H\+T\+TP server. 
+\end{DoxyReturn}
+create a resource config that scans for J\+A\+X-\/\+RS resources and providers
+
+create and start a new instance of grizzly http server
+
+exposing the Jersey application at B\+A\+S\+E\+\_\+\+U\+RI
+
+System.\+out.\+println(\char`\"{}$\ast$ Starting the server failed\+: \textbackslash{}n\char`\"{}); logger.\+error(\char`\"{}\+Starting the server failed\char`\"{},e);
+
+e.\+print\+Stack\+Trace();
+
+Definition at line 59 of file Server\+App.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+git/\+B\+S\+P\+Q22-\/\+E6/my-\/app/src/main/java/com/mycompany/server/\mbox{\hyperlink{_server_app_8java}{Server\+App.\+java}}\end{DoxyCompactItemize}
