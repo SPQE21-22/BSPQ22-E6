@@ -181,54 +181,54 @@ public class PrincipalWindow {
 		
 		int i = 0;
 		JPanel[] panels = new JPanel[eventlistDTO.size()];
+		if(eventlistDTO != null){
+			for (EventDTO event : eventlistDTO) {
+				panels[i] = new JPanel();
+				panels[i].setForeground(Color.LIGHT_GRAY);
+				panels[i].setBounds(164, 113 + 137*i, 454, 120);
+				panels[i].setBackground(Color.LIGHT_GRAY);
+				panels[i].setLayout(null);
+				
+				JLabel lblNewLabel = new JLabel(event.getName());
+				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+				lblNewLabel.setForeground(Color.BLACK);
+				lblNewLabel.setBounds(22, 11, 104, 58);
+				
+				
+				JLabel lblNewLabel_1 = new JLabel(event.getPlace());
+				lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+				lblNewLabel_1.setToolTipText("");
+				lblNewLabel_1.setBounds(195, 26 , 139, 30); 
 
-		for (EventDTO event : eventlistDTO) {
-			panels[i] = new JPanel();
-			panels[i].setForeground(Color.LIGHT_GRAY);
-			panels[i].setBounds(164, 113 + 137*i, 454, 120);
-			panels[i].setBackground(Color.LIGHT_GRAY);
-			panels[i].setLayout(null);
-			
-			JLabel lblNewLabel = new JLabel(event.getName());
-			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblNewLabel.setForeground(Color.BLACK);
-			lblNewLabel.setBounds(22, 11, 104, 58);
-			
-			
-			JLabel lblNewLabel_1 = new JLabel(event.getPlace());
-			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			lblNewLabel_1.setToolTipText("");
-			lblNewLabel_1.setBounds(195, 26 , 139, 30); 
+				JButton buyBut = new JButton("BUY");
+				buyBut.setBounds(190, 80, 70, 20);
+				final EventDTO evento = event;
+				buyBut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TicketController.getInstance().buyTicket(evento.getName(), LocalDate.parse(evento.getDate())); 
+					}
+				});
 
-			JButton buyBut = new JButton("BUY");
-			buyBut.setBounds(190, 80, 70, 20);
-			final EventDTO evento = event;
-			buyBut.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					TicketController.getInstance().buyTicket(evento.getName(), LocalDate.parse(evento.getDate())); 
-				}
-			});
-
-			JLabel lblNewLabel_2 = new JLabel(event.getDate().toString());
-			lblNewLabel_2.setForeground(Color.BLACK);
-			lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lblNewLabel_2.setBounds(32, 57, 76, 58);
-			
-			Random random = new Random();
-			JLabel lblNewLabel_3 = new JLabel(String.valueOf(10 + random.nextInt(10)) + "$");
-			lblNewLabel_3.setForeground(Color.BLACK);
-			lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 36));
-			lblNewLabel_3.setBounds(344, 22, 81, 76);
-			
-			panels[i].add(lblNewLabel);
-			panels[i].add(lblNewLabel_1);
-			panels[i].add(lblNewLabel_2);
-			panels[i].add(lblNewLabel_3);
-			panels[i].add(buyBut);
-			container.add(panels[i]);
-			i++;
+				JLabel lblNewLabel_2 = new JLabel(event.getDate().toString());
+				lblNewLabel_2.setForeground(Color.BLACK);
+				lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblNewLabel_2.setBounds(32, 57, 76, 58);
+				
+				Random random = new Random();
+				JLabel lblNewLabel_3 = new JLabel(String.valueOf(10 + random.nextInt(10)) + "$");
+				lblNewLabel_3.setForeground(Color.BLACK);
+				lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 36));
+				lblNewLabel_3.setBounds(344, 22, 81, 76);
+				
+				panels[i].add(lblNewLabel);
+				panels[i].add(lblNewLabel_1);
+				panels[i].add(lblNewLabel_2);
+				panels[i].add(lblNewLabel_3);
+				panels[i].add(buyBut);
+				container.add(panels[i]);
+				i++;
+			}
 		}
-		
 		
 
 		
