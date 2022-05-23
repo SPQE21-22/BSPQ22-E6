@@ -1,0 +1,166 @@
+\hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}{}\doxysection{com.\+mycompany.\+server.\+services.\+User\+App\+Service Class Reference}
+\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a650a48acb0acd0242607f72995378bc7}{login}} (String email, String password)
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_organizer}{Organizer}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_aad1c81fed2bf2ba3155da3b0dbf1ede5}{is\+Organizer}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} user)
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_consumer}{Consumer}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a45c18877e42e7a1153931aeeb650c219}{is\+Consumer}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} user)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_aabf8108122c82bcf85ac5d05bf660bda}{register\+Consumer}} (String email, String password, String name, String phone, String nickname, String \mbox{\hyperlink{com_8mycompany_8server_8data_8data_base_8_consumer_d_a_o_test_8txt_a42fd28669337d40f68a54b563be99ea5}{surname}})
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a440286e19e38277826fab4b59b630266}{register\+Organizer}} (String email, String password, String name, String phone, String address, String webpage)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}{User\+App\+Service}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_acb9e306182676ed47bc56b44fe27eca8}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Class \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}{User\+App\+Service}}. 
+
+Definition at line 11 of file User\+App\+Service.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_acb9e306182676ed47bc56b44fe27eca8}\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_acb9e306182676ed47bc56b44fe27eca8}} 
+\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}{User\+App\+Service}} com.\+mycompany.\+server.\+services.\+User\+App\+Service.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the single instance of \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}{User\+App\+Service}}.
+
+\begin{DoxyReturn}{Returns}
+single instance of \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service}{User\+App\+Service}} 
+\end{DoxyReturn}
+
+
+Definition at line 21 of file User\+App\+Service.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a45c18877e42e7a1153931aeeb650c219}\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a45c18877e42e7a1153931aeeb650c219}} 
+\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}!isConsumer@{isConsumer}}
+\index{isConsumer@{isConsumer}!com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsubsection{\texorpdfstring{isConsumer()}{isConsumer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_consumer}{Consumer}} com.\+mycompany.\+server.\+services.\+User\+App\+Service.\+is\+Consumer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}}}]{user }\end{DoxyParamCaption})}
+
+This method checks if the user given is an consumer and returns an consumer object If the user is not an consumer returns null.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & user object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+consumer object / null if user is not an consumer 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file User\+App\+Service.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_aad1c81fed2bf2ba3155da3b0dbf1ede5}\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_aad1c81fed2bf2ba3155da3b0dbf1ede5}} 
+\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}!isOrganizer@{isOrganizer}}
+\index{isOrganizer@{isOrganizer}!com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsubsection{\texorpdfstring{isOrganizer()}{isOrganizer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_organizer}{Organizer}} com.\+mycompany.\+server.\+services.\+User\+App\+Service.\+is\+Organizer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}}}]{user }\end{DoxyParamCaption})}
+
+This method checks if the user given is an organizer and returns an organizer object If the user is not an organizer returns null.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & user object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+organizer object / null if user is not an organizer 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file User\+App\+Service.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a650a48acb0acd0242607f72995378bc7}\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a650a48acb0acd0242607f72995378bc7}} 
+\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}!login@{login}}
+\index{login@{login}!com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} com.\+mycompany.\+server.\+services.\+User\+App\+Service.\+login (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password }\end{DoxyParamCaption})}
+
+Login.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the user 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file User\+App\+Service.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_aabf8108122c82bcf85ac5d05bf660bda}\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_aabf8108122c82bcf85ac5d05bf660bda}} 
+\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}!registerConsumer@{registerConsumer}}
+\index{registerConsumer@{registerConsumer}!com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsubsection{\texorpdfstring{registerConsumer()}{registerConsumer()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+server.\+services.\+User\+App\+Service.\+register\+Consumer (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password,  }\item[{String}]{name,  }\item[{String}]{phone,  }\item[{String}]{nickname,  }\item[{String}]{surname }\end{DoxyParamCaption})}
+
+Register consumer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+{\em name} & the name \\
+\hline
+{\em phone} & the phone \\
+\hline
+{\em nickname} & the nickname \\
+\hline
+{\em surname} & the surname \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file User\+App\+Service.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a440286e19e38277826fab4b59b630266}\label{classcom_1_1mycompany_1_1server_1_1services_1_1_user_app_service_a440286e19e38277826fab4b59b630266}} 
+\index{com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}!registerOrganizer@{registerOrganizer}}
+\index{registerOrganizer@{registerOrganizer}!com.mycompany.server.services.UserAppService@{com.mycompany.server.services.UserAppService}}
+\doxysubsubsection{\texorpdfstring{registerOrganizer()}{registerOrganizer()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+server.\+services.\+User\+App\+Service.\+register\+Organizer (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password,  }\item[{String}]{name,  }\item[{String}]{phone,  }\item[{String}]{address,  }\item[{String}]{webpage }\end{DoxyParamCaption})}
+
+Register organizer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+{\em name} & the name \\
+\hline
+{\em phone} & the phone \\
+\hline
+{\em address} & the address \\
+\hline
+{\em webpage} & the webpage \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 122 of file User\+App\+Service.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+git/\+B\+S\+P\+Q22-\/\+E6/my-\/app/src/main/java/com/mycompany/server/services/\mbox{\hyperlink{_user_app_service_8java}{User\+App\+Service.\+java}}\end{DoxyCompactItemize}

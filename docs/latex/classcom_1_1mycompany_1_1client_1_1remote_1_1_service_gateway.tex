@@ -1,0 +1,312 @@
+\hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}{}\doxysection{com.\+mycompany.\+client.\+remote.\+Service\+Gateway Class Reference}
+\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_aa9272b1a16c59705bff8b7b6e62e6de7}{init\+Gateway}} (String hostname, String port)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_af08539a750f5f1a34c2f7ada6e2de1a6}{testing\+Server}} (String name)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a6386670e743b0e5f93eb58394aaa94b0}{login}} (String email, String password)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a40e002722db7ef6ad749dcd0269a0ccc}{logout}} ()
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1remote_1_1serialization_1_1_ticket_d_t_o}{Ticket\+D\+TO}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a6a6ee45d79f29269295db8a302c39ade}{get\+Bought\+Tickets}} ()
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1remote_1_1serialization_1_1_event_d_t_o}{Event\+D\+TO}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a8c6fa7d7c09364e3cf73350d51b0bf79}{get\+Active\+Events}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a55a72f4954adc5ecefd78375cd749257}{buy\+Ticket}} (String name, Local\+Date date)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a4b5456025e2eb70c8f7f77141ffce728}{create\+Event}} (String name, Local\+Date date, String place)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_ad6ecc7d7e64aa11ca3f32d79d41d40a7}{register\+Consumer}} (String email, String password, String name, String phone, String nickname, String \mbox{\hyperlink{com_8mycompany_8server_8data_8data_base_8_consumer_d_a_o_test_8txt_a42fd28669337d40f68a54b563be99ea5}{surname}})
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a4c8451277e09a0eb72e55d3d568e083a}{register\+Organizer}} (String email, String password, String name, String phone, String address, String webpage)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a92c9e24c61c3917e947fb6e787a71bcf}{put\+Ticket\+In\+Resell}} (String ticket\+User\+Email, String ticket\+Event\+Name, Local\+Date ticket\+Event\+Date)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a34adb51dd6281bdab9e80211793c844c}{buy\+Reselling\+Ticket}} (String ticket\+User\+Email, String ticket\+Event\+Name, Local\+Date ticket\+Event\+Date)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1remote_1_1serialization_1_1_ticket_d_t_o}{Ticket\+D\+TO}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a3b5b4f06b8b7ee9a5def1382fb62a8c2}{get\+Reselling\+Tickets}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}{Service\+Gateway}} \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a9f3e52c6db02f27d912c8e69e20a8be2}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Class \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}{Service\+Gateway}}. 
+
+Definition at line 29 of file Service\+Gateway.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a34adb51dd6281bdab9e80211793c844c}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a34adb51dd6281bdab9e80211793c844c}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!buyResellingTicket@{buyResellingTicket}}
+\index{buyResellingTicket@{buyResellingTicket}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{buyResellingTicket()}{buyResellingTicket()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+buy\+Reselling\+Ticket (\begin{DoxyParamCaption}\item[{String}]{ticket\+User\+Email,  }\item[{String}]{ticket\+Event\+Name,  }\item[{Local\+Date}]{ticket\+Event\+Date }\end{DoxyParamCaption})}
+
+Buy reselling ticket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticket\+User\+Email} & the ticket user email \\
+\hline
+{\em ticket\+Event\+Name} & the ticket event name \\
+\hline
+{\em ticket\+Event\+Date} & the ticket event date \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 375 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a55a72f4954adc5ecefd78375cd749257}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a55a72f4954adc5ecefd78375cd749257}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!buyTicket@{buyTicket}}
+\index{buyTicket@{buyTicket}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{buyTicket()}{buyTicket()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+buy\+Ticket (\begin{DoxyParamCaption}\item[{String}]{name,  }\item[{Local\+Date}]{date }\end{DoxyParamCaption})}
+
+Buy ticket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+{\em date} & the date \\
+\hline
+\end{DoxyParams}
+T\+O\+DO\+: if error throw an exception
+
+Definition at line 205 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a4b5456025e2eb70c8f7f77141ffce728}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a4b5456025e2eb70c8f7f77141ffce728}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!createEvent@{createEvent}}
+\index{createEvent@{createEvent}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{createEvent()}{createEvent()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+create\+Event (\begin{DoxyParamCaption}\item[{String}]{name,  }\item[{Local\+Date}]{date,  }\item[{String}]{place }\end{DoxyParamCaption})}
+
+Creates the event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+{\em date} & the date \\
+\hline
+{\em place} & the place \\
+\hline
+\end{DoxyParams}
+T\+O\+DO\+: if error throw an exception
+
+Definition at line 235 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a8c6fa7d7c09364e3cf73350d51b0bf79}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a8c6fa7d7c09364e3cf73350d51b0bf79}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!getActiveEvents@{getActiveEvents}}
+\index{getActiveEvents@{getActiveEvents}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{getActiveEvents()}{getActiveEvents()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classcom_1_1mycompany_1_1remote_1_1serialization_1_1_event_d_t_o}{Event\+D\+TO}}$>$ com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+get\+Active\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the active events.
+
+\begin{DoxyReturn}{Returns}
+the active events 
+\end{DoxyReturn}
+Deserializing the list
+
+Definition at line 173 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a6a6ee45d79f29269295db8a302c39ade}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a6a6ee45d79f29269295db8a302c39ade}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!getBoughtTickets@{getBoughtTickets}}
+\index{getBoughtTickets@{getBoughtTickets}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{getBoughtTickets()}{getBoughtTickets()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classcom_1_1mycompany_1_1remote_1_1serialization_1_1_ticket_d_t_o}{Ticket\+D\+TO}}$>$ com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+get\+Bought\+Tickets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the bought tickets.
+
+\begin{DoxyReturn}{Returns}
+the bought tickets 
+\end{DoxyReturn}
+Deserializing the list
+
+Definition at line 138 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a9f3e52c6db02f27d912c8e69e20a8be2}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a9f3e52c6db02f27d912c8e69e20a8be2}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}{Service\+Gateway}} com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the single instance of \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}{Service\+Gateway}}.
+
+\begin{DoxyReturn}{Returns}
+single instance of \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway}{Service\+Gateway}} 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a3b5b4f06b8b7ee9a5def1382fb62a8c2}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a3b5b4f06b8b7ee9a5def1382fb62a8c2}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!getResellingTickets@{getResellingTickets}}
+\index{getResellingTickets@{getResellingTickets}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{getResellingTickets()}{getResellingTickets()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classcom_1_1mycompany_1_1remote_1_1serialization_1_1_ticket_d_t_o}{Ticket\+D\+TO}}$>$ com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+get\+Reselling\+Tickets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the reselling tickets.
+
+\begin{DoxyReturn}{Returns}
+the reselling tickets 
+\end{DoxyReturn}
+Deserializing the list
+
+Definition at line 403 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_aa9272b1a16c59705bff8b7b6e62e6de7}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_aa9272b1a16c59705bff8b7b6e62e6de7}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!initGateway@{initGateway}}
+\index{initGateway@{initGateway}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{initGateway()}{initGateway()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+init\+Gateway (\begin{DoxyParamCaption}\item[{String}]{hostname,  }\item[{String}]{port }\end{DoxyParamCaption})}
+
+Inits the gateway.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hostname} & the hostname \\
+\hline
+{\em port} & the port \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a6386670e743b0e5f93eb58394aaa94b0}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a6386670e743b0e5f93eb58394aaa94b0}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!login@{login}}
+\index{login@{login}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+login (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password }\end{DoxyParamCaption})}
+
+Login.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+\end{DoxyParams}
+T\+O\+DO\+: if error throw an exception
+
+Definition at line 91 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a40e002722db7ef6ad749dcd0269a0ccc}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a40e002722db7ef6ad749dcd0269a0ccc}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!logout@{logout}}
+\index{logout@{logout}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+logout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Logout. 
+
+Definition at line 116 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a92c9e24c61c3917e947fb6e787a71bcf}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a92c9e24c61c3917e947fb6e787a71bcf}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!putTicketInResell@{putTicketInResell}}
+\index{putTicketInResell@{putTicketInResell}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{putTicketInResell()}{putTicketInResell()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+put\+Ticket\+In\+Resell (\begin{DoxyParamCaption}\item[{String}]{ticket\+User\+Email,  }\item[{String}]{ticket\+Event\+Name,  }\item[{Local\+Date}]{ticket\+Event\+Date }\end{DoxyParamCaption})}
+
+Put ticket in resell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticket\+User\+Email} & the ticket user email \\
+\hline
+{\em ticket\+Event\+Name} & the ticket event name \\
+\hline
+{\em ticket\+Event\+Date} & the ticket event date \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 345 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_ad6ecc7d7e64aa11ca3f32d79d41d40a7}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_ad6ecc7d7e64aa11ca3f32d79d41d40a7}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!registerConsumer@{registerConsumer}}
+\index{registerConsumer@{registerConsumer}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{registerConsumer()}{registerConsumer()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+register\+Consumer (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password,  }\item[{String}]{name,  }\item[{String}]{phone,  }\item[{String}]{nickname,  }\item[{String}]{surname }\end{DoxyParamCaption})}
+
+Register consumer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+{\em name} & the name \\
+\hline
+{\em phone} & the phone \\
+\hline
+{\em nickname} & the nickname \\
+\hline
+{\em surname} & the surname \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 276 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a4c8451277e09a0eb72e55d3d568e083a}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_a4c8451277e09a0eb72e55d3d568e083a}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!registerOrganizer@{registerOrganizer}}
+\index{registerOrganizer@{registerOrganizer}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{registerOrganizer()}{registerOrganizer()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+register\+Organizer (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password,  }\item[{String}]{name,  }\item[{String}]{phone,  }\item[{String}]{address,  }\item[{String}]{webpage }\end{DoxyParamCaption})}
+
+Register organizer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+{\em name} & the name \\
+\hline
+{\em phone} & the phone \\
+\hline
+{\em address} & the address \\
+\hline
+{\em webpage} & the webpage \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 312 of file Service\+Gateway.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_af08539a750f5f1a34c2f7ada6e2de1a6}\label{classcom_1_1mycompany_1_1client_1_1remote_1_1_service_gateway_af08539a750f5f1a34c2f7ada6e2de1a6}} 
+\index{com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}!testingServer@{testingServer}}
+\index{testingServer@{testingServer}!com.mycompany.client.remote.ServiceGateway@{com.mycompany.client.remote.ServiceGateway}}
+\doxysubsubsection{\texorpdfstring{testingServer()}{testingServer()}}
+{\footnotesize\ttfamily void com.\+mycompany.\+client.\+remote.\+Service\+Gateway.\+testing\+Server (\begin{DoxyParamCaption}\item[{String}]{name }\end{DoxyParamCaption})}
+
+Testing server.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file Service\+Gateway.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+git/\+B\+S\+P\+Q22-\/\+E6/my-\/app/src/main/java/com/mycompany/client/remote/\mbox{\hyperlink{_service_gateway_8java}{Service\+Gateway.\+java}}\end{DoxyCompactItemize}

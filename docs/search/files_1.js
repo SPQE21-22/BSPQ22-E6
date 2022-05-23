@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['clientapp_2ejava_367',['ClientApp.java',['../_client_app_8java.html',1,'']]],
+  ['clientapptest_2ejava_368',['ClientAppTest.java',['../_client_app_test_8java.html',1,'']]],
+  ['clienttokenmanagement_2ejava_369',['ClientTokenManagement.java',['../_client_token_management_8java.html',1,'']]],
+  ['clienttokenmanagementtest_2ejava_370',['ClientTokenManagementTest.java',['../_client_token_management_test_8java.html',1,'']]],
+  ['com_2emycompany_2eclient_2eclientapptest_2etxt_371',['com.mycompany.client.ClientAppTest.txt',['../com_8mycompany_8client_8_client_app_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eclient_2econtroller_2eeventcontrollertest_2etxt_372',['com.mycompany.client.controller.EventControllerTest.txt',['../com_8mycompany_8client_8controller_8_event_controller_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eclient_2econtroller_2eticketcontrollertest_2etxt_373',['com.mycompany.client.controller.TicketControllerTest.txt',['../com_8mycompany_8client_8controller_8_ticket_controller_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eclient_2econtroller_2eusercontrollertest_2etxt_374',['com.mycompany.client.controller.UserControllerTest.txt',['../com_8mycompany_8client_8controller_8_user_controller_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eclient_2eremote_2eclienttokenmanagementtest_2etxt_375',['com.mycompany.client.remote.ClientTokenManagementTest.txt',['../com_8mycompany_8client_8remote_8_client_token_management_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eclient_2eremote_2eservicegatewaytest_2etxt_376',['com.mycompany.client.remote.ServiceGatewayTest.txt',['../com_8mycompany_8client_8remote_8_service_gateway_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2edata_2edatabase_2econsumerdaotest_2etxt_377',['com.mycompany.server.data.dataBase.ConsumerDAOTest.txt',['../com_8mycompany_8server_8data_8data_base_8_consumer_d_a_o_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2edata_2edatabase_2eeventdaotest_2etxt_378',['com.mycompany.server.data.dataBase.EventDAOTest.txt',['../com_8mycompany_8server_8data_8data_base_8_event_d_a_o_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2edata_2edatabase_2eorganizerdaotest_2etxt_379',['com.mycompany.server.data.dataBase.OrganizerDAOTest.txt',['../com_8mycompany_8server_8data_8data_base_8_organizer_d_a_o_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2edata_2edatabase_2eticketdaotest_2etxt_380',['com.mycompany.server.data.dataBase.TicketDAOTest.txt',['../com_8mycompany_8server_8data_8data_base_8_ticket_d_a_o_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2eremote_2eremotefacadetest_2etxt_381',['com.mycompany.server.remote.RemoteFacadeTest.txt',['../com_8mycompany_8server_8remote_8_remote_facade_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2eremote_2etokenmanagementtest_2etxt_382',['com.mycompany.server.remote.TokenManagementTest.txt',['../com_8mycompany_8server_8remote_8_token_management_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2eserverapptest_2etxt_383',['com.mycompany.server.ServerAppTest.txt',['../com_8mycompany_8server_8_server_app_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2eservices_2eeventappservicetest_2etxt_384',['com.mycompany.server.services.EventAppServiceTest.txt',['../com_8mycompany_8server_8services_8_event_app_service_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2eservices_2eticketappservicetest_2etxt_385',['com.mycompany.server.services.TicketAppServiceTest.txt',['../com_8mycompany_8server_8services_8_ticket_app_service_test_8txt.html',1,'']]],
+  ['com_2emycompany_2eserver_2eservices_2euserappservicetest_2etxt_386',['com.mycompany.server.services.UserAppServiceTest.txt',['../com_8mycompany_8server_8services_8_user_app_service_test_8txt.html',1,'']]],
+  ['consumer_2ejava_387',['Consumer.java',['../_consumer_8java.html',1,'']]],
+  ['consumerdao_2ejava_388',['ConsumerDAO.java',['../_consumer_d_a_o_8java.html',1,'']]],
+  ['consumerdaotest_2ejava_389',['ConsumerDAOTest.java',['../_consumer_d_a_o_test_8java.html',1,'']]],
+  ['consumerdto_2ejava_390',['ConsumerDTO.java',['../_consumer_d_t_o_8java.html',1,'']]],
+  ['createeventdto_2ejava_391',['CreateEventDTO.java',['../_create_event_d_t_o_8java.html',1,'']]]
+];

@@ -1,0 +1,290 @@
+\hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}{}\doxysection{com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager Class Reference}
+\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+
+
+Collaboration diagram for com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a8a44f82ad923a7fbe83a1d0bb8b0562c}{store\+User}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} u)
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ab209ea2f37f7b9fa84dcd84c2b4f6626}{get\+User}} (String email, String password)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_af6e07416505120feaaf49eb89188930a}{store\+Ticket}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}} t)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a953531a969402b0f7c3fdf4a2d07f07b}{delete\+Ticket}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}} t)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ac97b95b6c23819ac7c0e7ba9b5883831}{delete\+User}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} u)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ab433461cdfbc57c9909b814938fc7078}{delete\+Event}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}} e)
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a2986b0ced7385298e1f20134a798b66b}{get\+Ticket}} (String consumer\+Email, String event\+Name, Local\+Date event\+Date)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a3d944294edc6a3bb07f9ca1cf5422ee8}{store\+Event}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}} e)
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a9e43f66b543ed008dd4955d2a6470775}{get\+Event}} (String name, Local\+Date date)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a40819af10c86232bc5440820e6ed537f}{get\+Active\+Events}} ()
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a6cf1b895a0995f835e4eb6c9dc0c99ec}{get\+Reselling\+Tickets}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}{Test\+D\+B\+Manager}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_aa939f2da0d8838c7af696b7f760cc139}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Class \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}{Test\+D\+B\+Manager}}. 
+
+Definition at line 12 of file Test\+D\+B\+Manager.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ab433461cdfbc57c9909b814938fc7078}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ab433461cdfbc57c9909b814938fc7078}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!deleteEvent@{deleteEvent}}
+\index{deleteEvent@{deleteEvent}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{deleteEvent()}{deleteEvent()}}
+{\footnotesize\ttfamily boolean com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+delete\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}}}]{e }\end{DoxyParamCaption})}
+
+Delete event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & the e \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if successful 
+\end{DoxyReturn}
+
+
+Definition at line 121 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a953531a969402b0f7c3fdf4a2d07f07b}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a953531a969402b0f7c3fdf4a2d07f07b}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!deleteTicket@{deleteTicket}}
+\index{deleteTicket@{deleteTicket}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{deleteTicket()}{deleteTicket()}}
+{\footnotesize\ttfamily boolean com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+delete\+Ticket (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}}}]{t }\end{DoxyParamCaption})}
+
+Delete ticket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if successful 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ac97b95b6c23819ac7c0e7ba9b5883831}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ac97b95b6c23819ac7c0e7ba9b5883831}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!deleteUser@{deleteUser}}
+\index{deleteUser@{deleteUser}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{deleteUser()}{deleteUser()}}
+{\footnotesize\ttfamily boolean com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+delete\+User (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}}}]{u }\end{DoxyParamCaption})}
+
+Delete user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & the u \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if successful 
+\end{DoxyReturn}
+
+
+Definition at line 107 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a40819af10c86232bc5440820e6ed537f}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a40819af10c86232bc5440820e6ed537f}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!getActiveEvents@{getActiveEvents}}
+\index{getActiveEvents@{getActiveEvents}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{getActiveEvents()}{getActiveEvents()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}}$>$ com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+get\+Active\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the active events.
+
+\begin{DoxyReturn}{Returns}
+the active events 
+\end{DoxyReturn}
+
+
+Definition at line 184 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a9e43f66b543ed008dd4955d2a6470775}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a9e43f66b543ed008dd4955d2a6470775}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!getEvent@{getEvent}}
+\index{getEvent@{getEvent}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{getEvent()}{getEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}} com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+get\+Event (\begin{DoxyParamCaption}\item[{String}]{name,  }\item[{Local\+Date}]{date }\end{DoxyParamCaption})}
+
+Gets the event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+{\em date} & the date \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the event 
+\end{DoxyReturn}
+
+
+Definition at line 169 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_aa939f2da0d8838c7af696b7f760cc139}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_aa939f2da0d8838c7af696b7f760cc139}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}{Test\+D\+B\+Manager}} com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the single instance of \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}{Test\+D\+B\+Manager}}.
+
+\begin{DoxyReturn}{Returns}
+single instance of \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager}{Test\+D\+B\+Manager}} 
+\end{DoxyReturn}
+
+
+Definition at line 33 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a6cf1b895a0995f835e4eb6c9dc0c99ec}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a6cf1b895a0995f835e4eb6c9dc0c99ec}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!getResellingTickets@{getResellingTickets}}
+\index{getResellingTickets@{getResellingTickets}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{getResellingTickets()}{getResellingTickets()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}}$>$ com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+get\+Reselling\+Tickets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the reselling tickets.
+
+\begin{DoxyReturn}{Returns}
+the reselling tickets 
+\end{DoxyReturn}
+
+
+Definition at line 199 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a2986b0ced7385298e1f20134a798b66b}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a2986b0ced7385298e1f20134a798b66b}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!getTicket@{getTicket}}
+\index{getTicket@{getTicket}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{getTicket()}{getTicket()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}} com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+get\+Ticket (\begin{DoxyParamCaption}\item[{String}]{consumer\+Email,  }\item[{String}]{event\+Name,  }\item[{Local\+Date}]{event\+Date }\end{DoxyParamCaption})}
+
+Gets the ticket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em consumer\+Email} & the consumer email \\
+\hline
+{\em event\+Name} & the event name \\
+\hline
+{\em event\+Date} & the event date \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the ticket 
+\end{DoxyReturn}
+
+
+Definition at line 137 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ab209ea2f37f7b9fa84dcd84c2b4f6626}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_ab209ea2f37f7b9fa84dcd84c2b4f6626}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!getUser@{getUser}}
+\index{getUser@{getUser}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{getUser()}{getUser()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}} com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+get\+User (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password }\end{DoxyParamCaption})}
+
+Gets the user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & the email \\
+\hline
+{\em password} & the password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the user 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a3d944294edc6a3bb07f9ca1cf5422ee8}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a3d944294edc6a3bb07f9ca1cf5422ee8}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!storeEvent@{storeEvent}}
+\index{storeEvent@{storeEvent}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{storeEvent()}{storeEvent()}}
+{\footnotesize\ttfamily boolean com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+store\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event}{Event}}}]{e }\end{DoxyParamCaption})}
+
+Store event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & the e \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if successful 
+\end{DoxyReturn}
+
+
+Definition at line 154 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_af6e07416505120feaaf49eb89188930a}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_af6e07416505120feaaf49eb89188930a}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!storeTicket@{storeTicket}}
+\index{storeTicket@{storeTicket}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{storeTicket()}{storeTicket()}}
+{\footnotesize\ttfamily boolean com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+store\+Ticket (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket}{Ticket}}}]{t }\end{DoxyParamCaption})}
+
+Store ticket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if successful 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file Test\+D\+B\+Manager.\+java.
+
+\mbox{\Hypertarget{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a8a44f82ad923a7fbe83a1d0bb8b0562c}\label{classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_test_d_b_manager_a8a44f82ad923a7fbe83a1d0bb8b0562c}} 
+\index{com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}!storeUser@{storeUser}}
+\index{storeUser@{storeUser}!com.mycompany.server.data.dataBase.TestDBManager@{com.mycompany.server.data.dataBase.TestDBManager}}
+\doxysubsubsection{\texorpdfstring{storeUser()}{storeUser()}}
+{\footnotesize\ttfamily boolean com.\+mycompany.\+server.\+data.\+data\+Base.\+Test\+D\+B\+Manager.\+store\+User (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user}{User}}}]{u }\end{DoxyParamCaption})}
+
+Store user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & the u \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if successful 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file Test\+D\+B\+Manager.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+git/\+B\+S\+P\+Q22-\/\+E6/my-\/app/src/main/java/com/mycompany/server/data/data\+Base/\mbox{\hyperlink{_test_d_b_manager_8java}{Test\+D\+B\+Manager.\+java}}\end{DoxyCompactItemize}
