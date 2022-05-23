@@ -127,8 +127,7 @@ public class TicketDTO {
 	 */
 	@Override
 	public String toString() {
-		return "TicketDTO [eventName=" + eventName + ", userEmail=" + userEmail + ", eventDate=" + eventDate
-				+ ", place=" + place + ", inResell=" + inResell + "]";
+		return eventName + " in " + place + " the " + eventDate;
 	}
 	
 	/**
