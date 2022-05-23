@@ -20,16 +20,16 @@ jobs:
         java-version: '16'
         distribution: 'adopt'
     - name: compile the code
-      run: mvn clean compile
+      run: mvn clean compile -f my-app/pom.xml
     - name: Create Datanucleus schema
-      run: mvn datanucleus:schema-create
+      run: mvn datanucleus:schema-create -f my-app/pom.xml
     - name: Launch the server
-      run: mvn exec:java -Pserver
+      run: mvn exec:java -Pserver -f my-app/pom.xml
     - name: Sleep for 10 seconds
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
     - name: Launch the client
-      run: mvn exec:java -Pclient
+      run: mvn exec:java -Pclient -f my-app/pom.xml
     - name: Test with Maven
-      run: mvn test
+      run: mvn test -f my-app/pom.xml
