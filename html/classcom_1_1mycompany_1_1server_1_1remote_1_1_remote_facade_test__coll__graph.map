@@ -1,0 +1,11 @@
+<map id="com.mycompany.server.remote.RemoteFacadeTest" name="com.mycompany.server.remote.RemoteFacadeTest">
+<area shape="rect" id="node1" title=" " alt="" coords="709,191,916,233"/>
+<area shape="rect" id="node2" href="$classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_consumer.html" title=" " alt="" coords="321,7,560,49"/>
+<area shape="rect" id="node3" href="$classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_user.html" title=" " alt="" coords="5,48,272,75"/>
+<area shape="rect" id="node8" href="$classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_organizer.html" title=" " alt="" coords="321,73,560,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="399,139,483,165"/>
+<area shape="rect" id="node5" href="$classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_ticket.html" title=" " alt="" coords="321,190,560,231"/>
+<area shape="rect" id="node6" title=" " alt="" coords="398,256,483,283"/>
+<area shape="rect" id="node7" title=" " alt="" coords="389,307,493,333"/>
+<area shape="rect" id="node9" href="$classcom_1_1mycompany_1_1server_1_1data_1_1domain_1_1_event.html" title=" " alt="" coords="321,371,560,413"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="com.mycompany.server.data.dataBase.DataAccesObjectBase" name="com.mycompany.server.data.dataBase.DataAccesObjectBase">
+<area shape="rect" id="node1" title=" " alt="" coords="5,104,223,145"/>
+<area shape="rect" id="node2" href="$classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_consumer_d_a_o.html" title=" " alt="" coords="271,5,488,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_event_d_a_o.html" title=" " alt="" coords="271,71,488,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_organizer_d_a_o.html" title=" " alt="" coords="271,136,488,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1mycompany_1_1server_1_1data_1_1data_base_1_1_ticket_d_a_o.html" title=" " alt="" coords="271,201,488,243"/>
+</map>
