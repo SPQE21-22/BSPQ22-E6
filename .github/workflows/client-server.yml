@@ -1,0 +1,35 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Client-server github actions demo
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 16
+      uses: actions/setup-java@v2
+      with:
+        java-version: '16'
+        distribution: 'adopt'
+    - name: compile the code
+      run: mvn clean compile
+    - name: Create Datanucleus schema
+      run: mvn datanucleus:schema-create
+    - name: Launch the server
+      run: mvn exec:java -Pserver
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+    - name: Launch the client
+      run: mvn exec:java -Pclient
+    - name: Test with Maven
+      run: mvn test
