@@ -9,6 +9,10 @@ State what the project is about
 `mvn exec:java -Pclient`
 
 
+***Link to the documentation***
+https://spqe21-22.github.io/BSPQ22-E6/
+
+
 
 
 
